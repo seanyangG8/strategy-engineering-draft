@@ -5,7 +5,7 @@ import iconProcess from "@/assets/service-process.jpg";
 import iconAi from "@/assets/service-ai.jpg";
 import iconStrategy from "@/assets/service-strategy.jpg";
 import iconSustain from "@/assets/sustainability-bulb.png";
-import achievementsImg from "@/assets/achievements-real.jpg";
+import { AchievementsCarousel } from "@/components/site/AchievementsCarousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -75,7 +75,7 @@ function Index() {
           <p className="max-w-3xl mx-auto text-white/80 leading-relaxed mb-12">
             Some examples of our past achievements in successfully unlocking the untapped potential latent in all organisations. Names of our clients have been omitted for privacy
           </p>
-          <img src={achievementsImg} alt="Our achievements" loading="lazy" className="rounded-2xl mx-auto shadow-2xl w-full max-w-5xl" />
+          <AchievementsCarousel />
           <Link
             to="/services"
             className="inline-flex items-center justify-center mt-12 rounded-full bg-primary hover:bg-primary/90 px-10 py-4 text-sm font-bold text-primary-foreground uppercase tracking-wider"
