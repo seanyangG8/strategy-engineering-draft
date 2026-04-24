@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import lightbulb from "@/assets/lightbulb-sky.webp";
-import seedling from "@/assets/seedling-circle.png";
+import seanGoh from "@/assets/team-sean-goh.png";
+import nadzim from "@/assets/team-nadzim-zahari.png";
+import jonQuah from "@/assets/team-jon-quah.png";
+import seanMorais from "@/assets/team-sean-morais.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -16,10 +19,10 @@ export const Route = createFileRoute("/about")({
 });
 
 const team = [
-  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical and Electronic Engineering" },
-  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics and Finance" },
-  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering" },
-  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering" },
+  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical and Electronic Engineering", photo: seanGoh },
+  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics and Finance", photo: nadzim },
+  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering", photo: jonQuah },
+  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering", photo: seanMorais },
 ];
 
 function About() {
@@ -64,7 +67,7 @@ function About() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {team.map((m) => (
               <div key={m.name} className="text-center">
-                <img src={seedling} alt="" loading="lazy" className="w-36 h-36 rounded-full mx-auto mb-5 shadow-lg" />
+                <img src={m.photo} alt={m.name} loading="lazy" className="w-36 h-36 rounded-full mx-auto mb-5 shadow-lg object-cover" />
                 <h4 className="font-bold text-lg">{m.name}</h4>
                 <p className="text-primary text-sm font-medium mt-1">{m.role}</p>
                 <p className="text-white/60 text-xs italic mt-2">{m.edu}</p>
