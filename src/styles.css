@@ -39,36 +39,36 @@
 
 :root {
   --radius: 0.5rem;
-  /* Near-black with cool blue undertone */
-  --background: oklch(0.15 0.015 250);
-  --foreground: oklch(0.96 0.012 230);
-  --surface: oklch(0.97 0.01 230);
-  --surface-foreground: oklch(0.18 0.015 250);
-  --card: oklch(0.97 0.01 230);
-  --card-foreground: oklch(0.18 0.015 250);
-  --popover: oklch(0.97 0.01 230);
-  --popover-foreground: oklch(0.18 0.015 250);
-  /* Soft sky / porcelain accent */
-  --primary: oklch(0.86 0.04 230);
-  --primary-foreground: oklch(0.15 0.015 250);
-  --cream: oklch(0.91 0.03 225);
-  --cream-foreground: oklch(0.15 0.015 250);
-  --secondary: oklch(0.24 0.015 250);
-  --secondary-foreground: oklch(0.96 0.012 230);
-  --muted: oklch(0.94 0.01 230);
-  --muted-foreground: oklch(0.5 0.02 240);
-  --accent: oklch(0.86 0.04 230);
-  --accent-foreground: oklch(0.15 0.015 250);
+  /* Deep charcoal with subtle steel undertone — masculine, editorial */
+  --background: oklch(0.16 0.008 240);
+  --foreground: oklch(0.95 0.005 240);
+  --surface: oklch(0.96 0.005 240);
+  --surface-foreground: oklch(0.18 0.008 240);
+  --card: oklch(0.96 0.005 240);
+  --card-foreground: oklch(0.18 0.008 240);
+  --popover: oklch(0.96 0.005 240);
+  --popover-foreground: oklch(0.18 0.008 240);
+  /* Muted steel / platinum accent — professional, restrained */
+  --primary: oklch(0.78 0.018 235);
+  --primary-foreground: oklch(0.16 0.008 240);
+  --cream: oklch(0.84 0.015 235);
+  --cream-foreground: oklch(0.16 0.008 240);
+  --secondary: oklch(0.24 0.008 240);
+  --secondary-foreground: oklch(0.95 0.005 240);
+  --muted: oklch(0.93 0.005 240);
+  --muted-foreground: oklch(0.5 0.01 240);
+  --accent: oklch(0.78 0.018 235);
+  --accent-foreground: oklch(0.16 0.008 240);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.01 230);
-  --input: oklch(0.88 0.01 230);
-  --ring: oklch(0.86 0.04 230);
+  --border: oklch(0.86 0.005 240);
+  --input: oklch(0.86 0.005 240);
+  --ring: oklch(0.78 0.018 235);
 }
 
 .dark {
-  --background: oklch(0.13 0.015 250);
-  --foreground: oklch(0.96 0.012 230);
+  --background: oklch(0.14 0.008 240);
+  --foreground: oklch(0.95 0.005 240);
 }
 
 @layer base {
