@@ -4,6 +4,7 @@ import iconProcess from "@/assets/service-process.jpg";
 import iconAi from "@/assets/service-ai.jpg";
 import iconStrategy from "@/assets/service-strategy.jpg";
 import iconSustain from "@/assets/sustainability-bulb.png";
+import heroServices from "@/assets/hero-services.webp";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
