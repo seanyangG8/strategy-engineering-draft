@@ -80,7 +80,7 @@ const services = [
 function Services() {
   return (
     <main>
-      <PageHero eyebrow="Transforming Businesses, One Solution at a Time" title="Services" backgroundImage={heroServices} objectPosition="center 75%" />
+      <PageHero eyebrow="Transforming Businesses, One Solution at a Time" title="Services" backgroundImage={heroServices} objectPosition="center 100%" compact />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-5xl space-y-24">
