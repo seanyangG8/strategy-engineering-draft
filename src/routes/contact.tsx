@@ -34,7 +34,7 @@ function Contact() {
 
   return (
     <main>
-      <PageHero eyebrow="Let's Re-Engineer the Future." title="Contact Us" />
+      <PageHero eyebrow="Let's Re-Engineer the Future." title="Contact Us" backgroundImage={heroContact} objectPosition="center" />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
