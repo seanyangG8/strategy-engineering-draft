@@ -28,7 +28,7 @@ const team = [
 function About() {
   return (
     <main>
-      <PageHero title="Where Engineering Meets Business" />
+      <PageHero title="Where Engineering Meets Business" backgroundImage={lightbulb} />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-6xl">
@@ -39,7 +39,6 @@ function About() {
               Our mission is simple: to unlock the full potential of businesses by providing innovative, practical, and sustainable solutions. We bring an engineering mindset—focused on precision, efficiency, and scalability—to every challenge we tackle.
             </p>
           </div>
-          <img src={lightbulb} alt="Ideas at sunset" loading="lazy" className="rounded-2xl w-full shadow-xl mb-20" />
 
           <div className="grid md:grid-cols-2 gap-12 mb-20">
             <div>
