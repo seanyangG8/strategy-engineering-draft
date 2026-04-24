@@ -28,7 +28,7 @@ const team = [
 function About() {
   return (
     <main>
-      <PageHero title="Where Engineering Meets Business" backgroundImage={lightbulb} compact objectPosition="center 40%" />
+      <PageHero title="Where Engineering Meets Business" backgroundImage={lightbulb} compact objectPosition="center 30%" />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-6xl">
