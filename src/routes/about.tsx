@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
 import lightbulb from "@/assets/lightbulb-sky.webp";
 import seanGoh from "@/assets/team-sean-goh.png";
-import nadzim from "@/assets/team-nadzim-zahari.png";
+import nadzim from "@/assets/team-sean-morais.png";
 import jonQuah from "@/assets/team-jon-quah.png";
-import seanMorais from "@/assets/team-sean-morais.png";
+import seanMorais from "@/assets/team-nadzim-zahari.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
