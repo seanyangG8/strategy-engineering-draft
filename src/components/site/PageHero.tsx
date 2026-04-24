@@ -1,11 +1,30 @@
 import { Header } from "./Header";
 
-export function PageHero({ eyebrow, title, backgroundImage }: { eyebrow?: string; title: string; backgroundImage?: string }) {
+export function PageHero({
+  eyebrow,
+  title,
+  backgroundImage,
+  objectPosition,
+  compact,
+}: {
+  eyebrow?: string;
+  title: string;
+  backgroundImage?: string;
+  objectPosition?: string;
+  compact?: boolean;
+}) {
   return (
-    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+    <section
+      className={`relative ${compact ? "min-h-[42vh]" : "min-h-[60vh]"} flex items-center justify-center overflow-hidden`}
+    >
       {backgroundImage ? (
         <>
-          <img src={backgroundImage} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={backgroundImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: objectPosition ?? "center" }}
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/80" />
         </>
       ) : (
