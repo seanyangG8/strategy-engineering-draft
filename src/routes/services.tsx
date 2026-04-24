@@ -4,6 +4,7 @@ import iconProcess from "@/assets/service-process.jpg";
 import iconAi from "@/assets/service-ai.jpg";
 import iconStrategy from "@/assets/service-strategy.jpg";
 import iconSustain from "@/assets/sustainability-bulb.png";
+import heroServices from "@/assets/hero-services.webp";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -79,7 +80,7 @@ const services = [
 function Services() {
   return (
     <main>
-      <PageHero eyebrow="Transforming Businesses, One Solution at a Time" title="Services" />
+      <PageHero eyebrow="Transforming Businesses, One Solution at a Time" title="Services" backgroundImage={heroServices} objectPosition="center 75%" />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-5xl space-y-24">

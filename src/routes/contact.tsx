@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import heroContact from "@/assets/hero-contact.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -33,7 +34,7 @@ function Contact() {
 
   return (
     <main>
-      <PageHero eyebrow="Let's Re-Engineer the Future." title="Contact Us" />
+      <PageHero eyebrow="Let's Re-Engineer the Future." title="Contact Us" backgroundImage={heroContact} objectPosition="center" />
 
       <section className="bg-surface text-surface-foreground py-24 px-6">
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
