@@ -12,6 +12,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Process, automation, and AI engineering for ambitious operators. Measurable impact, engineered." },
       { property: "og:title", content: "Strategy Engineering" },
       { property: "og:description", content: "Process, automation, and AI engineering for ambitious operators." },
+      { property: "og:image", content: heroImg },
+      { name: "twitter:image", content: heroImg },
     ],
   }),
   component: Index,
@@ -99,7 +101,7 @@ function Index() {
         <Header />
         <div className="relative z-10 text-center px-6 max-w-5xl">
           <p className="eyebrow text-primary mb-6 animate-fade-up">// UNLOCKING POTENTIAL</p>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-medium text-white leading-[0.95] tracking-tight animate-fade-up-delay-1">
+          <h1 className="font-display text-[40px] sm:text-5xl md:text-7xl lg:text-8xl font-medium text-white leading-[0.95] tracking-tight animate-fade-up-delay-1">
             Your ambition.<br />
             <span className="italic font-light text-primary">Our expertise.</span>
           </h1>
@@ -167,7 +169,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s) => {
               const Icon = s.icon;
               return (
@@ -176,7 +178,7 @@ function Index() {
                   to="/services"
                   className={`group relative rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
                     s.featured
-                      ? "lg:col-span-2 lg:row-span-1 bg-background text-white border-white/10 hover:border-primary/50"
+                      ? "sm:col-span-2 lg:col-span-2 lg:row-span-1 bg-background text-white border-white/10 hover:border-primary/50"
                       : "bg-white border-black/10 hover:border-black/40"
                   }`}
                 >

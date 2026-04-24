@@ -61,7 +61,7 @@ function Contact() {
             </a>
 
             <a
-              href="#"
+              href="mailto:contact@strategyengineering.co?subject=30-min%20discovery%20call"
               className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-8"
             >
               <div className="flex items-center justify-between">
@@ -97,20 +97,20 @@ function Contact() {
 
             <form onSubmit={onSubmit} className="space-y-5">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Name *</label>
-                <Input required name="name" className="h-11" />
+                <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Name *</label>
+                <Input id="contact-name" required name="name" className="h-11" />
               </div>
               <div>
-                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Email *</label>
-                <Input required type="email" name="email" className="h-11" />
+                <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Email *</label>
+                <Input id="contact-email" required type="email" name="email" className="h-11" />
               </div>
               <div>
-                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Website</label>
-                <Input name="website" className="h-11" />
+                <label htmlFor="contact-website" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Website</label>
+                <Input id="contact-website" name="website" className="h-11" />
               </div>
               <div>
-                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Message *</label>
-                <Textarea required name="message" rows={5} />
+                <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Message *</label>
+                <Textarea id="contact-message" required name="message" rows={5} />
               </div>
               <button
                 type="submit"
