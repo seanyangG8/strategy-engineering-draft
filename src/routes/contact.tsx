@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { Mail, Facebook, Twitter, Youtube } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,9 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact — Strategy Engineering" },
       { name: "description", content: "Let's re-engineer the future. Get in touch with Strategy Engineering." },
       { property: "og:title", content: "Contact — Strategy Engineering" },
-      { property: "og:description", content: "Let's Re-Engineer the Future." },
+      { property: "og:description", content: "Let's re-engineer the future." },
+      { property: "og:image", content: heroContact },
+      { name: "twitter:image", content: heroContact },
     ],
   }),
   component: Contact,
@@ -28,67 +30,95 @@ function Contact() {
     setTimeout(() => {
       setSubmitting(false);
       (e.target as HTMLFormElement).reset();
-      toast.success("Message sent — we'll be in touch shortly.");
+      toast.success("Message sent — we'll be in touch within one business day.");
     }, 600);
   };
 
   return (
     <main>
-      <PageHero eyebrow="Let's Re-Engineer the Future." title="Contact Us" backgroundImage={heroContact} objectPosition="center" compact />
+      <PageHero eyebrow="LET'S RE-ENGINEER THE FUTURE" title="Get in touch." backgroundImage={heroContact} objectPosition="center" compact />
 
-      <section className="bg-surface text-surface-foreground py-24 px-6">
+      <section className="bg-surface text-surface-foreground py-28 px-6">
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
           <div>
-            <h2 className="text-3xl font-bold mb-2">Contact Info</h2>
-            <div className="w-16 h-[3px] bg-primary mb-10" />
+            <p className="eyebrow text-primary-foreground/60 mb-3">// CONTACT</p>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-8">Let's start a conversation.</h2>
 
-            <div className="mb-8">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
-                <Mail className="size-4" /> Email Us
-              </h3>
-              <a href="mailto:contact@strategyengineering.co" className="text-lg hover:text-primary transition-colors">
-                contact@strategyengineering.co
-              </a>
-            </div>
+            <a
+              href="mailto:contact@strategyengineering.co"
+              className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="eyebrow text-primary mb-2 flex items-center gap-2">
+                    <Mail className="size-3.5" /> EMAIL US
+                  </p>
+                  <p className="font-display text-xl font-medium tracking-tight">contact@strategyengineering.co</p>
+                  <p className="text-xs mt-2 opacity-60">We reply within one business day.</p>
+                </div>
+                <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+              </div>
+            </a>
+
+            <a
+              href="#"
+              className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-8"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="eyebrow text-primary mb-2 flex items-center gap-2">
+                    <Calendar className="size-3.5" /> BOOK A CALL
+                  </p>
+                  <p className="font-display text-xl font-medium tracking-tight">30-min discovery call</p>
+                  <p className="text-xs mt-2 opacity-60">Talk through your challenge with no obligation.</p>
+                </div>
+                <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+              </div>
+            </a>
 
             <div>
-              <h3 className="text-sm font-bold uppercase tracking-widest text-primary mb-3">Follow Us</h3>
-              <div className="flex gap-3">
-                <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-background text-white flex items-center justify-center hover:bg-primary transition-colors"><Facebook className="size-5" /></a>
-                <a href="#" aria-label="Twitter" className="w-11 h-11 rounded-full bg-background text-white flex items-center justify-center hover:bg-primary transition-colors"><Twitter className="size-5" /></a>
-                <a href="#" aria-label="YouTube" className="w-11 h-11 rounded-full bg-background text-white flex items-center justify-center hover:bg-primary transition-colors"><Youtube className="size-5" /></a>
-              </div>
+              <p className="eyebrow text-primary-foreground/60 mb-3">// FOLLOW</p>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-black/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+              >
+                <Linkedin className="size-5" />
+              </a>
             </div>
           </div>
 
           <div>
-            <h2 className="text-3xl font-bold mb-2">Get In Touch</h2>
-            <div className="w-16 h-[3px] bg-primary mb-6" />
+            <p className="eyebrow text-primary-foreground/60 mb-3">// MESSAGE</p>
+            <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-3">Tell us what you're solving.</h2>
             <p className="text-muted-foreground mb-8">We believe in understanding your unique needs before taking the next step.</p>
 
             <form onSubmit={onSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium mb-2">Your Name *</label>
+                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Name *</label>
                 <Input required name="name" className="h-11" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Email *</label>
+                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Email *</label>
                 <Input required type="email" name="email" className="h-11" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Website</label>
+                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Website</label>
                 <Input name="website" className="h-11" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Your Message *</label>
+                <label className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Message *</label>
                 <Textarea required name="message" rows={5} />
               </div>
               <button
                 type="submit"
                 disabled={submitting}
-                className="rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 px-8 py-3 text-sm font-bold text-primary-foreground uppercase tracking-wider transition-all"
+                className="group inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide transition-all hover:scale-[1.02]"
               >
-                {submitting ? "Sending..." : "Send Message"}
+                {submitting ? "Sending..." : "Send message"}
+                <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
               </button>
             </form>
           </div>

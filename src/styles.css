@@ -30,40 +30,45 @@
   --color-ring: var(--ring);
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
-  --font-sans: "Poppins", system-ui, sans-serif;
-  --font-display: "Poppins", system-ui, sans-serif;
+  --color-cream: var(--cream);
+  --color-cream-foreground: var(--cream-foreground);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
   --radius: 0.5rem;
-  /* Dark slate brand background */
-  --background: oklch(0.32 0.025 240);
-  --foreground: oklch(0.98 0 0);
-  --surface: oklch(0.99 0 0);
-  --surface-foreground: oklch(0.25 0.02 240);
-  --card: oklch(0.99 0 0);
-  --card-foreground: oklch(0.25 0.02 240);
-  --popover: oklch(0.99 0 0);
-  --popover-foreground: oklch(0.25 0.02 240);
-  /* Red/pink accent */
-  --primary: oklch(0.62 0.22 5);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.4 0.025 240);
-  --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.95 0.005 240);
-  --muted-foreground: oklch(0.45 0.02 240);
-  --accent: oklch(0.62 0.22 5);
-  --accent-foreground: oklch(0.99 0 0);
+  /* Near-black brand background */
+  --background: oklch(0.16 0.008 60);
+  --foreground: oklch(0.96 0.015 80);
+  --surface: oklch(0.97 0.012 80);
+  --surface-foreground: oklch(0.18 0.008 60);
+  --card: oklch(0.97 0.012 80);
+  --card-foreground: oklch(0.18 0.008 60);
+  --popover: oklch(0.97 0.012 80);
+  --popover-foreground: oklch(0.18 0.008 60);
+  /* Warm cream accent */
+  --primary: oklch(0.88 0.07 78);
+  --primary-foreground: oklch(0.16 0.008 60);
+  --cream: oklch(0.92 0.05 80);
+  --cream-foreground: oklch(0.16 0.008 60);
+  --secondary: oklch(0.24 0.008 60);
+  --secondary-foreground: oklch(0.96 0.015 80);
+  --muted: oklch(0.94 0.008 80);
+  --muted-foreground: oklch(0.45 0.012 60);
+  --accent: oklch(0.88 0.07 78);
+  --accent-foreground: oklch(0.16 0.008 60);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.01 240);
-  --input: oklch(0.9 0.01 240);
-  --ring: oklch(0.62 0.22 5);
+  --border: oklch(0.88 0.01 80);
+  --input: oklch(0.88 0.01 80);
+  --ring: oklch(0.88 0.07 78);
 }
 
 .dark {
-  --background: oklch(0.2 0.02 240);
-  --foreground: oklch(0.98 0 0);
+  --background: oklch(0.13 0.008 60);
+  --foreground: oklch(0.96 0.015 80);
 }
 
 @layer base {
@@ -74,6 +79,54 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
   }
-  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 700; }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; }
+}
+
+@layer utilities {
+  .font-mono { font-family: var(--font-mono); }
+  .font-display { font-family: var(--font-display); }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .story-link {
+    position: relative;
+    display: inline-block;
+  }
+  .story-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+  }
+  .story-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  .marquee {
+    animation: marquee 40s linear infinite;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .animate-fade-up-delay-1 { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+  .animate-fade-up-delay-2 { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both; }
+  .animate-fade-up-delay-3 { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; }
 }
