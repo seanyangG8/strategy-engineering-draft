@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import heroImg from "@/assets/hero-seedling.png";
-import iconProcess from "@/assets/icon-process.png";
-import iconAi from "@/assets/icon-ai.png";
-import iconStrategy from "@/assets/icon-strategy.png";
-import iconSustain from "@/assets/icon-sustainability.png";
-import achievementsImg from "@/assets/achievements.jpg";
+import iconProcess from "@/assets/service-process.jpg";
+import iconAi from "@/assets/service-ai.jpg";
+import iconStrategy from "@/assets/service-strategy.jpg";
+import iconSustain from "@/assets/sustainability-bulb.png";
+import achievementsImg from "@/assets/achievements-real.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -57,7 +57,7 @@ function Index() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
             {services.map((s) => (
               <div key={s.title} className="text-center flex flex-col items-center">
-                <img src={s.icon} alt={s.title} loading="lazy" width={512} height={512} className="w-40 h-40 rounded-full object-cover mb-6 shadow-lg" />
+                <img src={s.icon} alt={s.title} loading="lazy" className="w-40 h-40 rounded-full object-cover mb-6 shadow-lg" />
                 <h3 className="text-base font-bold uppercase tracking-wide mb-3">{s.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5">{s.desc}</p>
                 <Link to="/services" className="text-primary text-xs font-bold uppercase tracking-wider hover:underline">Learn More →</Link>
@@ -75,7 +75,7 @@ function Index() {
           <p className="max-w-3xl mx-auto text-white/80 leading-relaxed mb-12">
             Some examples of our past achievements in successfully unlocking the untapped potential latent in all organisations. Names of our clients have been omitted for privacy
           </p>
-          <img src={achievementsImg} alt="Our achievements" loading="lazy" width={1280} height={896} className="rounded-2xl mx-auto shadow-2xl w-full max-w-5xl" />
+          <img src={achievementsImg} alt="Our achievements" loading="lazy" className="rounded-2xl mx-auto shadow-2xl w-full max-w-5xl" />
           <Link
             to="/services"
             className="inline-flex items-center justify-center mt-12 rounded-full bg-primary hover:bg-primary/90 px-10 py-4 text-sm font-bold text-primary-foreground uppercase tracking-wider"

@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import iconProcess from "@/assets/icon-process.png";
-import iconAi from "@/assets/icon-ai.png";
-import iconStrategy from "@/assets/icon-strategy.png";
-import iconSustain from "@/assets/icon-sustainability.png";
+import iconProcess from "@/assets/service-process.jpg";
+import iconAi from "@/assets/service-ai.jpg";
+import iconStrategy from "@/assets/service-strategy.jpg";
+import iconSustain from "@/assets/sustainability-bulb.png";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -85,7 +85,7 @@ function Services() {
         <div className="mx-auto max-w-5xl space-y-24">
           {services.map((s, i) => (
             <article key={s.title} className={`grid md:grid-cols-[240px_1fr] gap-10 items-start ${i % 2 === 1 ? "md:[&>img]:order-last" : ""}`}>
-              <img src={s.icon} alt={s.title} loading="lazy" width={512} height={512} className="w-48 h-48 md:w-60 md:h-60 rounded-full mx-auto shadow-xl" />
+              <img src={s.icon} alt={s.title} loading="lazy" className="w-48 h-48 md:w-60 md:h-60 rounded-full mx-auto shadow-xl object-cover" />
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-1">{s.title}</h2>
                 <p className="text-primary font-semibold mb-5">{s.tagline}</p>
