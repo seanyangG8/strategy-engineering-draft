@@ -174,8 +174,10 @@ function Index() {
                 <Link
                   key={s.title}
                   to="/services"
-                  className={`group relative rounded-2xl border border-black/10 bg-white p-8 hover:border-black/40 transition-all duration-300 hover:-translate-y-1 ${
-                    s.featured ? "lg:col-span-2 lg:row-span-1 bg-background text-white border-white/10 hover:border-primary/50" : ""
+                  className={`group relative rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
+                    s.featured
+                      ? "lg:col-span-2 lg:row-span-1 bg-background text-white border-white/10 hover:border-primary/50"
+                      : "bg-white border-black/10 hover:border-black/40"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-12">
