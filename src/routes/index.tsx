@@ -31,7 +31,7 @@ function Index() {
     <main>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <img src={heroImg} alt="" className="absolute inset-0 w-full h-[99%] object-cover" style={{ objectPosition: "center 80%" }} />
+        <img src={heroImg} alt="" className="absolute inset-0 w-full h-[95%] object-contain bg-[oklch(0.25_0.02_240)]" style={{ objectPosition: "center 95%" }} />
         <div className="absolute inset-0 bg-[oklch(0.25_0.02_240)]/65" />
         <Header />
         <div className="relative z-10 text-center px-6 max-w-5xl">
