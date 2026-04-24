@@ -61,7 +61,7 @@ function Contact() {
             </a>
 
             <a
-              href="#"
+              href="mailto:contact@strategyengineering.co?subject=30-min%20discovery%20call"
               className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-8"
             >
               <div className="flex items-center justify-between">
