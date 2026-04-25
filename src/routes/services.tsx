@@ -157,7 +157,7 @@ function StickyServiceNav() {
         <p className="eyebrow text-primary-foreground/40 mb-5">// SERVICES</p>
         <div className="relative pl-5">
           {/* Rail */}
-          <div className="absolute left-0 top-1 bottom-1 w-px bg-black/10" aria-hidden />
+          <div className="absolute left-0 top-1 bottom-1 w-px bg-cream-foreground/10" aria-hidden />
           <div
             className="absolute left-0 top-1 w-px bg-primary origin-top"
             aria-hidden
@@ -191,7 +191,7 @@ function StickyServiceNav() {
       </aside>
 
       {/* Mobile/tablet: sticky top bar with progress */}
-      <div className="lg:hidden sticky top-[68px] z-30 -mx-6 px-6 pt-3 pb-2 bg-surface/95 backdrop-blur-md border-y border-black/10 mb-10">
+      <div className="lg:hidden sticky top-[68px] z-30 -mx-6 px-6 pt-3 pb-2 bg-surface/95 backdrop-blur-md border-y border-cream-foreground/10 mb-10">
         <div className="flex gap-5 overflow-x-auto no-scrollbar font-mono text-[11px] tracking-wider mb-2">
           {services.map((s) => (
             <a
@@ -205,7 +205,7 @@ function StickyServiceNav() {
             </a>
           ))}
         </div>
-        <div className="h-px bg-black/10 relative">
+        <div className="h-px bg-cream-foreground/10 relative">
           <div
             className="absolute inset-y-0 left-0 bg-primary origin-left"
             style={{ width: "100%", transform: `scaleX(${progress})`, transition: "transform 0.15s linear" }}
@@ -249,7 +249,7 @@ function Services() {
                   <div className={`relative grid md:grid-cols-12 gap-10 ${reverse ? "md:[&>*:first-child]:order-2" : ""}`}>
                     {/* Header column */}
                     <Reveal className="md:col-span-5">
-                      <div className="w-14 h-14 rounded-2xl border border-black/10 flex items-center justify-center bg-background text-primary mb-6">
+                      <div className="w-14 h-14 rounded-2xl border border-cream-foreground/10 flex items-center justify-center bg-background text-primary mb-6">
                         <Icon className="size-6" strokeWidth={1.5} />
                       </div>
                       <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary mb-3">
@@ -258,7 +258,7 @@ function Services() {
                       <h2 className="font-display text-4xl md:text-5xl font-medium tracking-tight mb-6">{s.title}</h2>
                       <p className="text-muted-foreground leading-relaxed mb-8">{s.intro}</p>
 
-                      <div className="grid grid-cols-3 gap-px bg-black/10 rounded-xl overflow-hidden border border-black/10">
+                      <div className="grid grid-cols-3 gap-px bg-cream-foreground/10 rounded-xl overflow-hidden border border-cream-foreground/10">
                         {s.outcomes.map((o) => (
                           <div key={o.l} className="bg-surface p-4 text-center">
                             <p className="font-display text-2xl md:text-3xl font-medium text-primary tracking-tight">
@@ -272,7 +272,7 @@ function Services() {
 
                     {/* Bullets column */}
                     <Reveal delay={120} className="md:col-span-7">
-                      <ul className="grid sm:grid-cols-2 gap-px bg-black/10 rounded-2xl overflow-hidden border border-black/10">
+                      <ul className="grid sm:grid-cols-2 gap-px bg-cream-foreground/10 rounded-2xl overflow-hidden border border-cream-foreground/10">
                         {s.bullets.map((b, idx) => (
                           <li key={b.h} className="bg-surface p-6 hover:bg-background hover:text-white transition-colors group">
                             <div className="flex items-center gap-2 mb-2">

@@ -114,7 +114,7 @@ function About() {
         <div className="mx-auto max-w-6xl relative">
           <div className="relative" ref={railRef}>
             {/* Timeline rail */}
-            <div className="absolute left-2 md:left-[7.5rem] top-2 bottom-2 w-px bg-black/10" aria-hidden />
+            <div className="absolute left-2 md:left-[7.5rem] top-2 bottom-2 w-px bg-cream-foreground/10" aria-hidden />
             <div
               className="absolute left-2 md:left-[7.5rem] top-2 w-px bg-primary origin-top"
               aria-hidden
@@ -163,7 +163,7 @@ function About() {
               Four words we <span className="italic font-light text-primary">actually live by.</span>
             </h2>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-cream/5 rounded-2xl overflow-hidden border border-white/5">
             {values.map((v, i) => (
               <Reveal
                 key={v.word}
@@ -206,7 +206,7 @@ function About() {
                 className={`rounded-2xl border p-9 transition-all duration-300 hover:-translate-y-1 ${
                   e.featured
                     ? "bg-bronze-flow text-white border-white/10 relative overflow-hidden"
-                    : "bg-white border-black/10"
+                    : "bg-cream border-cream-foreground/10"
                 }`}
               >
                 {e.featured && <div className="absolute inset-0 opacity-[0.05] bg-grain pointer-events-none" />}
@@ -215,7 +215,7 @@ function About() {
                     <h3 className={`font-display text-3xl font-medium tracking-tight ${e.featured ? "text-white" : ""}`}>
                       {e.name}
                     </h3>
-                    <span className={`font-mono text-[11px] tracking-[0.22em] uppercase ${e.featured ? "text-primary" : "text-black/45"}`}>
+                    <span className={`font-mono text-[11px] tracking-[0.22em] uppercase ${e.featured ? "text-primary" : "text-cream-foreground/55"}`}>
                       {e.duration}
                     </span>
                   </div>
@@ -228,7 +228,7 @@ function About() {
                         key={it}
                         className={`flex gap-3 text-sm ${e.featured ? "text-white/80" : "text-surface-foreground/80"}`}
                       >
-                        <span className={`mt-2 h-px w-4 shrink-0 ${e.featured ? "bg-primary" : "bg-black/30"}`} />
+                        <span className={`mt-2 h-px w-4 shrink-0 ${e.featured ? "bg-primary" : "bg-cream-foreground/30"}`} />
                         {it}
                       </li>
                     ))}
@@ -258,7 +258,7 @@ function About() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((m, i) => (
               <Reveal key={m.name} delay={i * 80} className="group">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white/5 mb-5 ring-1 ring-white/0 group-hover:ring-primary/40 transition-all duration-500">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream/5 mb-5 ring-1 ring-white/0 group-hover:ring-primary/40 transition-all duration-500">
                   <img
                     src={m.photo}
                     alt={m.name}
