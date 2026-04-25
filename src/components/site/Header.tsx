@@ -86,6 +86,7 @@ export function Header() {
         >
           {open ? <X /> : <Menu />}
         </button>
+        </div>
       </div>
 
       {open && (
