@@ -1,0 +1,5 @@
+# GitHub Pages SPA redirect trick. When a deep link like /repo/about is requested,
+# GitHub Pages serves this file because the path doesn't exist on disk. The script
+# below rewrites the URL to /repo/?/about and redirects to the SPA root, where
+# index.html's bootstrap script (in <head>) restores the original path before the
+# router boots. Source: https://github.com/rafgraph/spa-github-pages

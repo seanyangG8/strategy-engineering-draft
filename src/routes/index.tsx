@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { Header } from "@/components/site/Header";
 import { ArrowUpRight, Workflow, Cpu, Compass, Leaf } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -11,17 +12,6 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Strategy Engineering" },
-      { name: "description", content: "Process, automation, and AI engineering for ambitious operators. Measurable impact, engineered." },
-      { property: "og:title", content: "Strategy Engineering" },
-      { property: "og:description", content: "Process, automation, and AI engineering for ambitious operators." },
-      { property: "og:image", content: heroImg },
-      { name: "twitter:image", content: heroImg },
-      { rel: "canonical", href: "https://strategyengineering.co/" },
-    ],
-  }),
   component: Index,
 });
 
@@ -127,6 +117,15 @@ function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string
 function Index() {
   return (
     <main>
+      <Helmet>
+        <title>Strategy Engineering</title>
+        <meta name="description" content="Process, automation, and AI engineering for ambitious operators. Measurable impact, engineered." />
+        <meta property="og:title" content="Strategy Engineering" />
+        <meta property="og:description" content="Process, automation, and AI engineering for ambitious operators." />
+        <meta property="og:image" content={heroImg} />
+        <meta name="twitter:image" content={heroImg} />
+        <link rel="canonical" href="https://strategyengineering.co/" />
+      </Helmet>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { PageHero } from "@/components/site/PageHero";
 import { Workflow, Cpu, Compass, Leaf, ArrowUpRight } from "lucide-react";
 import heroServices from "@/assets/hero-services.webp";
@@ -8,17 +9,6 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { CountUpText } from "@/components/motion/CountUpText";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Strategy Engineering" },
-      { name: "description", content: "Process improvement, automation & AI, strategy & transformation, sustainability & impact." },
-      { property: "og:title", content: "Services — Strategy Engineering" },
-      { property: "og:description", content: "Transforming businesses, one solution at a time." },
-      { property: "og:image", content: heroServices },
-      { name: "twitter:image", content: heroServices },
-      { rel: "canonical", href: "https://strategyengineering.co/services" },
-    ],
-  }),
   component: Services,
 });
 
@@ -219,6 +209,15 @@ function StickyServiceNav() {
 function Services() {
   return (
     <main>
+      <Helmet>
+        <title>Services — Strategy Engineering</title>
+        <meta name="description" content="Process improvement, automation & AI, strategy & transformation, sustainability & impact." />
+        <meta property="og:title" content="Services — Strategy Engineering" />
+        <meta property="og:description" content="Transforming businesses, one solution at a time." />
+        <meta property="og:image" content={heroServices} />
+        <meta name="twitter:image" content={heroServices} />
+        <link rel="canonical" href="https://strategyengineering.co/services" />
+      </Helmet>
       <PageHero eyebrow="TRANSFORMING BUSINESSES, ONE SOLUTION AT A TIME" title="Services" backgroundImage={heroServices} objectPosition="center 100%" compact />
 
       <section className="bg-surface text-surface-foreground py-24 px-6 relative">

@@ -1,13 +1,12 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/components/site/Footer";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
-import { ThemeProvider, themeBootstrapScript } from "@/components/theme/ThemeProvider";
-import { FontProvider, fontBootstrapScript } from "@/components/theme/FontProvider";
-
-import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { FontProvider } from "@/components/theme/FontProvider";
 
 function NotFoundComponent() {
   return (
@@ -54,55 +53,24 @@ const orgJsonLd = JSON.stringify({
 });
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Strategy Engineering" },
-      { name: "description", content: "Engineering your success through process improvement, automation & AI, strategy, and sustainability." },
-      { name: "theme-color", content: "#262019" },
-      { property: "og:title", content: "Strategy Engineering" },
-      { property: "og:description", content: "Your Ambition. Our Expertise." },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Strategy Engineering" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Archivo+Black&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" },
-    ],
-    scripts: [
-      { children: themeBootstrapScript },
-      { children: fontBootstrapScript },
-      { type: "application/ld+json", children: orgJsonLd },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   return (
     <ThemeProvider>
       <FontProvider>
+        <Helmet>
+          <title>Strategy Engineering</title>
+          <meta name="description" content="Engineering your success through process improvement, automation & AI, strategy, and sustainability." />
+          <meta property="og:title" content="Strategy Engineering" />
+          <meta property="og:description" content="Your Ambition. Our Expertise." />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Strategy Engineering" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <script type="application/ld+json">{orgJsonLd}</script>
+        </Helmet>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <SmoothScroll />
         <ScrollProgress />
@@ -117,4 +85,3 @@ function RootComponent() {
     </ThemeProvider>
   );
 }
-

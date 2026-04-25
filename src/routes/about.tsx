@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { PageHero } from "@/components/site/PageHero";
 import { Linkedin, ArrowUpRight } from "lucide-react";
 import lightbulb from "@/assets/lightbulb-sky.webp";
@@ -11,17 +12,6 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "Strategy Engineering" },
-      { name: "description", content: "Where engineering meets business. Built for impact." },
-      { property: "og:title", content: "About — Strategy Engineering" },
-      { property: "og:description", content: "Where engineering meets business." },
-      { property: "og:image", content: lightbulb },
-      { name: "twitter:image", content: lightbulb },
-      { rel: "canonical", href: "https://strategyengineering.co/about" },
-    ],
-  }),
   component: About,
 });
 
@@ -106,6 +96,15 @@ function About() {
 
   return (
     <main>
+      <Helmet>
+        <title>About — Strategy Engineering</title>
+        <meta name="description" content="Where engineering meets business. Built for impact." />
+        <meta property="og:title" content="About — Strategy Engineering" />
+        <meta property="og:description" content="Where engineering meets business." />
+        <meta property="og:image" content={lightbulb} />
+        <meta name="twitter:image" content={lightbulb} />
+        <link rel="canonical" href="https://strategyengineering.co/about" />
+      </Helmet>
       <PageHero title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
 
       {/* MISSION + WHY (vertical timeline) */}
