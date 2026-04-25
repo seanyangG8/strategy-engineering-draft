@@ -5,6 +5,7 @@ import { PageTransition } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { ThemeProvider, themeBootstrapScript } from "@/components/theme/ThemeProvider";
+import { FontProvider, fontBootstrapScript } from "@/components/theme/FontProvider";
 
 import appCss from "../styles.css?url";
 
@@ -71,10 +72,11 @@ export const Route = createRootRoute({
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Archivo+Black&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" },
     ],
     scripts: [
       { children: themeBootstrapScript },
+      { children: fontBootstrapScript },
       { type: "application/ld+json", children: orgJsonLd },
     ],
   }),
@@ -100,16 +102,18 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <ThemeProvider>
-      <a href="#main-content" className="skip-link">Skip to content</a>
-      <SmoothScroll />
-      <ScrollProgress />
-      <PageTransition>
-        <div id="main-content">
-          <Outlet />
-        </div>
-      </PageTransition>
-      <Footer />
-      <Toaster />
+      <FontProvider>
+        <a href="#main-content" className="skip-link">Skip to content</a>
+        <SmoothScroll />
+        <ScrollProgress />
+        <PageTransition>
+          <div id="main-content">
+            <Outlet />
+          </div>
+        </PageTransition>
+        <Footer />
+        <Toaster />
+      </FontProvider>
     </ThemeProvider>
   );
 }

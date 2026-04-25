@@ -73,10 +73,12 @@ export function Header() {
           >
             <Linkedin className="size-[17px]" />
           </a>
+          <FontToggle />
           <ThemeToggle />
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
+        <FontToggle />
         <ThemeToggle />
         <button
           className="text-white p-2 rounded-md"
