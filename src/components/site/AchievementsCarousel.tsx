@@ -20,8 +20,8 @@ import {
   ResponsiveContainer,
   LabelList,
 } from "recharts";
-import erpImg from "@/assets/service-ai.jpg";
-import esgImg from "@/assets/sustainability-bulb.png";
+import erpImg from "@/assets/service-ai.webp";
+import esgImg from "@/assets/sustainability-bulb.webp";
 
 const BLUE = "#8a7350";
 const BLUE_PALETTE = ["#b09a7a", "#9c8665", "#8a7350", "#6b5a3e", "#48402d"];

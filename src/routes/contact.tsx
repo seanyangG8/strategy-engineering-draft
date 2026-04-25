@@ -5,7 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import heroContact from "@/assets/hero-contact.jpg";
+import heroContact from "@/assets/hero-contact.webp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
