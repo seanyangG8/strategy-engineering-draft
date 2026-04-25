@@ -111,6 +111,7 @@ const services = [
 
 function StickyServiceNav() {
   const [active, setActive] = useState(services[0].number);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -128,7 +129,25 @@ function StickyServiceNav() {
       const el = document.getElementById(`service-${s.number}`);
       if (el) obs.observe(el);
     });
-    return () => obs.disconnect();
+
+    const onScroll = () => {
+      const first = document.getElementById(`service-${services[0].number}`);
+      const last = document.getElementById(`service-${services[services.length - 1].number}`);
+      if (!first || !last) return;
+      const startY = first.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.4;
+      const endY = last.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.4;
+      const cur = window.scrollY;
+      const p = Math.max(0, Math.min(1, (cur - startY) / Math.max(1, endY - startY)));
+      setProgress(p);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
@@ -136,35 +155,44 @@ function StickyServiceNav() {
       {/* Desktop: vertical sticky on left */}
       <aside className="hidden lg:block sticky top-28 h-fit">
         <p className="eyebrow text-primary-foreground/40 mb-5">// SERVICES</p>
-        <ul className="space-y-3">
-          {services.map((s) => {
-            const isActive = active === s.number;
-            return (
-              <li key={s.number}>
-                <a
-                  href={`#service-${s.number}`}
-                  className={`flex items-center gap-4 group transition-colors ${
-                    isActive ? "text-primary-foreground" : "text-primary-foreground/45 hover:text-primary-foreground/80"
-                  }`}
-                >
-                  <span
-                    className={`h-px transition-all duration-500 ${
-                      isActive ? "w-10 bg-primary" : "w-4 bg-primary-foreground/25 group-hover:w-7"
+        <div className="relative pl-5">
+          {/* Rail */}
+          <div className="absolute left-0 top-1 bottom-1 w-px bg-black/10" aria-hidden />
+          <div
+            className="absolute left-0 top-1 w-px bg-primary origin-top"
+            aria-hidden
+            style={{ height: "calc(100% - 0.5rem)", transform: `scaleY(${progress})`, transition: "transform 0.15s linear" }}
+          />
+          <ul className="space-y-3">
+            {services.map((s) => {
+              const isActive = active === s.number;
+              return (
+                <li key={s.number}>
+                  <a
+                    href={`#service-${s.number}`}
+                    className={`flex items-center gap-3 group transition-colors ${
+                      isActive ? "text-primary-foreground" : "text-primary-foreground/45 hover:text-primary-foreground/80"
                     }`}
-                  />
-                  <span className="font-mono text-[11px] tracking-[0.2em] uppercase">
-                    {s.number} · {s.title}
-                  </span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+                  >
+                    <span
+                      className={`h-px transition-all duration-500 ${
+                        isActive ? "w-8 bg-primary" : "w-3 bg-primary-foreground/25 group-hover:w-6"
+                      }`}
+                    />
+                    <span className="font-mono text-[11px] tracking-[0.2em] uppercase">
+                      {s.number} · {s.title}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </aside>
 
-      {/* Mobile/tablet: sticky top bar */}
-      <div className="lg:hidden sticky top-16 z-30 -mx-6 px-6 py-3 bg-surface/90 backdrop-blur-md border-y border-black/10 mb-10">
-        <div className="flex gap-5 overflow-x-auto no-scrollbar font-mono text-[11px] tracking-wider">
+      {/* Mobile/tablet: sticky top bar with progress */}
+      <div className="lg:hidden sticky top-16 z-30 -mx-6 px-6 pt-3 pb-2 bg-surface/90 backdrop-blur-md border-y border-black/10 mb-10">
+        <div className="flex gap-5 overflow-x-auto no-scrollbar font-mono text-[11px] tracking-wider mb-2">
           {services.map((s) => (
             <a
               key={s.number}
@@ -176,6 +204,12 @@ function StickyServiceNav() {
               {s.number} · {s.title}
             </a>
           ))}
+        </div>
+        <div className="h-px bg-black/10 relative">
+          <div
+            className="absolute inset-y-0 left-0 bg-primary origin-left"
+            style={{ width: "100%", transform: `scaleX(${progress})`, transition: "transform 0.15s linear" }}
+          />
         </div>
       </div>
     </>
@@ -227,7 +261,9 @@ function Services() {
                       <div className="grid grid-cols-3 gap-px bg-black/10 rounded-xl overflow-hidden border border-black/10">
                         {s.outcomes.map((o) => (
                           <div key={o.l} className="bg-surface p-4 text-center">
-                            <p className="font-display text-2xl md:text-3xl font-medium text-primary tracking-tight">{o.v}</p>
+                            <p className="font-display text-2xl md:text-3xl font-medium text-primary tracking-tight">
+                              <CountUpText value={o.v} />
+                            </p>
                             <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary-foreground/60 mt-1.5">{o.l}</p>
                           </div>
                         ))}
