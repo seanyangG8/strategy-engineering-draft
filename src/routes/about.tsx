@@ -8,6 +8,7 @@ import jonQuah from "@/assets/team-jon-quah.webp";
 import seanMorais from "@/assets/team-sean-morais.webp";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -77,6 +78,32 @@ const engagements = [
 ];
 
 function About() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const [railProgress, setRailProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = railRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = vh * 0.75;
+      const end = vh * 0.25;
+      // progress: 0 when rail top below start; 1 when rail bottom above end
+      const total = r.height + (start - end);
+      const passed = start - r.top;
+      const p = Math.max(0, Math.min(1, passed / total));
+      setRailProgress(p);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
   return (
     <main>
       <PageHero title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
@@ -85,9 +112,14 @@ function About() {
       <section className="bg-surface text-surface-foreground py-28 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] bg-grain pointer-events-none" />
         <div className="mx-auto max-w-6xl relative">
-          <div className="relative">
+          <div className="relative" ref={railRef}>
             {/* Timeline rail */}
             <div className="absolute left-2 md:left-[7.5rem] top-2 bottom-2 w-px bg-black/10" aria-hidden />
+            <div
+              className="absolute left-2 md:left-[7.5rem] top-2 w-px bg-primary origin-top"
+              aria-hidden
+              style={{ height: "calc(100% - 1rem)", transform: `scaleY(${railProgress})`, transition: "transform 0.12s linear" }}
+            />
             <div className="space-y-24">
               {pillars.map((p, idx) => (
                 <Reveal key={p.n} delay={idx * 100}>

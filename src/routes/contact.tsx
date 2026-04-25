@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { Mail, Linkedin, Calendar, ArrowUpRight, Check } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowUpRight, Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import heroContact from "@/assets/hero-contact.webp";
@@ -32,6 +32,21 @@ function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [interest, setInterest] = useState("");
+  const [message, setMessage] = useState("");
+  const [copied, setCopied] = useState(false);
+  const MAX = 800;
+
+  const onCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText("contact@strategyengineering.co");
+      setCopied(true);
+      toast.success("Email copied to clipboard");
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = "mailto:contact@strategyengineering.co";
+    }
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,6 +56,7 @@ function Contact() {
       setSent(true);
       (e.target as HTMLFormElement).reset();
       setInterest("");
+      setMessage("");
       toast.success("Message sent — we'll be in touch within one business day.");
       setTimeout(() => setSent(false), 6000);
     }, 700);
@@ -61,15 +77,25 @@ function Contact() {
               href="mailto:contact@strategyengineering.co"
               className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
             >
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="min-w-0">
                   <p className="eyebrow text-primary mb-2 flex items-center gap-2">
                     <Mail className="size-3.5" /> EMAIL US
                   </p>
-                  <p className="font-display text-xl font-medium tracking-tight">contact@strategyengineering.co</p>
+                  <p className="font-display text-xl font-medium tracking-tight truncate">contact@strategyengineering.co</p>
                   <p className="text-xs mt-2 opacity-60">We reply within one business day.</p>
                 </div>
-                <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={onCopy}
+                    aria-label="Copy email address"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                  >
+                    {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                  </button>
+                  <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+                </div>
               </div>
             </a>
 
@@ -173,8 +199,26 @@ function Contact() {
                   <label htmlFor="contact-interest">I'm interested in…</label>
                 </div>
                 <div className="float-field">
-                  <textarea id="contact-message" required name="message" rows={5} placeholder=" " />
+                  <textarea
+                    id="contact-message"
+                    required
+                    name="message"
+                    rows={5}
+                    placeholder=" "
+                    maxLength={MAX}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
                   <label htmlFor="contact-message">Your message *</label>
+                  <div className="flex justify-end mt-1">
+                    <span
+                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
+                        message.length > MAX * 0.9 ? "text-primary" : "text-primary-foreground/40"
+                      }`}
+                    >
+                      {message.length} / {MAX}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="pt-6">

@@ -1,15 +1,19 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouterState } from "@tanstack/react-router";
 
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [mounted, setMounted] = useState(false);
-  const [shown, setShown] = useState(true);
   const [content, setContent] = useState(children);
   const [key, setKey] = useState(pathname);
+  const [phase, setPhase] = useState<"idle" | "out" | "in">("idle");
+  const reducedRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      reducedRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
   }, []);
 
   useEffect(() => {
@@ -18,27 +22,64 @@ export function PageTransition({ children }: { children: ReactNode }) {
       setContent(children);
       return;
     }
-    setShown(false);
-    const t = setTimeout(() => {
+    if (reducedRef.current) {
       setContent(children);
       setKey(pathname);
-      requestAnimationFrame(() => setShown(true));
-    }, 220);
-    return () => clearTimeout(t);
+      return;
+    }
+    // Out: wipe overlay enters from bottom
+    setPhase("out");
+    const t1 = setTimeout(() => {
+      setContent(children);
+      setKey(pathname);
+      window.scrollTo({ top: 0, behavior: "auto" });
+      // In: overlay exits upward
+      requestAnimationFrame(() => setPhase("in"));
+      const t2 = setTimeout(() => setPhase("idle"), 650);
+      return () => clearTimeout(t2);
+    }, 520);
+    return () => clearTimeout(t1);
   }, [pathname, children, key, mounted]);
 
-  // During SSR and first client render, render children directly to avoid hydration mismatch
   if (!mounted) return <>{children}</>;
 
+  // Overlay transform
+  let overlayTransform = "translateY(100%)";
+  if (phase === "out") overlayTransform = "translateY(0%)";
+  if (phase === "in") overlayTransform = "translateY(-100%)";
+
+  const contentOpacity = phase === "out" ? 0.6 : 1;
+  const contentTransform = phase === "out" ? "scale(0.985)" : "scale(1)";
+
   return (
-    <div
-      style={{
-        transition: "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(8px)",
-      }}
-    >
-      {content}
-    </div>
+    <>
+      <div
+        style={{
+          transition:
+            "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
+          opacity: contentOpacity,
+          transform: contentTransform,
+          transformOrigin: "center top",
+        }}
+      >
+        {content}
+      </div>
+      <div
+        aria-hidden
+        className="fixed inset-0 z-[80] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, oklch(0.16 0.012 50) 0%, oklch(0.20 0.025 60) 100%)",
+          transform: overlayTransform,
+          transition:
+            phase === "out"
+              ? "transform 0.52s cubic-bezier(0.76, 0, 0.24, 1)"
+              : "transform 0.62s cubic-bezier(0.22, 1, 0.36, 1)",
+          willChange: "transform",
+        }}
+      >
+        <div className="absolute inset-0 opacity-[0.06] bg-grain" />
+      </div>
+    </>
   );
 }
