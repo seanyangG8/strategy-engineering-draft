@@ -70,7 +70,7 @@ function Contact() {
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
           {/* LEFT */}
           <Reveal>
-            <p className="eyebrow text-primary-foreground/60 mb-3">// CONTACT</p>
+            <p className="eyebrow text-cream-foreground/60 mb-3">// CONTACT</p>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-8">Let's start a conversation.</h2>
 
             <a
@@ -116,7 +116,7 @@ function Contact() {
             </a>
 
             <div className="mb-12">
-              <p className="eyebrow text-primary-foreground/60 mb-3">// FOLLOW</p>
+              <p className="eyebrow text-cream-foreground/60 mb-3">// FOLLOW</p>
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
@@ -130,7 +130,7 @@ function Contact() {
 
             {/* What happens next */}
             <div className="border-t border-cream-foreground/10 pt-10">
-              <p className="eyebrow text-primary-foreground/55 mb-6">// WHAT HAPPENS NEXT</p>
+              <p className="eyebrow text-cream-foreground/55 mb-6">// WHAT HAPPENS NEXT</p>
               <ol className="space-y-5">
                 {nextSteps.map((s) => (
                   <li key={s.n} className="flex gap-5">
@@ -147,7 +147,7 @@ function Contact() {
 
           {/* RIGHT — Form */}
           <Reveal delay={120}>
-            <p className="eyebrow text-primary-foreground/60 mb-3">// MESSAGE</p>
+            <p className="eyebrow text-cream-foreground/60 mb-3">// MESSAGE</p>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-3">Tell us what you're solving.</h2>
             <p className="text-muted-foreground mb-10">We believe in understanding your unique needs before taking the next step.</p>
 
@@ -213,7 +213,7 @@ function Contact() {
                   <div className="flex justify-end mt-1">
                     <span
                       className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
-                        message.length > MAX * 0.9 ? "text-primary" : "text-primary-foreground/40"
+                        message.length > MAX * 0.9 ? "text-primary" : "text-cream-foreground/40"
                       }`}
                     >
                       {message.length} / {MAX}

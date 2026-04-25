@@ -131,13 +131,13 @@ function About() {
                       <span className="font-mono text-[11px] tracking-[0.25em] text-primary mt-0.5">{p.n}</span>
                     </div>
                     <div>
-                      <p className="eyebrow text-primary-foreground/55 mb-3">// {p.eyebrow}</p>
+                      <p className="eyebrow text-cream-foreground/55 mb-3">// {p.eyebrow}</p>
                       <h3 className="font-display text-3xl md:text-5xl font-medium tracking-tight mb-6 leading-[1.05]">
                         {p.title}
                       </h3>
                       {idx === 0 ? (
                         <>
-                          <p className="font-display text-xl md:text-2xl font-light italic leading-snug mb-5 text-primary-foreground/90">
+                          <p className="font-display text-xl md:text-2xl font-light italic leading-snug mb-5 text-cream-foreground/90">
                             {p.body}
                           </p>
                           <p className="text-muted-foreground leading-relaxed max-w-2xl">{p.body2}</p>
@@ -188,7 +188,7 @@ function About() {
         <div className="mx-auto max-w-6xl">
           <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div>
-              <p className="eyebrow text-primary-foreground/55 mb-3">// HOW WE ENGAGE</p>
+              <p className="eyebrow text-cream-foreground/55 mb-3">// HOW WE ENGAGE</p>
               <h2 className="font-display text-3xl md:text-5xl font-medium tracking-tight max-w-xl">
                 Two ways to <span className="italic font-light">work together.</span>
               </h2>
