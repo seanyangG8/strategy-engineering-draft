@@ -4,6 +4,7 @@ import { Footer } from "@/components/site/Footer";
 import { PageTransition } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { ThemeProvider, themeBootstrapScript } from "@/components/theme/ThemeProvider";
 
 import appCss from "../styles.css?url";
 
@@ -62,6 +63,7 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" },
     ],
     scripts: [
+      { children: themeBootstrapScript },
       { type: "application/ld+json", children: orgJsonLd },
     ],
   }),
@@ -86,7 +88,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <>
+    <ThemeProvider>
       <a href="#main-content" className="skip-link">Skip to content</a>
       <SmoothScroll />
       <ScrollProgress />
@@ -97,7 +99,7 @@ function RootComponent() {
       </PageTransition>
       <Footer />
       <Toaster />
-    </>
+    </ThemeProvider>
   );
 }
 
