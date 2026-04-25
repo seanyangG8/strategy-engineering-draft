@@ -204,7 +204,7 @@ export function AchievementsCarousel() {
         <CarouselContent>
           {slides.map((s, i) => (
             <CarouselItem key={i}>
-              <div className="group relative rounded-3xl bg-gradient-to-br from-[#1a1d24] via-[#13151b] to-[#0a0b0f] border border-primary/30 p-6 md:p-12 shadow-[0_30px_80px_-20px_rgba(200,133,74,0.22)] overflow-hidden">
+              <div className="group relative rounded-3xl bg-bronze-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
                 {/* Glow */}
                 <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
