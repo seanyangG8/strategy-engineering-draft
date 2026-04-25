@@ -210,18 +210,52 @@ function Contact() {
                 <p className="text-sm text-muted-foreground max-w-xs">We'll be in touch within one business day.</p>
               </div>
 
-              <form onSubmit={onSubmit} className={`space-y-2 transition-opacity duration-300 ${sent ? "opacity-30" : "opacity-100"}`}>
-                <div className="float-field">
-                  <input id="contact-name" required name="name" placeholder=" " autoComplete="name" />
+              <form onSubmit={onSubmit} noValidate className={`space-y-2 transition-opacity duration-300 ${sent ? "opacity-30" : "opacity-100"}`}>
+                <div className={`float-field ${touched.name && errors.name ? "field-error" : ""}`}>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    placeholder=" "
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onBlur={onBlur("name")}
+                    aria-invalid={!!(touched.name && errors.name)}
+                    aria-describedby={touched.name && errors.name ? "err-name" : undefined}
+                  />
                   <label htmlFor="contact-name">Your name *</label>
+                  {touched.name && errors.name && (
+                    <p id="err-name" className="field-error-text" role="alert">{errors.name}</p>
+                  )}
                 </div>
-                <div className="float-field">
-                  <input id="contact-email" required type="email" name="email" placeholder=" " autoComplete="email" />
+                <div className={`float-field ${touched.email && errors.email ? "field-error" : ""}`}>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder=" "
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={onBlur("email")}
+                    aria-invalid={!!(touched.email && errors.email)}
+                    aria-describedby={touched.email && errors.email ? "err-email" : undefined}
+                  />
                   <label htmlFor="contact-email">Email *</label>
+                  {touched.email && errors.email && (
+                    <p id="err-email" className="field-error-text" role="alert">{errors.email}</p>
+                  )}
                 </div>
                 <div className="float-field">
-                  <input id="contact-website" name="website" placeholder=" " autoComplete="url" />
-                  <label htmlFor="contact-website">Website</label>
+                  <input
+                    id="contact-website"
+                    name="website"
+                    placeholder=" "
+                    autoComplete="url"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                  <label htmlFor="contact-website">Company website</label>
                 </div>
                 <div className="float-field">
                   <select
@@ -240,21 +274,28 @@ function Contact() {
                   </select>
                   <label htmlFor="contact-interest">I'm interested in…</label>
                 </div>
-                <div className="float-field">
+                <div className={`float-field ${touched.message && errors.message ? "field-error" : ""}`}>
                   <textarea
                     id="contact-message"
-                    required
                     name="message"
                     rows={5}
                     placeholder=" "
                     maxLength={MAX}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onBlur={onBlur("message")}
+                    aria-invalid={!!(touched.message && errors.message)}
+                    aria-describedby={touched.message && errors.message ? "err-message" : undefined}
                   />
                   <label htmlFor="contact-message">Your message *</label>
-                  <div className="flex justify-end mt-1">
+                  <div className="flex justify-between items-center mt-1 gap-3">
+                    <span className="min-w-0 flex-1">
+                      {touched.message && errors.message && (
+                        <span id="err-message" className="field-error-text" role="alert">{errors.message}</span>
+                      )}
+                    </span>
                     <span
-                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
+                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors shrink-0 ${
                         message.length > MAX * 0.9 ? "text-primary" : "text-cream-foreground/40"
                       }`}
                     >
