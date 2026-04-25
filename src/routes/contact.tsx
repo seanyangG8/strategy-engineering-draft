@@ -28,13 +28,43 @@ const nextSteps = [
   { n: "03", title: "Tailored proposal", body: "Clear scope, timeline, and outcomes. No template decks." },
 ];
 
+type FieldErrors = { name?: string; email?: string; message?: string };
+
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [interest, setInterest] = useState("");
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [copied, setCopied] = useState(false);
   const MAX = 800;
+
+  const validate = (values: { name: string; email: string; message: string }): FieldErrors => {
+    const e: FieldErrors = {};
+    const trimmedName = values.name.trim();
+    if (!trimmedName) e.name = "Please enter your name.";
+    else if (trimmedName.length > 100) e.name = "Name must be under 100 characters.";
+
+    const trimmedEmail = values.email.trim();
+    if (!trimmedEmail) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmedEmail)) e.email = "That doesn't look like a valid email.";
+
+    const trimmedMsg = values.message.trim();
+    if (!trimmedMsg) e.message = "Please share a brief message.";
+    else if (trimmedMsg.length < 10) e.message = "A bit more context helps — at least 10 characters.";
+    else if (trimmedMsg.length > MAX) e.message = `Message must be under ${MAX} characters.`;
+
+    return e;
+  };
+
+  const onBlur = (field: keyof FieldErrors) => () => {
+    setTouched((t) => ({ ...t, [field]: true }));
+    setErrors(validate({ name, email, message }));
+  };
 
   const onCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,13 +80,25 @@ function Contact() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const validationErrors = validate({ name, email, message });
+    setErrors(validationErrors);
+    setTouched({ name: true, email: true, message: true });
+    if (Object.keys(validationErrors).length > 0) {
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
       setSent(true);
       (e.target as HTMLFormElement).reset();
+      setName("");
+      setEmail("");
+      setWebsite("");
       setInterest("");
       setMessage("");
+      setErrors({});
+      setTouched({});
       toast.success("Message sent — we'll be in touch within one business day.");
       setTimeout(() => setSent(false), 6000);
     }, 700);
