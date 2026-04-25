@@ -75,7 +75,7 @@ function Contact() {
 
             <a
               href="mailto:contact@strategyengineering.co"
-              className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
+              className="block group rounded-2xl border border-cream-foreground/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="min-w-0">
@@ -90,7 +90,7 @@ function Contact() {
                     type="button"
                     onClick={onCopy}
                     aria-label="Copy email address"
-                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </button>
@@ -101,7 +101,7 @@ function Contact() {
 
             <a
               href="mailto:contact@strategyengineering.co?subject=30-min%20discovery%20call"
-              className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-8"
+              className="block group rounded-2xl border border-cream-foreground/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-8"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -122,14 +122,14 @@ function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-black/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
               >
                 <Linkedin className="size-5" />
               </a>
             </div>
 
             {/* What happens next */}
-            <div className="border-t border-black/10 pt-10">
+            <div className="border-t border-cream-foreground/10 pt-10">
               <p className="eyebrow text-primary-foreground/55 mb-6">// WHAT HAPPENS NEXT</p>
               <ol className="space-y-5">
                 {nextSteps.map((s) => (
