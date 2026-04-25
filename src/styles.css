@@ -86,6 +86,8 @@
 
 @layer utilities {
   .font-mono { font-family: var(--font-mono); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   .font-display { font-family: var(--font-display); }
   .eyebrow {
     font-family: var(--font-mono);
