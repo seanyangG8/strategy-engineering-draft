@@ -32,13 +32,24 @@ function NotFoundComponent() {
 
 const orgJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   name: "Strategy Engineering",
   url: "https://strategyengineering.co",
   description:
     "Engineering your success through process improvement, automation & AI, strategy, and sustainability.",
   email: "contact@strategyengineering.co",
-  sameAs: ["https://www.linkedin.com/"],
+  areaServed: "Global",
+  sameAs: ["https://www.linkedin.com/company/strategy-engineering-co"],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Process Improvement" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Automation & AI" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Strategy & Transformation" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sustainability & Impact" } },
+    ],
+  },
 });
 
 export const Route = createRootRoute({

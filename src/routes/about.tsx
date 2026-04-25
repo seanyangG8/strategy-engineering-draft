@@ -26,10 +26,10 @@ export const Route = createFileRoute("/about")({
 });
 
 const team = [
-  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical & Electronic Engineering", quote: "Most processes don't need transforming — they need engineering.", photo: seanGoh },
-  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics & Finance", quote: "Sustainability that ignores the P&L gets ignored. Period.", photo: nadzim },
-  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering", quote: "Build the bridge before you sell the crossing.", photo: jonQuah },
-  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering", quote: "If it can't be measured, it probably can't be fixed.", photo: seanMorais },
+  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical & Electronic Engineering", quote: "Most processes don't need transforming — they need engineering.", photo: seanGoh, linkedin: "https://www.linkedin.com/in/seanygoh/" },
+  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics & Finance", quote: "Sustainability that ignores the P&L gets ignored. Period.", photo: nadzim, linkedin: "https://www.linkedin.com/in/nadzimzahari/" },
+  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering", quote: "Build the bridge before you sell the crossing.", photo: jonQuah, linkedin: "https://www.linkedin.com/in/jonathan-q-1917b3125/" },
+  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering", quote: "If it can't be measured, it probably can't be fixed.", photo: seanMorais, linkedin: "https://www.linkedin.com/in/smmorais/" },
 ];
 
 const values = [
@@ -114,30 +114,30 @@ function About() {
         <div className="mx-auto max-w-6xl relative">
           <div className="relative" ref={railRef}>
             {/* Timeline rail */}
-            <div className="absolute left-2 md:left-[7.5rem] top-2 bottom-2 w-px bg-cream-foreground/10" aria-hidden />
+            <div className="absolute left-[10px] md:left-[7.5rem] top-2 bottom-2 w-px bg-cream-foreground/10" aria-hidden />
             <div
-              className="absolute left-2 md:left-[7.5rem] top-2 w-px bg-primary origin-top"
+              className="absolute left-[10px] md:left-[7.5rem] top-2 w-px bg-primary origin-top"
               aria-hidden
               style={{ height: "calc(100% - 1rem)", transform: `scaleY(${railProgress})`, transition: "transform 0.12s linear" }}
             />
-            <div className="space-y-24">
+            <div className="space-y-20 md:space-y-24">
               {pillars.map((p, idx) => (
                 <Reveal key={p.n} delay={idx * 100}>
-                  <div className="grid md:grid-cols-[8rem_1fr] gap-8 md:gap-12 relative">
-                    <div className="flex md:flex-col items-start gap-3">
-                      <span className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary">
+                  <div className="grid grid-cols-[2.5rem_1fr] md:grid-cols-[8rem_1fr] gap-4 md:gap-12 relative">
+                    <div className="flex flex-col items-start gap-2 md:gap-3 pt-1">
+                      <span className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </span>
-                      <span className="font-mono text-[11px] tracking-[0.25em] text-primary mt-0.5">{p.n}</span>
+                      <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] md:tracking-[0.25em] text-primary">{p.n}</span>
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="eyebrow text-cream-foreground/55 mb-3">// {p.eyebrow}</p>
-                      <h3 className="font-display text-3xl md:text-5xl font-medium tracking-tight mb-6 leading-[1.05]">
+                      <h3 className="font-display text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight mb-5 md:mb-6 leading-[1.05]">
                         {p.title}
                       </h3>
                       {idx === 0 ? (
                         <>
-                          <p className="font-display text-xl md:text-2xl font-light italic leading-snug mb-5 text-cream-foreground/90">
+                          <p className="font-display text-lg sm:text-xl md:text-2xl font-light italic leading-snug mb-4 md:mb-5 text-cream-foreground/90">
                             {p.body}
                           </p>
                           <p className="text-muted-foreground leading-relaxed max-w-2xl">{p.body2}</p>
@@ -269,7 +269,7 @@ function About() {
                   <div className="absolute inset-x-5 bottom-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                     <p className="font-display text-sm italic text-white/90 leading-snug mb-3">"{m.quote}"</p>
                     <a
-                      href="https://www.linkedin.com/"
+                      href={m.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn (opens in new tab)`}

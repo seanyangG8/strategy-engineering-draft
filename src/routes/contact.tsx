@@ -28,13 +28,43 @@ const nextSteps = [
   { n: "03", title: "Tailored proposal", body: "Clear scope, timeline, and outcomes. No template decks." },
 ];
 
+type FieldErrors = { name?: string; email?: string; message?: string };
+
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [interest, setInterest] = useState("");
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [copied, setCopied] = useState(false);
   const MAX = 800;
+
+  const validate = (values: { name: string; email: string; message: string }): FieldErrors => {
+    const e: FieldErrors = {};
+    const trimmedName = values.name.trim();
+    if (!trimmedName) e.name = "Please enter your name.";
+    else if (trimmedName.length > 100) e.name = "Name must be under 100 characters.";
+
+    const trimmedEmail = values.email.trim();
+    if (!trimmedEmail) e.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmedEmail)) e.email = "That doesn't look like a valid email.";
+
+    const trimmedMsg = values.message.trim();
+    if (!trimmedMsg) e.message = "Please share a brief message.";
+    else if (trimmedMsg.length < 10) e.message = "A bit more context helps — at least 10 characters.";
+    else if (trimmedMsg.length > MAX) e.message = `Message must be under ${MAX} characters.`;
+
+    return e;
+  };
+
+  const onBlur = (field: keyof FieldErrors) => () => {
+    setTouched((t) => ({ ...t, [field]: true }));
+    setErrors(validate({ name, email, message }));
+  };
 
   const onCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -50,13 +80,25 @@ function Contact() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const validationErrors = validate({ name, email, message });
+    setErrors(validationErrors);
+    setTouched({ name: true, email: true, message: true });
+    if (Object.keys(validationErrors).length > 0) {
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
       setSent(true);
       (e.target as HTMLFormElement).reset();
+      setName("");
+      setEmail("");
+      setWebsite("");
       setInterest("");
       setMessage("");
+      setErrors({});
+      setTouched({});
       toast.success("Message sent — we'll be in touch within one business day.");
       setTimeout(() => setSent(false), 6000);
     }, 700);
@@ -118,10 +160,10 @@ function Contact() {
             <div className="mb-12">
               <p className="eyebrow text-cream-foreground/60 mb-3">// FOLLOW</p>
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/company/strategy-engineering-co"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
+                aria-label="Strategy Engineering on LinkedIn (opens in new tab)"
                 className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
               >
                 <Linkedin className="size-5" />
@@ -168,18 +210,52 @@ function Contact() {
                 <p className="text-sm text-muted-foreground max-w-xs">We'll be in touch within one business day.</p>
               </div>
 
-              <form onSubmit={onSubmit} className={`space-y-2 transition-opacity duration-300 ${sent ? "opacity-30" : "opacity-100"}`}>
-                <div className="float-field">
-                  <input id="contact-name" required name="name" placeholder=" " autoComplete="name" />
+              <form onSubmit={onSubmit} noValidate className={`space-y-2 transition-opacity duration-300 ${sent ? "opacity-30" : "opacity-100"}`}>
+                <div className={`float-field ${touched.name && errors.name ? "field-error" : ""}`}>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    placeholder=" "
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onBlur={onBlur("name")}
+                    aria-invalid={!!(touched.name && errors.name)}
+                    aria-describedby={touched.name && errors.name ? "err-name" : undefined}
+                  />
                   <label htmlFor="contact-name">Your name *</label>
+                  {touched.name && errors.name && (
+                    <p id="err-name" className="field-error-text" role="alert">{errors.name}</p>
+                  )}
                 </div>
-                <div className="float-field">
-                  <input id="contact-email" required type="email" name="email" placeholder=" " autoComplete="email" />
+                <div className={`float-field ${touched.email && errors.email ? "field-error" : ""}`}>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder=" "
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={onBlur("email")}
+                    aria-invalid={!!(touched.email && errors.email)}
+                    aria-describedby={touched.email && errors.email ? "err-email" : undefined}
+                  />
                   <label htmlFor="contact-email">Email *</label>
+                  {touched.email && errors.email && (
+                    <p id="err-email" className="field-error-text" role="alert">{errors.email}</p>
+                  )}
                 </div>
                 <div className="float-field">
-                  <input id="contact-website" name="website" placeholder=" " autoComplete="url" />
-                  <label htmlFor="contact-website">Website</label>
+                  <input
+                    id="contact-website"
+                    name="website"
+                    placeholder=" "
+                    autoComplete="url"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                  <label htmlFor="contact-website">Company website</label>
                 </div>
                 <div className="float-field">
                   <select
@@ -198,21 +274,28 @@ function Contact() {
                   </select>
                   <label htmlFor="contact-interest">I'm interested in…</label>
                 </div>
-                <div className="float-field">
+                <div className={`float-field ${touched.message && errors.message ? "field-error" : ""}`}>
                   <textarea
                     id="contact-message"
-                    required
                     name="message"
                     rows={5}
                     placeholder=" "
                     maxLength={MAX}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    onBlur={onBlur("message")}
+                    aria-invalid={!!(touched.message && errors.message)}
+                    aria-describedby={touched.message && errors.message ? "err-message" : undefined}
                   />
                   <label htmlFor="contact-message">Your message *</label>
-                  <div className="flex justify-end mt-1">
+                  <div className="flex justify-between items-center mt-1 gap-3">
+                    <span className="min-w-0 flex-1">
+                      {touched.message && errors.message && (
+                        <span id="err-message" className="field-error-text" role="alert">{errors.message}</span>
+                      )}
+                    </span>
                     <span
-                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
+                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors shrink-0 ${
                         message.length > MAX * 0.9 ? "text-primary" : "text-cream-foreground/40"
                       }`}
                     >

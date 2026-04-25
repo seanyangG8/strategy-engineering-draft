@@ -274,26 +274,48 @@ function Services() {
                     <Reveal delay={120} className="md:col-span-7">
                       <ul className="grid sm:grid-cols-2 gap-px bg-cream-foreground/10 rounded-2xl overflow-hidden border border-cream-foreground/10">
                         {s.bullets.map((b, idx) => (
-                          <li key={b.h} className="bg-surface p-6 hover:bg-background hover:text-white transition-colors group">
-                            <div className="flex items-center gap-2 mb-2">
+                          <li
+                            key={b.h}
+                            className="bg-surface p-6 hover:bg-background hover:text-white transition-all duration-300 group relative overflow-hidden"
+                          >
+                            {/* Animated accent bar on hover */}
+                            <span
+                              aria-hidden
+                              className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500"
+                            />
+                            <div className="flex items-center gap-2 mb-3">
                               <span className="font-mono text-[10px] tracking-[0.22em] text-primary">
                                 {String(idx + 1).padStart(2, "0")}
                               </span>
                               <span className="h-px flex-1 bg-current opacity-10 group-hover:opacity-30 transition-opacity" />
+                              <Icon
+                                aria-hidden
+                                className="size-3.5 text-primary opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+                                strokeWidth={1.8}
+                              />
                             </div>
-                            <h4 className="font-display text-lg font-medium mb-1.5 tracking-tight">{b.h}</h4>
+                            <h4 className="font-display text-lg font-medium mb-1.5 tracking-tight transition-transform duration-300 group-hover:translate-x-1">
+                              {b.h}
+                            </h4>
                             <p className="text-sm leading-relaxed opacity-70">{b.b}</p>
                           </li>
                         ))}
-                        <li className="bg-bronze-flow text-white p-6 relative overflow-hidden">
-                          <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
-                          <p className="relative font-display text-lg md:text-xl font-light italic leading-snug">
-                            {s.closing}
-                          </p>
-                        </li>
                       </ul>
                     </Reveal>
                   </div>
+
+                  {/* Closing italic band — full width below the article */}
+                  <Reveal delay={180}>
+                    <div className="mt-8 rounded-2xl bg-bronze-flow text-white p-7 md:p-9 relative overflow-hidden">
+                      <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
+                      <div className="relative flex items-start gap-4">
+                        <span aria-hidden className="font-display text-4xl md:text-5xl font-light leading-none text-primary opacity-60 select-none">"</span>
+                        <p className="font-display text-lg md:text-2xl font-light italic leading-snug">
+                          {s.closing}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
                 </article>
               );
             })}
