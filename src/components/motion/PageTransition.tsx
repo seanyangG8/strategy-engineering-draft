@@ -32,7 +32,12 @@ export function PageTransition({ children }: { children: ReactNode }) {
     const t1 = setTimeout(() => {
       setContent(children);
       setKey(pathname);
-      window.scrollTo({ top: 0, behavior: "auto" });
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, o?: { immediate?: boolean }) => void } }).__lenis;
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
       // In: overlay exits upward
       requestAnimationFrame(() => setPhase("in"));
       const t2 = setTimeout(() => setPhase("idle"), 650);
