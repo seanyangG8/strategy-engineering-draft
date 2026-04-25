@@ -150,10 +150,10 @@ function Index() {
               <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
             </MagneticButton>
             <Link
-              to="/services"
+              to="/about"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white/80 hover:text-white transition-colors story-link"
             >
-              See how we work
+              Why we're different
             </Link>
           </div>
         </div>

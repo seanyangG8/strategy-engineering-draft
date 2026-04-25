@@ -3,11 +3,17 @@ import { useRouterState } from "@tanstack/react-router";
 
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [mounted, setMounted] = useState(false);
   const [shown, setShown] = useState(true);
   const [content, setContent] = useState(children);
   const [key, setKey] = useState(pathname);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     if (key === pathname) {
       setContent(children);
       return;
@@ -19,7 +25,10 @@ export function PageTransition({ children }: { children: ReactNode }) {
       requestAnimationFrame(() => setShown(true));
     }, 220);
     return () => clearTimeout(t);
-  }, [pathname, children, key]);
+  }, [pathname, children, key, mounted]);
+
+  // During SSR and first client render, render children directly to avoid hydration mismatch
+  if (!mounted) return <>{children}</>;
 
   return (
     <div
