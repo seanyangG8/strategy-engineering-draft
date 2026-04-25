@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Linkedin, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { FontToggle } from "@/components/theme/FontToggle";
 
 const links = [
   { to: "/" as const, label: "Home" },
@@ -47,8 +48,8 @@ export function Header() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-5 flex items-center justify-between">
-        <Link to="/" className="text-lg font-display font-medium tracking-tight text-white lowercase rounded-sm">
-          strategy<span className="text-primary">.</span>engineering
+        <Link to="/" className="font-sans text-lg font-light tracking-wide text-white lowercase rounded-sm">
+          strategy <span className="font-semibold">engineering</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden md:flex items-center gap-9">
