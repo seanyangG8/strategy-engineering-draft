@@ -143,20 +143,32 @@ function Index() {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up-delay-3">
             <MagneticButton
-              to="/services"
+              to="/contact"
               className="group items-center gap-2 rounded-full bg-primary hover:bg-primary/90 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide"
             >
-              Explore our work
+              Book a discovery call
               <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
             </MagneticButton>
             <Link
-              to="/about"
+              to="/services"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white/80 hover:text-white transition-colors story-link"
             >
-              Why we're different
+              See how we work
             </Link>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <a
+          href="#process"
+          aria-label="Scroll to explore"
+          className="absolute left-1/2 -translate-x-1/2 bottom-24 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
+        >
+          <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+          <span className="relative block w-[22px] h-[36px] rounded-full border border-white/30 group-hover:border-primary/70 transition-colors">
+            <span className="absolute left-1/2 top-2 -translate-x-1/2 w-[3px] h-[6px] rounded-full bg-current animate-scroll-dot" />
+          </span>
+        </a>
 
         {/* Trusted-by marquee */}
         <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-background/40 backdrop-blur-sm py-5 overflow-hidden">
