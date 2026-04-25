@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { Mail, Linkedin, Calendar, ArrowUpRight } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowUpRight, Check } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import heroContact from "@/assets/hero-contact.webp";
+import { Reveal } from "@/components/motion/Reveal";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -16,22 +16,34 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Let's re-engineer the future." },
       { property: "og:image", content: heroContact },
       { name: "twitter:image", content: heroContact },
+      { rel: "canonical", href: "https://strategyengineering.co/contact" },
     ],
   }),
   component: Contact,
 });
 
+const nextSteps = [
+  { n: "01", title: "We reply", body: "Within one business day, with sharp follow-up questions." },
+  { n: "02", title: "Discovery call", body: "30 minutes. We listen, scope, and tell you whether we're the fit." },
+  { n: "03", title: "Tailored proposal", body: "Clear scope, timeline, and outcomes. No template decks." },
+];
+
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [interest, setInterest] = useState("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
+      setSent(true);
       (e.target as HTMLFormElement).reset();
+      setInterest("");
       toast.success("Message sent — we'll be in touch within one business day.");
-    }, 600);
+      setTimeout(() => setSent(false), 6000);
+    }, 700);
   };
 
   return (
@@ -40,7 +52,8 @@ function Contact() {
 
       <section className="bg-surface text-surface-foreground py-28 px-6">
         <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-16">
-          <div>
+          {/* LEFT */}
+          <Reveal>
             <p className="eyebrow text-primary-foreground/60 mb-3">// CONTACT</p>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-8">Let's start a conversation.</h2>
 
@@ -76,7 +89,7 @@ function Contact() {
               </div>
             </a>
 
-            <div>
+            <div className="mb-12">
               <p className="eyebrow text-primary-foreground/60 mb-3">// FOLLOW</p>
               <a
                 href="https://www.linkedin.com/"
@@ -88,40 +101,96 @@ function Contact() {
                 <Linkedin className="size-5" />
               </a>
             </div>
-          </div>
 
-          <div>
+            {/* What happens next */}
+            <div className="border-t border-black/10 pt-10">
+              <p className="eyebrow text-primary-foreground/55 mb-6">// WHAT HAPPENS NEXT</p>
+              <ol className="space-y-5">
+                {nextSteps.map((s) => (
+                  <li key={s.n} className="flex gap-5">
+                    <span className="font-mono text-[11px] tracking-[0.22em] text-primary mt-1 shrink-0">{s.n}</span>
+                    <div>
+                      <h4 className="font-display text-lg font-medium tracking-tight">{s.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{s.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Reveal>
+
+          {/* RIGHT — Form */}
+          <Reveal delay={120}>
             <p className="eyebrow text-primary-foreground/60 mb-3">// MESSAGE</p>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-3">Tell us what you're solving.</h2>
-            <p className="text-muted-foreground mb-8">We believe in understanding your unique needs before taking the next step.</p>
+            <p className="text-muted-foreground mb-10">We believe in understanding your unique needs before taking the next step.</p>
 
-            <form onSubmit={onSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="contact-name" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Name *</label>
-                <Input id="contact-name" required name="name" className="h-11" />
-              </div>
-              <div>
-                <label htmlFor="contact-email" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Email *</label>
-                <Input id="contact-email" required type="email" name="email" className="h-11" />
-              </div>
-              <div>
-                <label htmlFor="contact-website" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Website</label>
-                <Input id="contact-website" name="website" className="h-11" />
-              </div>
-              <div>
-                <label htmlFor="contact-message" className="block text-xs font-mono uppercase tracking-widest mb-2 text-primary-foreground/70">Your Message *</label>
-                <Textarea id="contact-message" required name="message" rows={5} />
-              </div>
-              <button
-                type="submit"
-                disabled={submitting}
-                className="group inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide transition-all hover:scale-[1.02]"
+            <div className="relative">
+              {/* Success overlay */}
+              <div
+                className={`absolute inset-0 z-10 flex flex-col items-center justify-center text-center bg-surface/95 backdrop-blur-sm rounded-2xl transition-all duration-500 ${
+                  sent ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                }`}
               >
-                {submitting ? "Sending..." : "Send message"}
-                <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
-              </button>
-            </form>
-          </div>
+                {sent && (
+                  <svg viewBox="0 0 80 80" className="w-20 h-20 mb-6">
+                    <circle cx="40" cy="40" r="36" fill="none" stroke="var(--primary)" strokeWidth="2" className="circle-path" />
+                    <path d="M26 41 L36 51 L55 30" fill="none" stroke="var(--primary)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="check-path" />
+                  </svg>
+                )}
+                <h3 className="font-display text-2xl font-medium tracking-tight mb-2">Message sent.</h3>
+                <p className="text-sm text-muted-foreground max-w-xs">We'll be in touch within one business day.</p>
+              </div>
+
+              <form onSubmit={onSubmit} className={`space-y-2 transition-opacity duration-300 ${sent ? "opacity-30" : "opacity-100"}`}>
+                <div className="float-field">
+                  <input id="contact-name" required name="name" placeholder=" " autoComplete="name" />
+                  <label htmlFor="contact-name">Your name *</label>
+                </div>
+                <div className="float-field">
+                  <input id="contact-email" required type="email" name="email" placeholder=" " autoComplete="email" />
+                  <label htmlFor="contact-email">Email *</label>
+                </div>
+                <div className="float-field">
+                  <input id="contact-website" name="website" placeholder=" " autoComplete="url" />
+                  <label htmlFor="contact-website">Website</label>
+                </div>
+                <div className="float-field">
+                  <select
+                    id="contact-interest"
+                    name="interest"
+                    value={interest}
+                    onChange={(e) => setInterest(e.target.value)}
+                    className={interest ? "has-value" : ""}
+                  >
+                    <option value="" disabled hidden></option>
+                    <option value="process">Process Improvement</option>
+                    <option value="automation">Automation & AI</option>
+                    <option value="strategy">Strategy & Transformation</option>
+                    <option value="sustainability">Sustainability & Impact</option>
+                    <option value="unsure">Not sure yet</option>
+                  </select>
+                  <label htmlFor="contact-interest">I'm interested in…</label>
+                </div>
+                <div className="float-field">
+                  <textarea id="contact-message" required name="message" rows={5} placeholder=" " />
+                  <label htmlFor="contact-message">Your message *</label>
+                </div>
+
+                <div className="pt-6">
+                  <MagneticButton
+                    type="submit"
+                    disabled={submitting}
+                    className="group items-center gap-2 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide"
+                  >
+                    {submitting ? "Sending…" : "Send message"}
+                    {submitting ? null : <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />}
+                    {sent && <Check className="size-4" />}
+                  </MagneticButton>
+                </div>
+              </form>
+            </div>
+          </Reveal>
         </div>
       </section>
     </main>

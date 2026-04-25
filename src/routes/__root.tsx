@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/components/site/Footer";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 import appCss from "../styles.css?url";
 
@@ -26,6 +27,17 @@ function NotFoundComponent() {
   );
 }
 
+const orgJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Strategy Engineering",
+  url: "https://strategyengineering.co",
+  description:
+    "Engineering your success through process improvement, automation & AI, strategy, and sustainability.",
+  email: "contact@strategyengineering.co",
+  sameAs: ["https://www.linkedin.com/"],
+});
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -33,15 +45,22 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Strategy Engineering — Your Ambition, Our Expertise" },
       { name: "description", content: "Engineering your success through process improvement, automation & AI, strategy, and sustainability." },
+      { name: "theme-color", content: "#262019" },
       { property: "og:title", content: "Strategy Engineering" },
       { property: "og:description", content: "Your Ambition. Our Expertise." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Strategy Engineering" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500&display=swap" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: orgJsonLd },
     ],
   }),
   shellComponent: RootShell,
@@ -66,9 +85,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
-      <Outlet />
+      <PageTransition>
+        <Outlet />
+      </PageTransition>
       <Footer />
       <Toaster />
     </>
   );
 }
+

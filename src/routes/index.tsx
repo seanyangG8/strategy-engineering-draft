@@ -4,6 +4,11 @@ import { ArrowUpRight, Workflow, Cpu, Compass, Leaf } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-seedling.webp";
 import { AchievementsCarousel } from "@/components/site/AchievementsCarousel";
+import { ProcessStrip } from "@/components/site/ProcessStrip";
+import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
+import { Reveal } from "@/components/motion/Reveal";
+import { TiltCard } from "@/components/motion/TiltCard";
+import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,6 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Process, automation, and AI engineering for ambitious operators." },
       { property: "og:image", content: heroImg },
       { name: "twitter:image", content: heroImg },
+      { rel: "canonical", href: "https://strategyengineering.co/" },
     ],
   }),
   component: Index,
@@ -25,6 +31,7 @@ const services = [
     number: "02",
     title: "Automation & AI",
     desc: "Custom automation, AI integrations, and analytics dashboards that turn raw data into compounding advantage.",
+    tags: ["LLM Workflows", "RPA", "Data Pipelines"],
     featured: true,
   },
   {
@@ -32,29 +39,55 @@ const services = [
     number: "01",
     title: "Process Improvement",
     desc: "Lean Six Sigma and Kaizen methodologies to remove bottlenecks, reduce waste, and unlock margin.",
+    tags: ["Lean", "Six Sigma", "Kaizen"],
   },
   {
     icon: Compass,
     number: "03",
     title: "Strategy & Transformation",
     desc: "Forward-thinking strategy paired with executable roadmaps that move the business forward.",
+    tags: ["Operating Model", "M&A", "Change"],
   },
   {
     icon: Leaf,
     number: "04",
     title: "Sustainability & Impact",
     desc: "ESG reporting, carbon roadmaps, and operating models that turn sustainability into advantage.",
+    tags: ["ESG", "Net Zero", "Circularity"],
   },
 ];
 
 const trustedBy = ["FORTUNE 500 FMCG", "UK HOME & LIVING", "NATIONAL ENERGY", "F&B GROWTH", "GLOBAL LOGISTICS", "RETAIL LEADER"];
 
 const stats = [
-  { value: 12, suffix: "+", label: "Transformations delivered" },
-  { value: 40, suffix: "M+", prefix: "$", label: "Operational savings" },
-  { value: 98, suffix: "%", label: "Time saved on automated workflows" },
-  { value: 4, suffix: "", label: "Industries served" },
+  { value: 12, suffix: "+", label: "Transformations delivered", spark: [3, 5, 4, 7, 6, 9, 12] },
+  { value: 40, suffix: "M+", prefix: "$", label: "Operational savings", spark: [2, 6, 9, 14, 22, 31, 40] },
+  { value: 98, suffix: "%", label: "Time saved on automated workflows", spark: [10, 25, 45, 60, 78, 90, 98] },
+  { value: 4, suffix: "", label: "Industries served", spark: [1, 1, 2, 2, 3, 3, 4] },
 ];
+
+function Sparkline({ data }: { data: number[] }) {
+  const max = Math.max(...data);
+  const w = 100;
+  const h = 24;
+  const step = w / (data.length - 1);
+  const path = data
+    .map((v, i) => `${i === 0 ? "M" : "L"}${(i * step).toFixed(1)},${(h - (v / max) * h).toFixed(1)}`)
+    .join(" ");
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-6 mt-3" preserveAspectRatio="none">
+      <path
+        d={path}
+        fill="none"
+        stroke="var(--primary)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="sparkline-path"
+      />
+    </svg>
+  );
+}
 
 function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string; suffix?: string }) {
   const [val, setVal] = useState(0);
@@ -109,13 +142,13 @@ function Index() {
             Process, automation, and AI engineering for ambitious operators — built for measurable impact.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up-delay-3">
-            <Link
+            <MagneticButton
               to="/services"
-              className="group inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide transition-all hover:scale-[1.02]"
+              className="group items-center gap-2 rounded-full bg-primary hover:bg-primary/90 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide"
             >
               Explore our work
               <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
-            </Link>
+            </MagneticButton>
             <Link
               to="/about"
               className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium text-white/80 hover:text-white transition-colors story-link"
@@ -145,19 +178,23 @@ function Index() {
       {/* STATS STRIP */}
       <section className="bg-background border-y border-white/5 py-20 px-6">
         <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-10">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center md:text-left">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 100} className="text-center md:text-left">
               <Counter to={s.value} prefix={s.prefix} suffix={s.suffix} />
-              <p className="mt-3 text-xs uppercase tracking-[0.18em] text-white/50 font-medium">{s.label}</p>
-            </div>
+              <Sparkline data={s.spark} />
+              <p className="mt-2 text-xs uppercase tracking-[0.18em] text-white/50 font-medium">{s.label}</p>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      {/* SERVICES — Bento */}
+      {/* PROCESS STRIP */}
+      <ProcessStrip />
+
+      {/* SERVICES — Bento (redesigned) */}
       <section className="bg-surface text-surface-foreground py-28 px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
             <div>
               <p className="eyebrow text-primary-foreground/60 mb-3">// WHAT WE DO</p>
               <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight max-w-2xl">
@@ -167,48 +204,103 @@ function Index() {
             <p className="text-muted-foreground max-w-md leading-relaxed">
               Four disciplines, one engineering mindset — focused on precision, efficiency, and outcomes that compound.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((s) => {
+            {services.map((s, i) => {
               const Icon = s.icon;
               return (
-                <Link
+                <Reveal
                   key={s.title}
-                  to="/services"
-                  className={`group relative rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
-                    s.featured
-                      ? "sm:col-span-2 lg:col-span-2 lg:row-span-1 bg-background text-white border-white/10 hover:border-primary/50"
-                      : "bg-white border-black/10 hover:border-black/40"
-                  }`}
+                  delay={i * 90}
+                  className={s.featured ? "sm:col-span-2 lg:col-span-2" : ""}
                 >
-                  <div className="flex items-start justify-between mb-12">
-                    <span className={`font-mono text-xs tracking-widest ${s.featured ? "text-primary" : "text-black/40"}`}>
-                      {s.number}
-                    </span>
-                    <Icon className={`size-6 ${s.featured ? "text-primary" : "text-black/70"}`} strokeWidth={1.5} />
-                  </div>
-                  <h3 className={`font-display text-2xl md:text-3xl font-medium mb-3 ${s.featured ? "text-white" : ""}`}>
-                    {s.title}
-                  </h3>
-                  <p className={`text-sm leading-relaxed mb-6 ${s.featured ? "text-white/70" : "text-muted-foreground"}`}>
-                    {s.desc}
-                  </p>
-                  <span className={`inline-flex items-center gap-1.5 text-xs font-mono tracking-wider ${s.featured ? "text-primary" : "text-black/60"}`}>
-                    LEARN MORE
-                    <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </span>
-                </Link>
+                  <TiltCard
+                    max={4}
+                    className={`h-full rounded-2xl border overflow-hidden ${
+                      s.featured
+                        ? "border-white/10"
+                        : "border-black/10 hover:border-black/40 transition-colors"
+                    }`}
+                  >
+                    <Link
+                      to="/services"
+                      className={`relative block h-full p-8 group ${
+                        s.featured ? "bg-bronze-flow text-white" : "bg-white"
+                      }`}
+                    >
+                      {s.featured && (
+                        <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
+                      )}
+                      {s.featured && (
+                        <div
+                          className="absolute -inset-x-20 -top-1/2 h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                          style={{
+                            background:
+                              "linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.08) 50%, transparent 60%)",
+                            transform: "translateX(-30%)",
+                          }}
+                        />
+                      )}
+                      <div className="relative">
+                        <div className="flex items-start justify-between mb-12">
+                          <span
+                            className={`font-mono text-xs tracking-widest ${
+                              s.featured ? "text-primary" : "text-black/40"
+                            }`}
+                          >
+                            {s.number}
+                          </span>
+                          <Icon
+                            className={`size-6 ${s.featured ? "text-primary" : "text-black/70"}`}
+                            strokeWidth={1.5}
+                          />
+                        </div>
+                        <h3 className={`font-display text-2xl md:text-3xl font-medium mb-3 ${s.featured ? "text-white" : ""}`}>
+                          {s.title}
+                        </h3>
+                        <p className={`text-sm leading-relaxed mb-5 ${s.featured ? "text-white/70" : "text-muted-foreground"}`}>
+                          {s.desc}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5 mb-6">
+                          {s.tags.map((t) => (
+                            <span
+                              key={t}
+                              className={`font-mono text-[10px] tracking-[0.18em] uppercase px-2.5 py-1 rounded-full border ${
+                                s.featured
+                                  ? "border-white/15 text-white/60"
+                                  : "border-black/10 text-black/55"
+                              }`}
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        <span
+                          className={`inline-flex items-center gap-1.5 text-xs font-mono tracking-wider ${
+                            s.featured ? "text-primary" : "text-black/60"
+                          }`}
+                        >
+                          LEARN MORE
+                          <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </span>
+                      </div>
+                    </Link>
+                  </TiltCard>
+                </Reveal>
               );
             })}
           </div>
         </div>
       </section>
 
+      {/* TESTIMONIAL */}
+      <TestimonialCarousel />
+
       {/* ACHIEVEMENTS */}
       <section className="bg-background text-white py-28 px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-14">
+          <Reveal className="text-center mb-14">
             <p className="eyebrow text-primary mb-3">// PROOF</p>
             <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight mb-5">
               Outcomes, not <span className="italic font-light text-primary">opinions.</span>
@@ -216,16 +308,16 @@ function Index() {
             <p className="max-w-2xl mx-auto text-white/65 leading-relaxed">
               A selection of past engagements where we unlocked latent potential. Client names omitted for privacy.
             </p>
-          </div>
+          </Reveal>
           <AchievementsCarousel />
           <div className="text-center">
-            <Link
+            <MagneticButton
               to="/services"
-              className="inline-flex items-center gap-2 mt-12 rounded-full bg-primary hover:bg-primary/90 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide transition-all hover:scale-[1.02] group"
+              className="group items-center gap-2 mt-12 rounded-full bg-primary hover:bg-primary/90 px-8 py-3.5 text-sm font-semibold text-primary-foreground tracking-wide"
             >
               See how we work
               <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
-            </Link>
+            </MagneticButton>
           </div>
         </div>
       </section>
