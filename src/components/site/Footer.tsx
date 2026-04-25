@@ -37,8 +37,8 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl grid md:grid-cols-12 gap-12 relative">
         <div className="md:col-span-5">
-          <Link to="/" className="text-lg font-display font-medium tracking-tight text-white lowercase">
-            strategy<span className="text-primary">.</span>engineering
+          <Link to="/" className="font-sans text-lg font-light tracking-wide text-white lowercase">
+            strategy <span className="font-semibold">engineering</span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-xs">
             Engineering the systems, automation, and AI that turn ambition into operating advantage.
