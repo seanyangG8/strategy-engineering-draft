@@ -282,24 +282,7 @@ const slides: Slide[] = [
     headline: "Sales Growth of 30%",
     body: "Developed and implemented a new route to market strategy alongside a data-driven sales plan leading to 30% sales growth.",
     timeline: "Project Timeline: 3 Months",
-    visual: (play) => (
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={play ? barData : barData.map((d) => ({ ...d, v: 0 }))} margin={{ top: 24, right: 16, left: -8, bottom: 8 }}>
-          <defs>
-            <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.45} />
-              <stop offset="100%" stopColor={PRIMARY} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid stroke="#ffffff10" vertical={false} />
-          <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-          <YAxis stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={[260, 410]} />
-          <Bar dataKey="v" fill="url(#barFill)" radius={[6, 6, 0, 0]} maxBarSize={42} isAnimationActive animationDuration={1200} animationEasing="ease-out">
-            <LabelList dataKey="v" position="top" fill="#ffffffcc" fontSize={10} />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    ),
+    visual: (play) => <GrowthBars play={play} />,
   },
 ];
 
