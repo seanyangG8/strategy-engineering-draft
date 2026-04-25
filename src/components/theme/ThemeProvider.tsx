@@ -8,7 +8,7 @@ export const THEME_META: Record<Theme, { label: string; swatch: string }> = {
   midnight: { label: "Midnight", swatch: "oklch(0.72 0.14 230)" },
   forest: { label: "Forest", swatch: "oklch(0.78 0.10 90)" },
   plum: { label: "Plum", swatch: "oklch(0.75 0.09 25)" },
-  mono: { label: "Mono", swatch: "oklch(0.95 0 0)" },
+  mono: { label: "Mono", swatch: "oklch(0.62 0.22 25)" },
 };
 
 const STORAGE_KEY = "se-theme";
