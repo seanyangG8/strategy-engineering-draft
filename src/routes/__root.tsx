@@ -2,6 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { Toaster } from "@/components/ui/sonner";
 import { Footer } from "@/components/site/Footer";
 import { PageTransition } from "@/components/motion/PageTransition";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 
 import appCss from "../styles.css?url";
 
@@ -85,6 +87,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
+      <SmoothScroll />
+      <ScrollProgress />
       <PageTransition>
         <Outlet />
       </PageTransition>
