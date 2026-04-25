@@ -76,14 +76,14 @@ const slides: Slide[] = [
         <AreaChart data={areaData} margin={{ top: 10, right: 16, left: -8, bottom: 0 }}>
           <defs>
             <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={BLUE} stopOpacity={0.95} />
-              <stop offset="100%" stopColor={BLUE} stopOpacity={0.15} />
+              <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.95} />
+              <stop offset="100%" stopColor={PRIMARY} stopOpacity={0.15} />
             </linearGradient>
           </defs>
           <CartesianGrid stroke="#ffffff10" vertical={false} />
           <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
           <YAxis stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[0, 100]} />
-          <Area type="monotone" dataKey="v" stroke={BLUE} strokeWidth={2.5} fill="url(#areaFill)" />
+          <Area type="monotone" dataKey="v" stroke={PRIMARY} strokeWidth={2.5} fill="url(#areaFill)" />
         </AreaChart>
       </ResponsiveContainer>
     ),
@@ -109,7 +109,7 @@ const slides: Slide[] = [
               style={{ fontSize: 11, fill: "#fff" }}
             >
               {pieData.map((_, i) => (
-                <Cell key={i} fill={BLUE_PALETTE[i]} />
+                <Cell key={i} fill={PRIMARY_PALETTE[i]} />
               ))}
             </Pie>
           </PieChart>
@@ -156,7 +156,7 @@ const slides: Slide[] = [
           <defs>
             <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#a8c4b6" />
-              <stop offset="100%" stopColor={BLUE} />
+              <stop offset="100%" stopColor={PRIMARY} />
             </linearGradient>
           </defs>
           <CartesianGrid stroke="#ffffff10" vertical={false} />
