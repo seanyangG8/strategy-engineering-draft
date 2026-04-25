@@ -26,10 +26,10 @@ export const Route = createFileRoute("/about")({
 });
 
 const team = [
-  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical & Electronic Engineering", quote: "Most processes don't need transforming — they need engineering.", photo: seanGoh },
-  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics & Finance", quote: "Sustainability that ignores the P&L gets ignored. Period.", photo: nadzim },
-  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering", quote: "Build the bridge before you sell the crossing.", photo: jonQuah },
-  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering", quote: "If it can't be measured, it probably can't be fixed.", photo: seanMorais },
+  { name: "Sean Goh", role: "Senior Business Process Manager", edu: "MEng Electrical & Electronic Engineering", quote: "Most processes don't need transforming — they need engineering.", photo: seanGoh, linkedin: "https://www.linkedin.com/in/seanygoh/" },
+  { name: "Nadzim Zahari", role: "Senior Sustainability Manager", edu: "BSc Economics & Finance", quote: "Sustainability that ignores the P&L gets ignored. Period.", photo: nadzim, linkedin: "https://www.linkedin.com/in/nadzimzahari/" },
+  { name: "Jon Quah", role: "Business Development Head", edu: "BSc Civil Engineering", quote: "Build the bridge before you sell the crossing.", photo: jonQuah, linkedin: "https://www.linkedin.com/in/jonathan-q-1917b3125/" },
+  { name: "Sean Morais", role: "Lead Design Engineer", edu: "MEng Astronautics Engineering", quote: "If it can't be measured, it probably can't be fixed.", photo: seanMorais, linkedin: "https://www.linkedin.com/in/smmorais/" },
 ];
 
 const values = [
@@ -269,7 +269,7 @@ function About() {
                   <div className="absolute inset-x-5 bottom-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                     <p className="font-display text-sm italic text-white/90 leading-snug mb-3">"{m.quote}"</p>
                     <a
-                      href="https://www.linkedin.com/"
+                      href={m.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn (opens in new tab)`}
