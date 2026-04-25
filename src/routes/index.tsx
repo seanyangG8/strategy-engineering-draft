@@ -129,14 +129,36 @@ function Index() {
     <main>
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center center" }} />
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src={heroImg}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover animate-ken-burns"
+            style={{ objectPosition: "center center" }}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/55 to-background" />
         <Header />
         <div className="relative z-10 text-center px-6 max-w-5xl">
           <p className="eyebrow text-primary mb-6 animate-fade-up">// UNLOCKING POTENTIAL</p>
-          <h1 className="font-display text-[40px] sm:text-5xl md:text-7xl lg:text-8xl font-medium text-white leading-[0.95] tracking-tight animate-fade-up-delay-1">
-            Your ambition.<br />
-            <span className="italic font-light text-primary">Our expertise.</span>
+          <h1 className="font-display text-[40px] sm:text-5xl md:text-7xl lg:text-8xl font-medium text-white leading-[0.95] tracking-tight">
+            {["Your", "ambition."].map((w, i) => (
+              <span key={`a-${i}`} className="word-rise-wrap mr-[0.25em]">
+                <span className="word-rise" style={{ animationDelay: `${0.1 + i * 0.09}s` }}>
+                  {w}
+                </span>
+              </span>
+            ))}
+            <br />
+            <span className="italic font-light text-primary">
+              {["Our", "expertise."].map((w, i) => (
+                <span key={`b-${i}`} className="word-rise-wrap mr-[0.25em]">
+                  <span className="word-rise" style={{ animationDelay: `${0.32 + i * 0.09}s` }}>
+                    {w}
+                  </span>
+                </span>
+              ))}
+            </span>
           </h1>
           <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-white/70 leading-relaxed animate-fade-up-delay-2">
             We're the engineers behind the strategy — turning bold ambitions into systems that scale, automate, and outperform.
@@ -160,9 +182,9 @@ function Index() {
 
         {/* Scroll indicator */}
         <a
-          href="#process"
+          href="#trusted"
           aria-label="Scroll to explore"
-          className="absolute left-1/2 -translate-x-1/2 bottom-24 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
+          className="absolute left-1/2 -translate-x-1/2 bottom-28 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
         >
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <span className="relative block w-[22px] h-[36px] rounded-full border border-white/30 group-hover:border-primary/70 transition-colors">
@@ -170,18 +192,19 @@ function Index() {
           </span>
         </a>
 
-        {/* Trusted-by marquee */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-background/40 backdrop-blur-sm py-5 overflow-hidden">
-          <div className="flex items-center gap-3 max-w-7xl mx-auto px-6">
-            <span className="eyebrow text-white/50 whitespace-nowrap shrink-0">Trusted by teams at</span>
-            <div className="flex-1 overflow-hidden relative">
-              <div className="flex gap-12 marquee whitespace-nowrap">
-                {[...trustedBy, ...trustedBy].map((name, i) => (
-                  <span key={i} className="font-mono text-xs tracking-[0.2em] text-white/40 hover:text-white/70 transition-colors">
-                    {name}
-                  </span>
-                ))}
-              </div>
+        {/* Trusted-by hairline grid */}
+        <div id="trusted" className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-background/50 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6">
+            <span className="eyebrow text-white/45 whitespace-nowrap shrink-0 hidden md:inline">// TRUSTED BY</span>
+            <div className="flex-1 grid grid-cols-3 md:grid-cols-6 divide-x divide-white/10 border-x border-white/10">
+              {trustedBy.map((name) => (
+                <div
+                  key={name}
+                  className="px-4 py-2 flex items-center justify-center text-center font-mono text-[10px] tracking-[0.22em] text-white/45 hover:text-white/85 transition-colors"
+                >
+                  {name}
+                </div>
+              ))}
             </div>
           </div>
         </div>
