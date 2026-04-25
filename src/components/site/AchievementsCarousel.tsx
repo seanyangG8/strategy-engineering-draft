@@ -23,8 +23,15 @@ import {
 import erpImg from "@/assets/service-ai.webp";
 import esgImg from "@/assets/sustainability-bulb.webp";
 
-const BLUE = "#8a7350";
-const BLUE_PALETTE = ["#b09a7a", "#9c8665", "#8a7350", "#6b5a3e", "#48402d"];
+// Theme-aware chart colors — pulled from CSS variables at render time
+const PRIMARY = "var(--primary)";
+const PRIMARY_PALETTE = [
+  "color-mix(in oklab, var(--primary) 95%, white 5%)",
+  "color-mix(in oklab, var(--primary) 80%, white 20%)",
+  "var(--primary)",
+  "color-mix(in oklab, var(--primary) 70%, black 30%)",
+  "color-mix(in oklab, var(--primary) 50%, black 50%)",
+];
 
 const areaData = [
   { name: "Phase 1", v: 30 },
