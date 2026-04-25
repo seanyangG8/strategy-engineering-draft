@@ -346,22 +346,7 @@ const slides: Slide[] = [
     headline: "Time Saved by 98.2%",
     body: "Developed a regional automation solution streamlining six hours of daily work into several minutes whilst employing Lean principles and practices.",
     timeline: "Project Timeline: 3 Months",
-    visual: (play) => (
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={play ? areaData : areaData.map((d) => ({ ...d, v: 0 }))} margin={{ top: 10, right: 16, left: -8, bottom: 0 }}>
-          <defs>
-            <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.95} />
-              <stop offset="100%" stopColor={PRIMARY} stopOpacity={0.15} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid stroke="#ffffff10" vertical={false} />
-          <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
-          <YAxis stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[0, 100]} />
-          <Area type="monotone" dataKey="v" stroke={PRIMARY} strokeWidth={2.5} fill="url(#areaFill)" isAnimationActive animationDuration={1400} animationEasing="ease-out" />
-        </AreaChart>
-      </ResponsiveContainer>
-    ),
+    visual: (play) => <GrowthArea play={play} />,
   },
   {
     title: "Fortune 500 MNC",
