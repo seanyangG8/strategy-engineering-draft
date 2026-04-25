@@ -40,9 +40,7 @@ export function Footer() {
           <a
             href="mailto:contact@strategyengineering.co"
             className="inline-flex items-center gap-2 mt-6 text-sm text-white hover:text-primary transition-colors story-link"
-          >
-            <Mail className="size-4" /> contact@strategyengineering.co
-          </a>
+          ><Mail className="size-4" /><span>contact@strategyengineering.co</span></a>
         </div>
 
         <div className="md:col-span-3">

@@ -25,7 +25,7 @@ const steps = [
 
 export function ProcessStrip() {
   return (
-    <section className="bg-background text-white py-28 px-6 border-t border-white/5">
+    <section id="process" className="bg-background text-white py-28 px-6 border-t border-white/5 scroll-mt-20">
       <div className="mx-auto max-w-7xl">
         <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
