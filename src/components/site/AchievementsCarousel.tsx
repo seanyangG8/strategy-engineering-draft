@@ -237,10 +237,11 @@ export function AchievementsCarousel() {
       </Carousel>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-6 mt-8">
+      <div className="flex items-center justify-center gap-6 mt-8" role="group" aria-label="Carousel controls">
         <button
+          type="button"
           onClick={() => api?.scrollPrev()}
-          aria-label="Previous"
+          aria-label="Previous slide"
           className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-[#c8854a] hover:bg-[#c8854a]/10 transition-all flex items-center justify-center"
         >
           <ChevronLeft className="h-5 w-5" />
@@ -262,8 +263,9 @@ export function AchievementsCarousel() {
         </div>
 
         <button
+          type="button"
           onClick={() => api?.scrollNext()}
-          aria-label="Next"
+          aria-label="Next slide"
           className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-[#c8854a] hover:bg-[#c8854a]/10 transition-all flex items-center justify-center"
         >
           <ChevronRight className="h-5 w-5" />
