@@ -215,6 +215,102 @@ function EsgDiagram({ play }: { play: boolean }) {
 }
 
 // Animated bar chart — bars grow one at a time, left to right
+function GrowthArea({ play }: { play: boolean }) {
+  const W = 100;
+  const H = 60;
+  const padL = 10;
+  const padR = 4;
+  const padT = 6;
+  const padB = 8;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const yMax = 100;
+  const scaleY = (v: number) => (v / yMax) * chartH;
+  const stepX = chartW / (areaData.length - 1);
+  const points = areaData.map((d, i) => ({
+    x: padL + i * stepX,
+    y: padT + chartH - scaleY(d.v),
+    ...d,
+  }));
+  // Smooth path via cubic bezier
+  const linePath = points
+    .map((p, i, arr) => {
+      if (i === 0) return `M ${p.x} ${p.y}`;
+      const prev = arr[i - 1];
+      const cx1 = prev.x + (p.x - prev.x) / 2;
+      const cx2 = prev.x + (p.x - prev.x) / 2;
+      return `C ${cx1} ${prev.y} ${cx2} ${p.y} ${p.x} ${p.y}`;
+    })
+    .join(" ");
+  const areaPath = `${linePath} L ${points[points.length - 1].x} ${padT + chartH} L ${points[0].x} ${padT + chartH} Z`;
+  const ticks = [0, 25, 50, 75, 100];
+  const sweep = 1600; // ms
+  const clipId = "growthAreaClip";
+
+  return (
+    <div className="relative w-full h-full">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full" preserveAspectRatio="none" style={{ overflow: "visible" }}>
+        <defs>
+          <linearGradient id="growthAreaFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.9} />
+            <stop offset="100%" stopColor={PRIMARY} stopOpacity={0.1} />
+          </linearGradient>
+          <clipPath id={clipId}>
+            <rect
+              x={padL}
+              y={0}
+              width={play ? chartW : 0}
+              height={H}
+              style={{ transition: `width ${sweep}ms cubic-bezier(0.22,1,0.36,1)` }}
+            />
+          </clipPath>
+        </defs>
+
+        {/* Gridlines + Y labels */}
+        {ticks.map((t) => {
+          const y = padT + chartH - scaleY(t);
+          return (
+            <g key={t}>
+              <line x1={padL} y1={y} x2={W - padR} y2={y} stroke="#ffffff10" strokeWidth="0.2" />
+              <text x={padL - 1} y={y + 1} textAnchor="end" fontSize="2.4" fill="#ffffff70">
+                {t}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Area + line clipped left-to-right */}
+        <g clipPath={`url(#${clipId})`}>
+          <path d={areaPath} fill="url(#growthAreaFill)" />
+          <path d={linePath} fill="none" stroke={PRIMARY} strokeWidth="0.7" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+
+        {/* X-axis labels reveal as sweep passes them */}
+        {points.map((p, i) => {
+          const progress = i / (points.length - 1);
+          const delay = progress * sweep * 0.9;
+          return (
+            <text
+              key={p.name}
+              x={p.x}
+              y={padT + chartH + 4}
+              textAnchor="middle"
+              fontSize="2.4"
+              fill="#ffffff70"
+              style={{
+                opacity: play ? 1 : 0,
+                transition: `opacity 300ms ease-out ${delay}ms`,
+              }}
+            >
+              {p.name}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function GrowthBars({ play }: { play: boolean }) {
   // SVG coordinate system
   const W = 100;
