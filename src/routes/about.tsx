@@ -8,6 +8,7 @@ import jonQuah from "@/assets/team-jon-quah.webp";
 import seanMorais from "@/assets/team-sean-morais.webp";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
