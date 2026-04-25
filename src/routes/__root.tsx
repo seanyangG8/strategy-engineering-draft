@@ -87,10 +87,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <SmoothScroll />
       <ScrollProgress />
       <PageTransition>
-        <Outlet />
+        <div id="main-content">
+          <Outlet />
+        </div>
       </PageTransition>
       <Footer />
       <Toaster />
