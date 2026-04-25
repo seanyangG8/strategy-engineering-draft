@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { PageHero } from "@/components/site/PageHero";
 import { Mail, Linkedin, Calendar, ArrowUpRight, Check, Copy } from "lucide-react";
 import { useState } from "react";
@@ -8,17 +9,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Strategy Engineering" },
-      { name: "description", content: "Let's re-engineer the future. Get in touch with Strategy Engineering." },
-      { property: "og:title", content: "Contact — Strategy Engineering" },
-      { property: "og:description", content: "Let's re-engineer the future." },
-      { property: "og:image", content: heroContact },
-      { name: "twitter:image", content: heroContact },
-      { rel: "canonical", href: "https://strategyengineering.co/contact" },
-    ],
-  }),
   component: Contact,
 });
 
@@ -106,6 +96,15 @@ function Contact() {
 
   return (
     <main>
+      <Helmet>
+        <title>Contact — Strategy Engineering</title>
+        <meta name="description" content="Let's re-engineer the future. Get in touch with Strategy Engineering." />
+        <meta property="og:title" content="Contact — Strategy Engineering" />
+        <meta property="og:description" content="Let's re-engineer the future." />
+        <meta property="og:image" content={heroContact} />
+        <meta name="twitter:image" content={heroContact} />
+        <link rel="canonical" href="https://strategyengineering.co/contact" />
+      </Helmet>
       <PageHero eyebrow="LET'S RE-ENGINEER THE FUTURE" title="Get in touch." backgroundImage={heroContact} objectPosition="center" compact />
 
       <section className="bg-surface text-surface-foreground py-28 px-6">
