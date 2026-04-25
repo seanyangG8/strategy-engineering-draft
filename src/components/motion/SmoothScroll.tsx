@@ -11,6 +11,8 @@ export function SmoothScroll() {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    // Expose so other components (e.g. PageTransition) can sync scroll
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let rafId = 0;
     const raf = (time: number) => {
@@ -35,6 +37,7 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(rafId);
       document.removeEventListener("click", onClick);
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
       lenis.destroy();
     };
   }, []);
