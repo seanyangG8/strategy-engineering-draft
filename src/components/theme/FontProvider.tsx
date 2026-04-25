@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export const FONTS = ["editorial", "modern", "industrial", "brutalist", "soft", "geometric"] as const;
+export const FONTS = ["editorial", "modern", "industrial", "brutalist", "soft", "geometric", "bold"] as const;
 export type FontPair = (typeof FONTS)[number];
 
 export const FONT_META: Record<
@@ -43,6 +43,12 @@ export const FONT_META: Record<
     display: "'Syne', 'Inter', sans-serif",
     sans: "'Plus Jakarta Sans', system-ui, sans-serif",
   },
+  bold: {
+    label: "Bold",
+    sample: "Aa",
+    display: "'Montserrat', 'Inter', sans-serif",
+    sans: "'Montserrat', system-ui, sans-serif",
+  },
 };
 
 const STORAGE_KEY = "se-font";
@@ -83,4 +89,4 @@ export function useFont() {
 }
 
 // Inline bootstrap to set font + CSS vars before hydration — prevents FOUC
-export const fontBootstrapScript = `(function(){try{var k='${STORAGE_KEY}';var v=['editorial','modern','industrial','brutalist','soft','geometric'];var t=localStorage.getItem(k);if(!t||v.indexOf(t)===-1)t='editorial';document.documentElement.setAttribute('data-font',t);var m={editorial:["'Fraunces','Times New Roman',serif","'Inter',system-ui,sans-serif"],modern:["'Space Grotesk','Inter',sans-serif","'Inter',system-ui,sans-serif"],industrial:["'JetBrains Mono',ui-monospace,monospace","'IBM Plex Sans',system-ui,sans-serif"],brutalist:["'Archivo Black','Inter',sans-serif","'IBM Plex Sans',system-ui,sans-serif"],soft:["'DM Serif Display','Times New Roman',serif","'DM Sans',system-ui,sans-serif"],geometric:["'Syne','Inter',sans-serif","'Plus Jakarta Sans',system-ui,sans-serif"]};var p=m[t];document.documentElement.style.setProperty('--font-display',p[0]);document.documentElement.style.setProperty('--font-sans',p[1]);}catch(e){}})();`;
+export const fontBootstrapScript = `(function(){try{var k='${STORAGE_KEY}';var v=['editorial','modern','industrial','brutalist','soft','geometric','bold'];var t=localStorage.getItem(k);if(!t||v.indexOf(t)===-1)t='editorial';document.documentElement.setAttribute('data-font',t);var m={editorial:["'Fraunces','Times New Roman',serif","'Inter',system-ui,sans-serif"],modern:["'Space Grotesk','Inter',sans-serif","'Inter',system-ui,sans-serif"],industrial:["'JetBrains Mono',ui-monospace,monospace","'IBM Plex Sans',system-ui,sans-serif"],brutalist:["'Archivo Black','Inter',sans-serif","'IBM Plex Sans',system-ui,sans-serif"],soft:["'DM Serif Display','Times New Roman',serif","'DM Sans',system-ui,sans-serif"],geometric:["'Syne','Inter',sans-serif","'Plus Jakarta Sans',system-ui,sans-serif"],bold:["'Montserrat','Inter',sans-serif","'Montserrat',system-ui,sans-serif"]};var p=m[t];document.documentElement.style.setProperty('--font-display',p[0]);document.documentElement.style.setProperty('--font-sans',p[1]);}catch(e){}})();`;
