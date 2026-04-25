@@ -23,8 +23,8 @@ import {
 import erpImg from "@/assets/service-ai.jpg";
 import esgImg from "@/assets/sustainability-bulb.png";
 
-const BLUE = "#7fa896";
-const BLUE_PALETTE = ["#a8c4b6", "#7fa896", "#5e8a78", "#3f6557", "#26443a"];
+const BLUE = "#c8854a";
+const BLUE_PALETTE = ["#e8b888", "#d49b66", "#c8854a", "#a66a35", "#7a4a23"];
 
 const areaData = [
   { name: "Phase 1", v: 30 },
