@@ -160,10 +160,10 @@ function Contact() {
             <div className="mb-12">
               <p className="eyebrow text-cream-foreground/60 mb-3">// FOLLOW</p>
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/company/strategy-engineering-co"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
+                aria-label="Strategy Engineering on LinkedIn (opens in new tab)"
                 className="inline-flex items-center justify-center w-11 h-11 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
               >
                 <Linkedin className="size-5" />
