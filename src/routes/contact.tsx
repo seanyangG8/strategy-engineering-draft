@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHero } from "@/components/site/PageHero";
-import { Mail, Linkedin, Calendar, ArrowUpRight, Check } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowUpRight, Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import heroContact from "@/assets/hero-contact.webp";
@@ -32,6 +32,21 @@ function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const [interest, setInterest] = useState("");
+  const [message, setMessage] = useState("");
+  const [copied, setCopied] = useState(false);
+  const MAX = 800;
+
+  const onCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText("contact@strategyengineering.co");
+      setCopied(true);
+      toast.success("Email copied to clipboard");
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = "mailto:contact@strategyengineering.co";
+    }
+  };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,6 +56,7 @@ function Contact() {
       setSent(true);
       (e.target as HTMLFormElement).reset();
       setInterest("");
+      setMessage("");
       toast.success("Message sent — we'll be in touch within one business day.");
       setTimeout(() => setSent(false), 6000);
     }, 700);
