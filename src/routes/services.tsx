@@ -5,6 +5,7 @@ import heroServices from "@/assets/hero-services.webp";
 import { useEffect, useState } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+import { CountUpText } from "@/components/motion/CountUpText";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
