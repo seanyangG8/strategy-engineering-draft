@@ -58,7 +58,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Strategy Engineering — Your Ambition, Our Expertise" },
+      { title: "Strategy Engineering" },
       { name: "description", content: "Engineering your success through process improvement, automation & AI, strategy, and sustainability." },
       { name: "theme-color", content: "#262019" },
       { property: "og:title", content: "Strategy Engineering" },
