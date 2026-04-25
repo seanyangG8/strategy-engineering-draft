@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
@@ -20,8 +20,6 @@ import {
   ResponsiveContainer,
   LabelList,
 } from "recharts";
-import erpImg from "@/assets/service-ai.webp";
-import esgImg from "@/assets/sustainability-bulb.webp";
 
 // Theme-aware chart colors — pulled from CSS variables at render time
 const PRIMARY = "var(--primary)";
@@ -57,12 +55,153 @@ const barData = [
   { name: "M5", v: 372 },
 ];
 
+// Animated ERP diagram — central hub with 4 satellite modules wiring in
+function ErpDiagram({ play }: { play: boolean }) {
+  const modules = [
+    { label: "Inventory", x: 50, y: 18 },
+    { label: "Orders", x: 82, y: 50 },
+    { label: "Finance", x: 50, y: 82 },
+    { label: "People", x: 18, y: 50 },
+  ];
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        <defs>
+          <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={PRIMARY} stopOpacity="0.9" />
+            <stop offset="100%" stopColor={PRIMARY} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Connector lines drawing in */}
+        {modules.map((m, i) => (
+          <line
+            key={`l-${i}`}
+            x1="50"
+            y1="50"
+            x2={m.x}
+            y2={m.y}
+            stroke={PRIMARY}
+            strokeWidth="0.4"
+            strokeDasharray="60"
+            strokeDashoffset={play ? 0 : 60}
+            style={{
+              transition: `stroke-dashoffset 800ms ease-out ${300 + i * 150}ms`,
+              opacity: 0.7,
+            }}
+          />
+        ))}
+
+        {/* Pulsing hub */}
+        <circle cx="50" cy="50" r="14" fill="url(#hubGlow)" />
+        <circle
+          cx="50"
+          cy="50"
+          r={play ? 7 : 0}
+          fill={PRIMARY}
+          style={{ transition: "r 600ms cubic-bezier(0.34,1.56,0.64,1) 100ms" }}
+        />
+        <text x="50" y="51.5" textAnchor="middle" fontSize="3.2" fill="#fff" fontWeight="600" style={{ opacity: play ? 1 : 0, transition: "opacity 400ms 700ms" }}>
+          ERP
+        </text>
+
+        {/* Satellite nodes */}
+        {modules.map((m, i) => (
+          <g
+            key={`m-${i}`}
+            style={{
+              opacity: play ? 1 : 0,
+              transform: play ? "scale(1)" : "scale(0)",
+              transformOrigin: `${m.x}px ${m.y}px`,
+              transition: `opacity 400ms ease-out ${800 + i * 150}ms, transform 500ms cubic-bezier(0.34,1.56,0.64,1) ${800 + i * 150}ms`,
+            }}
+          >
+            <circle cx={m.x} cy={m.y} r="6" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.6" />
+            <text x={m.x} y={m.y + 11} textAnchor="middle" fontSize="3" fill="#fff" opacity="0.85">
+              {m.label}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// Animated ESG diagram — carbon meter sweeping from red to net positive
+function EsgDiagram({ play }: { play: boolean }) {
+  // Arc from -120deg to +120deg (240deg sweep)
+  const start = -120;
+  const end = 120;
+  const targetDeg = play ? end : start;
+  const polar = (deg: number, r: number) => {
+    const rad = (deg * Math.PI) / 180;
+    return { x: 50 + r * Math.sin(rad), y: 50 - r * Math.cos(rad) };
+  };
+  const arcPath = (from: number, to: number, r: number) => {
+    const a = polar(from, r);
+    const b = polar(to, r);
+    const large = to - from > 180 ? 1 : 0;
+    return `M ${a.x} ${a.y} A ${r} ${r} 0 ${large} 1 ${b.x} ${b.y}`;
+  };
+
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        {/* Track */}
+        <path d={arcPath(start, end, 38)} fill="none" stroke="#ffffff15" strokeWidth="6" strokeLinecap="round" />
+        {/* Coloured arc */}
+        <path
+          d={arcPath(start, end, 38)}
+          fill="none"
+          stroke={PRIMARY}
+          strokeWidth="6"
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray={1}
+          strokeDashoffset={play ? 0 : 1}
+          style={{ transition: "stroke-dashoffset 1600ms cubic-bezier(0.65,0,0.35,1) 200ms" }}
+        />
+        {/* Tick markers */}
+        {[-120, -60, 0, 60, 120].map((d) => {
+          const a = polar(d, 32);
+          const b = polar(d, 28);
+          return <line key={d} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke="#ffffff40" strokeWidth="0.5" />;
+        })}
+        {/* Needle */}
+        <g
+          style={{
+            transform: `rotate(${targetDeg}deg)`,
+            transformOrigin: "50px 50px",
+            transition: "transform 1600ms cubic-bezier(0.65,0,0.35,1) 200ms",
+          }}
+        >
+          <line x1="50" y1="50" x2="50" y2="18" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+          <circle cx="50" cy="18" r="2" fill={PRIMARY} />
+        </g>
+        <circle cx="50" cy="50" r="3.5" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.6" />
+        {/* Labels */}
+        <text x="14" y="78" fontSize="3" fill="#ffffff60">High emissions</text>
+        <text x="86" y="78" textAnchor="end" fontSize="3" fill={PRIMARY} fontWeight="600" style={{ opacity: play ? 1 : 0, transition: "opacity 400ms 1600ms" }}>
+          Net positive
+        </text>
+        {/* Centre readout */}
+        <text x="50" y="62" textAnchor="middle" fontSize="3" fill="#ffffff70">CARBON</text>
+        <text x="50" y="72" textAnchor="middle" fontSize="6" fill="#fff" fontWeight="300" style={{ opacity: play ? 1 : 0, transition: "opacity 500ms 1700ms" }}>
+          +
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 type Slide = {
   title: string;
   headline: string;
   body: string;
   timeline: string;
-  visual: React.ReactNode;
+  visual: (play: boolean) => React.ReactNode;
 };
 
 const slides: Slide[] = [
@@ -71,9 +210,9 @@ const slides: Slide[] = [
     headline: "Time Saved by 98.2%",
     body: "Developed a regional automation solution streamlining six hours of daily work into several minutes whilst employing Lean principles and practices.",
     timeline: "Project Timeline: 3 Months",
-    visual: (
+    visual: (play) => (
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={areaData} margin={{ top: 10, right: 16, left: -8, bottom: 0 }}>
+        <AreaChart data={play ? areaData : areaData.map((d) => ({ ...d, v: 0 }))} margin={{ top: 10, right: 16, left: -8, bottom: 0 }}>
           <defs>
             <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.95} />
@@ -83,7 +222,7 @@ const slides: Slide[] = [
           <CartesianGrid stroke="#ffffff10" vertical={false} />
           <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
           <YAxis stroke="#ffffff70" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} domain={[0, 100]} />
-          <Area type="monotone" dataKey="v" stroke={PRIMARY} strokeWidth={2.5} fill="url(#areaFill)" />
+          <Area type="monotone" dataKey="v" stroke={PRIMARY} strokeWidth={2.5} fill="url(#areaFill)" isAnimationActive animationDuration={1400} animationEasing="ease-out" />
         </AreaChart>
       </ResponsiveContainer>
     ),
@@ -93,7 +232,7 @@ const slides: Slide[] = [
     headline: "Savings of 500,000 USD",
     body: "Developed a sourcing strategy built on robust analysis and a bespoke calculation methodology.",
     timeline: "Project Timeline: 2 Months",
-    visual: (
+    visual: (play) => (
       <div className="relative w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -107,6 +246,9 @@ const slides: Slide[] = [
               label={({ value }) => `${value}%`}
               labelLine={false}
               style={{ fontSize: 11, fill: "#fff" }}
+              isAnimationActive={play}
+              animationDuration={1200}
+              animationBegin={150}
             >
               {pieData.map((_, i) => (
                 <Cell key={i} fill={PRIMARY_PALETTE[i]} />
@@ -116,7 +258,7 @@ const slides: Slide[] = [
         </ResponsiveContainer>
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
           <span className="text-[10px] uppercase tracking-widest text-white/60">Total</span>
-          <span className="text-2xl font-light text-white">100%</span>
+          <span className="text-2xl font-light text-white" style={{ opacity: play ? 1 : 0, transition: "opacity 500ms 1100ms" }}>100%</span>
         </div>
       </div>
     ),
@@ -126,33 +268,23 @@ const slides: Slide[] = [
     headline: "Software Development",
     body: "Developed an ERP from scratch, overhauling the resource planning system, leading to cost and time savings.",
     timeline: "Project Timeline: 5 Months",
-    visual: (
-      <div className="relative w-full h-full flex items-center justify-center">
-        <div className="absolute inset-4 bg-primary/20 blur-3xl rounded-full" />
-        <img src={erpImg} alt="ERP system" className="relative max-h-full max-w-full object-contain rounded-xl ring-1 ring-white/10" />
-      </div>
-    ),
+    visual: (play) => <ErpDiagram play={play} />,
   },
   {
     title: "National Energy Company",
     headline: "Net Positive Carbon Rating",
     body: "Brought a national company with no prior ESG knowledge to a net positive carbon rating.",
     timeline: "Project Timeline: 5 Months",
-    visual: (
-      <div className="relative w-full h-full flex items-center justify-center">
-        <div className="absolute inset-4 bg-primary/20 blur-3xl rounded-full" />
-        <img src={esgImg} alt="ESG sustainability" className="relative max-h-full max-w-full object-contain rounded-xl" />
-      </div>
-    ),
+    visual: (play) => <EsgDiagram play={play} />,
   },
   {
     title: "F&B Startup",
     headline: "Sales Growth of 30%",
     body: "Developed and implemented a new route to market strategy alongside a data-driven sales plan leading to 30% sales growth.",
     timeline: "Project Timeline: 3 Months",
-    visual: (
+    visual: (play) => (
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={barData} margin={{ top: 24, right: 16, left: -8, bottom: 8 }}>
+        <BarChart data={play ? barData : barData.map((d) => ({ ...d, v: 0 }))} margin={{ top: 24, right: 16, left: -8, bottom: 8 }}>
           <defs>
             <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.45} />
@@ -162,7 +294,7 @@ const slides: Slide[] = [
           <CartesianGrid stroke="#ffffff10" vertical={false} />
           <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
           <YAxis stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={[260, 410]} />
-          <Bar dataKey="v" fill="url(#barFill)" radius={[6, 6, 0, 0]} maxBarSize={42}>
+          <Bar dataKey="v" fill="url(#barFill)" radius={[6, 6, 0, 0]} maxBarSize={42} isAnimationActive animationDuration={1200} animationEasing="ease-out">
             <LabelList dataKey="v" position="top" fill="#ffffffcc" fontSize={10} />
           </Bar>
         </BarChart>
@@ -175,6 +307,31 @@ export function AchievementsCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [playKey, setPlayKey] = useState(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Watch when the carousel scrolls into view
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) setInView(true);
+          else setInView(false);
+        }
+      },
+      { threshold: 0.35 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  // Re-trigger visual animation when active slide changes (while in view)
+  useEffect(() => {
+    if (inView) setPlayKey((k) => k + 1);
+  }, [current, inView]);
 
   useEffect(() => {
     if (!api) return;
@@ -187,59 +344,65 @@ export function AchievementsCarousel() {
   }, [api]);
 
   useEffect(() => {
-    if (!api || paused) return;
+    if (!api || paused || !inView) return;
     const id = setInterval(() => {
       api.scrollNext();
     }, 6500);
     return () => clearInterval(id);
-  }, [api, paused]);
+  }, [api, paused, inView]);
 
   return (
     <div
+      ref={wrapperRef}
       className="mx-auto max-w-5xl"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <Carousel setApi={setApi} opts={{ loop: true, align: "start" }} className="w-full">
         <CarouselContent>
-          {slides.map((s, i) => (
-            <CarouselItem key={i}>
-              <div className="group relative rounded-3xl bg-bronze-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
-                {/* Glow */}
-                <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
+          {slides.map((s, i) => {
+            const isActive = current === i && inView;
+            return (
+              <CarouselItem key={i}>
+                <div className="group relative rounded-3xl bg-bronze-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
+                  {/* Glow */}
+                  <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
+                  <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
-                <div className="relative">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
-                      Case Study {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="h-px flex-1 bg-gradient-to-r from-primary/60 to-transparent" />
-                  </div>
-                  <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight">
-                    {s.title}
-                  </h3>
-                  <div className="h-[2px] w-full bg-gradient-to-r from-primary via-primary/60 to-transparent mt-4 mb-8" />
-
-                  <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[320px]">
-                    <div className="h-[260px] md:h-[340px]">{s.visual}</div>
-                    <div className="text-left">
-                      <h4 className="text-2xl md:text-3xl font-light text-white leading-tight mb-5">
-                        {s.headline}
-                      </h4>
-                      <p className="text-white/80 text-base md:text-lg leading-relaxed font-light">
-                        {s.body}
-                      </p>
+                  <div className="relative">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
+                        Case Study {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="h-px flex-1 bg-gradient-to-r from-primary/60 to-transparent" />
                     </div>
-                  </div>
+                    <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight">
+                      {s.title}
+                    </h3>
+                    <div className="h-[2px] w-full bg-gradient-to-r from-primary via-primary/60 to-transparent mt-4 mb-8" />
 
-                  <p className="text-right italic text-white/60 text-sm mt-8">
-                    {s.timeline}
-                  </p>
+                    <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[320px]">
+                      <div className="h-[260px] md:h-[340px]" key={`${i}-${isActive ? playKey : "idle"}`}>
+                        {s.visual(isActive)}
+                      </div>
+                      <div className="text-left">
+                        <h4 className="text-2xl md:text-3xl font-light text-white leading-tight mb-5">
+                          {s.headline}
+                        </h4>
+                        <p className="text-white/80 text-base md:text-lg leading-relaxed font-light">
+                          {s.body}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-right italic text-white/60 text-sm mt-8">
+                      {s.timeline}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
 
