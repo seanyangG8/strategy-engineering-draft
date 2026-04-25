@@ -132,6 +132,26 @@
   .animate-fade-up-delay-2 { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both; }
   .animate-fade-up-delay-3 { animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both; }
 
+  /* Ken Burns slow zoom for hero images */
+  @keyframes ken-burns {
+    0% { transform: scale(1.06) translate3d(0, 0, 0); }
+    100% { transform: scale(1.16) translate3d(-1.5%, -1%, 0); }
+  }
+  .animate-ken-burns { animation: ken-burns 22s ease-in-out infinite alternate; }
+
+  /* Word-by-word reveal */
+  @keyframes word-rise {
+    from { opacity: 0; transform: translateY(110%); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .word-rise-wrap { display: inline-block; overflow: hidden; vertical-align: bottom; line-height: 1; padding-bottom: 0.05em; }
+  .word-rise {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    animation: word-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
   @keyframes scroll-dot {
     0% { transform: translate(-50%, 0); opacity: 0; }
     30% { opacity: 1; }
