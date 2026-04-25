@@ -155,7 +155,7 @@ const slides: Slide[] = [
         <BarChart data={barData} margin={{ top: 24, right: 16, left: -8, bottom: 8 }}>
           <defs>
             <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#a8c4b6" />
+              <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.45} />
               <stop offset="100%" stopColor={PRIMARY} />
             </linearGradient>
           </defs>
