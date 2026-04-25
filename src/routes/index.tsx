@@ -262,7 +262,7 @@ function Index() {
                     className={`h-full rounded-2xl border overflow-hidden ${
                       s.featured
                         ? "border-white/10"
-                        : "border-cream-foreground/10 hover:border-black/40 transition-colors"
+                        : "border-cream-foreground/10 hover:border-cream-foreground/40 transition-colors"
                     }`}
                   >
                     <Link
