@@ -300,22 +300,19 @@ function Services() {
                             <p className="text-sm leading-relaxed opacity-70">{b.b}</p>
                           </li>
                         ))}
+                        {/* Closing quote — fills the empty grid cell */}
+                        <li className="bg-bronze-flow text-white p-6 relative overflow-hidden flex items-center">
+                          <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
+                          <div className="relative flex items-start gap-3">
+                            <span aria-hidden className="font-display text-3xl font-light leading-none text-primary opacity-70 select-none -mt-1">"</span>
+                            <p className="font-display text-sm md:text-base font-light italic leading-snug">
+                              {s.closing}
+                            </p>
+                          </div>
+                        </li>
                       </ul>
                     </Reveal>
                   </div>
-
-                  {/* Closing italic band — full width below the article */}
-                  <Reveal delay={180}>
-                    <div className="mt-8 rounded-2xl bg-bronze-flow text-white p-7 md:p-9 relative overflow-hidden">
-                      <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
-                      <div className="relative flex items-start gap-4">
-                        <span aria-hidden className="font-display text-4xl md:text-5xl font-light leading-none text-primary opacity-60 select-none">"</span>
-                        <p className="font-display text-lg md:text-2xl font-light italic leading-snug">
-                          {s.closing}
-                        </p>
-                      </div>
-                    </div>
-                  </Reveal>
                 </article>
               );
             })}
