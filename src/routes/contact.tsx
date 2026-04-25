@@ -199,8 +199,26 @@ function Contact() {
                   <label htmlFor="contact-interest">I'm interested in…</label>
                 </div>
                 <div className="float-field">
-                  <textarea id="contact-message" required name="message" rows={5} placeholder=" " />
+                  <textarea
+                    id="contact-message"
+                    required
+                    name="message"
+                    rows={5}
+                    placeholder=" "
+                    maxLength={MAX}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
                   <label htmlFor="contact-message">Your message *</label>
+                  <div className="flex justify-end mt-1">
+                    <span
+                      className={`font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
+                        message.length > MAX * 0.9 ? "text-primary" : "text-primary-foreground/40"
+                      }`}
+                    >
+                      {message.length} / {MAX}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="pt-6">
