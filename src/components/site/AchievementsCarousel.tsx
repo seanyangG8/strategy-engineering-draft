@@ -250,8 +250,10 @@ export function AchievementsCarousel() {
           {slides.map((_, i) => (
             <button
               key={i}
+              type="button"
               onClick={() => api?.scrollTo(i)}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={`Go to slide ${i + 1} of ${slides.length}`}
+              aria-current={current === i ? "true" : undefined}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 current === i ? "w-8 bg-[#c8854a]" : "w-1.5 bg-white/30 hover:bg-white/60"
               }`}

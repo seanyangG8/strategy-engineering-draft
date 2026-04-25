@@ -269,8 +269,10 @@ function About() {
                   <div className="absolute inset-x-5 bottom-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                     <p className="font-display text-sm italic text-white/90 leading-snug mb-3">"{m.quote}"</p>
                     <a
-                      href="#"
-                      aria-label={`${m.name} on LinkedIn`}
+                      href="https://www.linkedin.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${m.name} on LinkedIn (opens in new tab)`}
                       className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/30 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
                     >
                       <Linkedin className="size-3.5" />

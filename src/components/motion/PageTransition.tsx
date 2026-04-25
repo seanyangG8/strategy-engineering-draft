@@ -8,35 +8,46 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const [key, setKey] = useState(pathname);
   const [phase, setPhase] = useState<"idle" | "out" | "in">("idle");
   const reducedRef = useRef(false);
+  const timersRef = useRef<number[]>([]);
+
+  const clearTimers = () => {
+    timersRef.current.forEach((id) => clearTimeout(id));
+    timersRef.current = [];
+  };
 
   useEffect(() => {
     setMounted(true);
     if (typeof window !== "undefined") {
       reducedRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
+    return clearTimers;
   }, []);
 
   useEffect(() => {
     if (!mounted) return;
     if (key === pathname) {
+      // Same path — keep latest children fresh, no transition
       setContent(children);
       return;
     }
     if (reducedRef.current) {
       setContent(children);
       setKey(pathname);
+      setPhase("idle");
       return;
     }
-    // Out: wipe overlay enters from bottom
+
+    // Cancel any pending transition before starting a new one
+    clearTimers();
     setPhase("out");
-    const t1 = setTimeout(() => {
+
+    const t1 = window.setTimeout(() => {
       setContent(children);
       setKey(pathname);
       const hash = window.location.hash?.slice(1);
       const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number | HTMLElement, o?: { immediate?: boolean; offset?: number }) => void } }).__lenis;
       const target = hash ? document.getElementById(hash) : null;
       if (target) {
-        // Wait one frame so layout settles, then scroll to hash target
         requestAnimationFrame(() => {
           if (lenis) lenis.scrollTo(target, { offset: -80 });
           else target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -46,17 +57,17 @@ export function PageTransition({ children }: { children: ReactNode }) {
       } else {
         window.scrollTo({ top: 0, behavior: "auto" });
       }
-      // In: overlay exits upward
       requestAnimationFrame(() => setPhase("in"));
-      const t2 = setTimeout(() => setPhase("idle"), 650);
-      return () => clearTimeout(t2);
+      const t2 = window.setTimeout(() => setPhase("idle"), 650);
+      timersRef.current.push(t2);
     }, 520);
-    return () => clearTimeout(t1);
+    timersRef.current.push(t1);
+
+    return clearTimers;
   }, [pathname, children, key, mounted]);
 
   if (!mounted) return <>{children}</>;
 
-  // Overlay transform
   let overlayTransform = "translateY(100%)";
   if (phase === "out") overlayTransform = "translateY(0%)";
   if (phase === "in") overlayTransform = "translateY(-100%)";

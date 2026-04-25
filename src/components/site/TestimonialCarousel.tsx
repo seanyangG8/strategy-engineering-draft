@@ -29,15 +29,20 @@ export function TestimonialCarousel() {
   }, []);
 
   return (
-    <section className="bg-surface text-surface-foreground py-28 px-6 relative overflow-hidden">
+    <section
+      aria-label="Client testimonials"
+      aria-roledescription="carousel"
+      className="bg-surface text-surface-foreground py-28 px-6 relative overflow-hidden"
+    >
       <div className="absolute inset-0 opacity-[0.03] bg-grain pointer-events-none" />
       <div className="mx-auto max-w-5xl text-center relative">
         <p className="eyebrow text-primary-foreground/50 mb-8">// IN THEIR WORDS</p>
         <Quote className="size-10 text-primary mx-auto mb-8 opacity-80" strokeWidth={1.2} />
-        <div className="relative min-h-[200px] md:min-h-[180px]">
+        <div className="relative min-h-[200px] md:min-h-[180px]" aria-live="polite">
           {quotes.map((q, idx) => (
             <blockquote
               key={idx}
+              aria-hidden={i !== idx}
               className="absolute inset-0 transition-all duration-700 ease-out px-2"
               style={{
                 opacity: i === idx ? 1 : 0,
@@ -59,7 +64,8 @@ export function TestimonialCarousel() {
             <button
               key={idx}
               type="button"
-              aria-label={`Quote ${idx + 1}`}
+              aria-label={`Go to testimonial ${idx + 1} of ${quotes.length}`}
+              aria-current={i === idx ? "true" : undefined}
               onClick={() => setI(idx)}
               className={`h-1.5 rounded-full transition-all duration-500 ${
                 i === idx ? "w-10 bg-primary" : "w-2 bg-primary-foreground/15 hover:bg-primary-foreground/40"
