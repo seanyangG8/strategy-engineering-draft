@@ -68,10 +68,10 @@ export function Footer() {
             <li><Link to="/services" hash="service-04" className="hover:text-primary transition-colors story-link">Sustainability & Impact</Link></li>
           </ul>
           <a
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/company/strategy-engineering-co"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label="Strategy Engineering on LinkedIn (opens in new tab)"
             className="inline-flex items-center justify-center w-10 h-10 mt-6 rounded-full border border-white/15 text-white/70 hover:text-primary hover:border-primary/40 transition-colors"
           >
             <Linkedin className="size-4" />
