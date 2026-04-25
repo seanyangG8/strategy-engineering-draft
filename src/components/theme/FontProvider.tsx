@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export const FONTS = ["editorial", "modern", "industrial", "brutalist", "soft", "geometric", "bold"] as const;
+export const FONTS = ["editorial", "bold", "modern", "industrial", "brutalist", "soft", "geometric"] as const;
 export type FontPair = (typeof FONTS)[number];
 
 export const FONT_META: Record<
