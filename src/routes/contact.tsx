@@ -77,15 +77,25 @@ function Contact() {
               href="mailto:contact@strategyengineering.co"
               className="block group rounded-2xl border border-black/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
             >
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="min-w-0">
                   <p className="eyebrow text-primary mb-2 flex items-center gap-2">
                     <Mail className="size-3.5" /> EMAIL US
                   </p>
-                  <p className="font-display text-xl font-medium tracking-tight">contact@strategyengineering.co</p>
+                  <p className="font-display text-xl font-medium tracking-tight truncate">contact@strategyengineering.co</p>
                   <p className="text-xs mt-2 opacity-60">We reply within one business day.</p>
                 </div>
-                <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={onCopy}
+                    aria-label="Copy email address"
+                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-black/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                  >
+                    {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                  </button>
+                  <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
+                </div>
               </div>
             </a>
 
