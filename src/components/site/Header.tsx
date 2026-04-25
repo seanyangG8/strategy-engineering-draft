@@ -20,6 +20,23 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close on Escape, and auto-close when resizing into desktop layout
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const onResize = () => {
+      if (window.innerWidth >= 768) setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -29,16 +46,16 @@ export function Header() {
       }`}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-5 flex items-center justify-between">
-        <Link to="/" className="text-lg font-display font-medium tracking-tight text-white lowercase">
+        <Link to="/" className="text-lg font-display font-medium tracking-tight text-white lowercase rounded-sm">
           strategy<span className="text-primary">.</span>engineering
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9">
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-9">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="text-white/80 hover:text-white text-[13px] font-medium tracking-wide transition-colors story-link"
+              className="text-white/80 hover:text-white text-[13px] font-medium tracking-wide transition-colors story-link rounded-sm"
               activeOptions={{ exact: true }}
               activeProps={{ className: "text-primary" }}
             >
@@ -49,31 +66,33 @@ export function Header() {
             href="https://www.linkedin.com/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-white/70 hover:text-primary transition-colors pl-3 ml-2 border-l border-white/10"
+            aria-label="LinkedIn (opens in new tab)"
+            className="text-white/70 hover:text-primary transition-colors pl-3 ml-2 border-l border-white/10 rounded-sm"
           >
             <Linkedin className="size-[17px]" />
           </a>
         </nav>
 
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-white p-2 rounded-md"
           onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X /> : <Menu />}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-background/95 backdrop-blur border-t border-white/10">
-          <div className="px-6 py-5 flex flex-col gap-4">
+        <div id="mobile-nav" className="md:hidden bg-background/95 backdrop-blur border-t border-white/10">
+          <nav aria-label="Mobile" className="px-6 py-5 flex flex-col gap-4">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="text-white/90 hover:text-primary text-base font-medium"
+                className="text-white/90 hover:text-primary text-base font-medium rounded-sm"
               >
                 {l.label}
               </Link>
@@ -82,11 +101,12 @@ export function Header() {
               href="https://www.linkedin.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/70 hover:text-primary inline-flex items-center gap-2 text-sm pt-2 border-t border-white/10"
+              aria-label="LinkedIn (opens in new tab)"
+              className="text-white/70 hover:text-primary inline-flex items-center gap-2 text-sm pt-2 border-t border-white/10 rounded-sm"
             >
               <Linkedin className="size-4" /> LinkedIn
             </a>
-          </div>
+          </nav>
         </div>
       )}
     </header>

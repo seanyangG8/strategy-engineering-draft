@@ -82,6 +82,35 @@
     font-feature-settings: "ss01", "cv11";
   }
   h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; }
+
+  /* Visible keyboard focus across the app — bronze ring with offset */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  /* Skip-to-content link, hidden until focused */
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    transform: translateY(-150%);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline-offset: 4px;
+  }
 }
 
 @layer utilities {
@@ -261,4 +290,6 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .word-rise { transform: none !important; opacity: 1 !important; }
+  .animate-ken-burns { animation: none !important; transform: scale(1.06) !important; }
 }

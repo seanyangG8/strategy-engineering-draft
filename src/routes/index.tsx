@@ -180,7 +180,7 @@ function Index() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — hidden on small screens to avoid trusted-by overlap */}
         <button
           type="button"
           aria-label="Scroll to next section"
@@ -191,7 +191,7 @@ function Index() {
             else if (target) target.scrollIntoView({ behavior: "smooth" });
             else window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
           }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-32 md:bottom-36 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
+          className="hidden md:flex absolute left-1/2 -translate-x-1/2 bottom-28 z-10 flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group rounded-full"
         >
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <span className="relative block w-[22px] h-[36px] rounded-full border border-white/30 group-hover:border-primary/70 transition-colors">
