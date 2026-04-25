@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { ArrowUpRight, Workflow, Cpu, Compass, Leaf } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import heroImg from "@/assets/hero-seedling.png";
+import heroImg from "@/assets/hero-seedling.webp";
 import { AchievementsCarousel } from "@/components/site/AchievementsCarousel";
 
 export const Route = createFileRoute("/")({
