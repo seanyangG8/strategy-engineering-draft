@@ -318,12 +318,7 @@ body, header, footer, section, article, aside, nav, main,
     background-size: 160px 160px;
   }
 
-  /* Animated bronze gradient for featured cards */
-  .bg-bronze-flow {
-    background: linear-gradient(135deg, oklch(0.22 0.02 55) 0%, oklch(0.18 0.015 50) 35%, oklch(0.28 0.05 65) 100%);
-    background-size: 200% 200%;
-    animation: bronze-flow 12s ease-in-out infinite;
-  }
+  /* keyframes for the dynamic .bg-bronze-flow defined above */
   @keyframes bronze-flow {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
