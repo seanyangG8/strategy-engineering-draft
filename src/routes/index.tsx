@@ -262,13 +262,13 @@ function Index() {
                     className={`h-full rounded-2xl border overflow-hidden ${
                       s.featured
                         ? "border-white/10"
-                        : "border-black/10 hover:border-black/40 transition-colors"
+                        : "border-cream-foreground/10 hover:border-black/40 transition-colors"
                     }`}
                   >
                     <Link
                       to="/services"
                       className={`relative block h-full p-8 group ${
-                        s.featured ? "bg-bronze-flow text-white" : "bg-white"
+                        s.featured ? "bg-bronze-flow text-white" : "bg-cream"
                       }`}
                     >
                       {s.featured && (
@@ -288,13 +288,13 @@ function Index() {
                         <div className="flex items-start justify-between mb-12">
                           <span
                             className={`font-mono text-xs tracking-widest ${
-                              s.featured ? "text-primary" : "text-black/40"
+                              s.featured ? "text-primary" : "text-cream-foreground/50"
                             }`}
                           >
                             {s.number}
                           </span>
                           <Icon
-                            className={`size-6 ${s.featured ? "text-primary" : "text-black/70"}`}
+                            className={`size-6 ${s.featured ? "text-primary" : "text-cream-foreground/80"}`}
                             strokeWidth={1.5}
                           />
                         </div>
@@ -311,7 +311,7 @@ function Index() {
                               className={`font-mono text-[10px] tracking-[0.18em] uppercase px-2.5 py-1 rounded-full border ${
                                 s.featured
                                   ? "border-white/15 text-white/60"
-                                  : "border-black/10 text-black/55"
+                                  : "border-cream-foreground/10 text-cream-foreground/65"
                               }`}
                             >
                               {t}
@@ -320,7 +320,7 @@ function Index() {
                         </div>
                         <span
                           className={`inline-flex items-center gap-1.5 text-xs font-mono tracking-wider ${
-                            s.featured ? "text-primary" : "text-black/60"
+                            s.featured ? "text-primary" : "text-cream-foreground/70"
                           }`}
                         >
                           LEARN MORE
