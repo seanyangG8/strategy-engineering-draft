@@ -55,6 +55,24 @@ const barData = [
   { name: "M5", v: 372 },
 ];
 
+// Mounts the visual with play=false on first paint, then flips to play=true on the next frame.
+// This guarantees CSS transitions fire (initial state must differ from final state).
+function VisualSlot({ active, render }: { active: boolean; render: (play: boolean) => React.ReactNode }) {
+  const [play, setPlay] = useState(false);
+  useEffect(() => {
+    if (!active) return;
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setPlay(true));
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
+  }, [active]);
+  return <div className="h-[260px] md:h-[340px]">{render(play)}</div>;
+}
+
 // Animated ERP diagram — central hub with 4 satellite modules wiring in
 function ErpDiagram({ play }: { play: boolean }) {
   const modules = [
