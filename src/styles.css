@@ -149,9 +149,8 @@
   --ring: oklch(0.72 0.11 25);
 }
 
-[data-theme="mono"] {
-  /* Brutalist monochrome — pure black + pure white + a single hairline crimson accent.
-     Accent works on BOTH dark bg and light cards, unlike pure-white primary. */
+[data-theme="crimson"] {
+  /* Bold black + white + crimson accent. Editorial / magazine vibe. */
   --background: oklch(0.12 0 0);
   --foreground: oklch(0.97 0 0);
   --surface: oklch(0.97 0 0);
@@ -173,6 +172,34 @@
   --border: oklch(0.86 0 0);
   --input: oklch(0.86 0 0);
   --ring: oklch(0.62 0.22 25);
+}
+
+[data-theme="mono"] {
+  /* True monochrome — black + white + grayscale only.
+     Primary is a mid-gray that works as subtle accent on both dark bg and light cards.
+     A single hairline of warm tone keeps it from feeling clinical. */
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.97 0 0);
+  --surface: oklch(0.97 0 0);
+  --surface-foreground: oklch(0.13 0 0);
+  --card: oklch(0.97 0 0);
+  --card-foreground: oklch(0.13 0 0);
+  --popover: oklch(0.97 0 0);
+  --popover-foreground: oklch(0.13 0 0);
+  /* Primary = warm graphite — readable on both white cards and dark bg */
+  --primary: oklch(0.55 0.005 60);
+  --primary-foreground: oklch(0.97 0 0);
+  --cream: oklch(0.94 0 0);
+  --cream-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.92 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.55 0.005 60);
+  --accent-foreground: oklch(0.97 0 0);
+  --border: oklch(0.86 0 0);
+  --input: oklch(0.86 0 0);
+  --ring: oklch(0.55 0.005 60);
 }
 
 /* Smooth swap when the user changes themes — applies to most surfaces */
