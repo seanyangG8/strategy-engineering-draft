@@ -71,6 +71,81 @@
   --foreground: oklch(0.95 0.012 70);
 }
 
+/* ===== Themes ===== */
+/* Bronze is the default in :root above. data-theme="bronze" is a no-op alias. */
+[data-theme="midnight"] {
+  --background: oklch(0.16 0.03 255);
+  --foreground: oklch(0.96 0.012 230);
+  --primary: oklch(0.72 0.14 230);
+  --primary-foreground: oklch(0.14 0.03 255);
+  --cream: oklch(0.85 0.10 220);
+  --cream-foreground: oklch(0.14 0.03 255);
+  --secondary: oklch(0.24 0.035 255);
+  --secondary-foreground: oklch(0.96 0.012 230);
+  --accent: oklch(0.72 0.14 230);
+  --accent-foreground: oklch(0.14 0.03 255);
+  --ring: oklch(0.72 0.14 230);
+}
+
+[data-theme="forest"] {
+  --background: oklch(0.16 0.025 155);
+  --foreground: oklch(0.95 0.02 90);
+  --primary: oklch(0.78 0.10 90);
+  --primary-foreground: oklch(0.16 0.025 155);
+  --cream: oklch(0.82 0.08 90);
+  --cream-foreground: oklch(0.16 0.025 155);
+  --secondary: oklch(0.24 0.03 155);
+  --secondary-foreground: oklch(0.95 0.02 90);
+  --accent: oklch(0.78 0.10 90);
+  --accent-foreground: oklch(0.16 0.025 155);
+  --ring: oklch(0.78 0.10 90);
+}
+
+[data-theme="plum"] {
+  --background: oklch(0.16 0.03 340);
+  --foreground: oklch(0.95 0.015 30);
+  --primary: oklch(0.75 0.09 25);
+  --primary-foreground: oklch(0.16 0.03 340);
+  --cream: oklch(0.85 0.07 30);
+  --cream-foreground: oklch(0.16 0.03 340);
+  --secondary: oklch(0.24 0.04 340);
+  --secondary-foreground: oklch(0.95 0.015 30);
+  --accent: oklch(0.75 0.09 25);
+  --accent-foreground: oklch(0.16 0.03 340);
+  --ring: oklch(0.75 0.09 25);
+}
+
+[data-theme="mono"] {
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.97 0 0);
+  --primary: oklch(0.97 0 0);
+  --primary-foreground: oklch(0.12 0 0);
+  --cream: oklch(0.85 0 0);
+  --cream-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.22 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.12 0 0);
+  --ring: oklch(0.97 0 0);
+}
+
+/* Smooth swap when the user changes themes */
+html { transition: background-color 280ms ease, color 280ms ease; }
+
+/* Update the bronze-flow gradient to track the active primary so featured
+   cards re-tint with the theme. */
+.bg-bronze-flow {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--background) 80%, var(--primary) 20%) 0%,
+      var(--background) 35%,
+      color-mix(in oklab, var(--background) 55%, var(--primary) 45%) 100%
+    );
+  background-size: 200% 200%;
+  animation: bronze-flow 12s ease-in-out infinite;
+}
+
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }

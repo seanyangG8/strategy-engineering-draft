@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Linkedin, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const links = [
   { to: "/" as const, label: "Home" },
@@ -71,10 +72,13 @@ export function Header() {
           >
             <Linkedin className="size-[17px]" />
           </a>
+          <ThemeToggle />
         </nav>
 
+        <div className="md:hidden flex items-center gap-2">
+        <ThemeToggle />
         <button
-          className="md:hidden text-white p-2 rounded-md"
+          className="text-white p-2 rounded-md"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
