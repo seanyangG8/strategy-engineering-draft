@@ -22,6 +22,9 @@ export function PageHero({
           <img
             src={backgroundImage}
             alt=""
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: objectPosition ?? "center" }}
           />
