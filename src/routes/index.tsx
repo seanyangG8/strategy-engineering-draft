@@ -139,7 +139,7 @@ function Index() {
             <span className="italic font-light text-primary">Our expertise.</span>
           </h1>
           <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-white/70 leading-relaxed animate-fade-up-delay-2">
-            Process, automation, and AI engineering for ambitious operators — built for measurable impact.
+            We're the engineers behind the strategy — turning bold ambitions into systems that scale, automate, and outperform.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up-delay-3">
             <MagneticButton
