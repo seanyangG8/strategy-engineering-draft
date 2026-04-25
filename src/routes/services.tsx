@@ -241,7 +241,7 @@ function Services() {
                     aria-hidden
                     className={`pointer-events-none absolute -top-12 ${
                       reverse ? "right-0" : "left-0"
-                    } font-display text-[180px] md:text-[260px] font-light leading-none text-primary-foreground/[0.04] select-none`}
+                    } font-display text-[180px] md:text-[260px] font-light leading-none text-cream-foreground/[0.05] select-none`}
                   >
                     {s.number}
                   </div>
@@ -264,7 +264,7 @@ function Services() {
                             <p className="font-display text-2xl md:text-3xl font-medium text-primary tracking-tight">
                               <CountUpText value={o.v} />
                             </p>
-                            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary-foreground/60 mt-1.5">{o.l}</p>
+                            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-foreground/60 mt-1.5">{o.l}</p>
                           </div>
                         ))}
                       </div>
