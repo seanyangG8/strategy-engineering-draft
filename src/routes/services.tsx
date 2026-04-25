@@ -10,7 +10,7 @@ import { CountUpText } from "@/components/motion/CountUpText";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Strategy Engineering" },
+      { title: "Strategy Engineering" },
       { name: "description", content: "Process improvement, automation & AI, strategy & transformation, sustainability & impact." },
       { property: "og:title", content: "Services — Strategy Engineering" },
       { property: "og:description", content: "Transforming businesses, one solution at a time." },

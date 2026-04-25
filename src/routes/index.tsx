@@ -13,7 +13,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Strategy Engineering — Your Ambition, Our Expertise" },
+      { title: "Strategy Engineering" },
       { name: "description", content: "Process, automation, and AI engineering for ambitious operators. Measurable impact, engineered." },
       { property: "og:title", content: "Strategy Engineering" },
       { property: "og:description", content: "Process, automation, and AI engineering for ambitious operators." },

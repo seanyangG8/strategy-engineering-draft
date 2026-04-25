@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Strategy Engineering" },
+      { title: "Strategy Engineering" },
       { name: "description", content: "Where engineering meets business. Built for impact." },
       { property: "og:title", content: "About — Strategy Engineering" },
       { property: "og:description", content: "Where engineering meets business." },
