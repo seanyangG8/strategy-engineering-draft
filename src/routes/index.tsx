@@ -238,7 +238,7 @@ function Index() {
         <div className="mx-auto max-w-7xl">
           <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
             <div>
-              <p className="eyebrow text-primary-foreground/60 mb-3">// WHAT WE DO</p>
+              <p className="eyebrow text-cream-foreground/60 mb-3">// WHAT WE DO</p>
               <h2 className="font-display text-4xl md:text-6xl font-medium tracking-tight max-w-2xl">
                 Engineering your <span className="italic font-light">success.</span>
               </h2>

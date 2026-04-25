@@ -74,99 +74,105 @@
 /* ===== Themes ===== */
 /* Bronze is the default in :root above. data-theme="bronze" is a no-op alias. */
 [data-theme="midnight"] {
-  --background: oklch(0.16 0.03 255);
-  --foreground: oklch(0.96 0.012 230);
-  --surface: oklch(0.94 0.025 220);
-  --surface-foreground: oklch(0.16 0.03 255);
-  --card: oklch(0.94 0.025 220);
-  --card-foreground: oklch(0.16 0.03 255);
-  --popover: oklch(0.94 0.025 220);
-  --popover-foreground: oklch(0.16 0.03 255);
-  --primary: oklch(0.72 0.14 230);
-  --primary-foreground: oklch(0.14 0.03 255);
-  --cream: oklch(0.92 0.04 220);
-  --cream-foreground: oklch(0.16 0.03 255);
+  /* Deep navy bg + electric ice-blue accent. Cards stay near-neutral cool ivory. */
+  --background: oklch(0.17 0.035 255);
+  --foreground: oklch(0.96 0.008 230);
+  --surface: oklch(0.965 0.006 230);
+  --surface-foreground: oklch(0.17 0.035 255);
+  --card: oklch(0.965 0.006 230);
+  --card-foreground: oklch(0.17 0.035 255);
+  --popover: oklch(0.965 0.006 230);
+  --popover-foreground: oklch(0.17 0.035 255);
+  --primary: oklch(0.74 0.13 235);
+  --primary-foreground: oklch(0.14 0.035 255);
+  --cream: oklch(0.94 0.01 230);
+  --cream-foreground: oklch(0.17 0.035 255);
   --secondary: oklch(0.24 0.035 255);
-  --secondary-foreground: oklch(0.96 0.012 230);
-  --muted: oklch(0.9 0.025 220);
-  --muted-foreground: oklch(0.5 0.03 230);
-  --accent: oklch(0.72 0.14 230);
-  --accent-foreground: oklch(0.16 0.03 255);
-  --border: oklch(0.84 0.025 220);
-  --input: oklch(0.84 0.025 220);
-  --ring: oklch(0.72 0.14 230);
+  --secondary-foreground: oklch(0.96 0.008 230);
+  --muted: oklch(0.93 0.008 230);
+  --muted-foreground: oklch(0.55 0.02 230);
+  --accent: oklch(0.74 0.13 235);
+  --accent-foreground: oklch(0.14 0.035 255);
+  --border: oklch(0.88 0.008 230);
+  --input: oklch(0.88 0.008 230);
+  --ring: oklch(0.74 0.13 235);
 }
 
 [data-theme="forest"] {
-  --background: oklch(0.16 0.025 155);
-  --foreground: oklch(0.95 0.02 90);
-  --surface: oklch(0.94 0.03 95);
-  --surface-foreground: oklch(0.18 0.025 155);
-  --card: oklch(0.94 0.03 95);
-  --card-foreground: oklch(0.18 0.025 155);
-  --popover: oklch(0.94 0.03 95);
-  --popover-foreground: oklch(0.18 0.025 155);
-  --primary: oklch(0.78 0.10 90);
-  --primary-foreground: oklch(0.16 0.025 155);
-  --cream: oklch(0.88 0.06 95);
-  --cream-foreground: oklch(0.16 0.025 155);
-  --secondary: oklch(0.24 0.03 155);
-  --secondary-foreground: oklch(0.95 0.02 90);
-  --muted: oklch(0.9 0.03 95);
-  --muted-foreground: oklch(0.5 0.025 120);
-  --accent: oklch(0.78 0.10 90);
-  --accent-foreground: oklch(0.16 0.025 155);
-  --border: oklch(0.84 0.03 95);
-  --input: oklch(0.84 0.03 95);
-  --ring: oklch(0.78 0.10 90);
+  /* Deep moss bg + warm sand accent. Cards stay warm off-white (matches Bronze feel). */
+  --background: oklch(0.18 0.022 155);
+  --foreground: oklch(0.95 0.015 90);
+  --surface: oklch(0.965 0.012 85);
+  --surface-foreground: oklch(0.18 0.022 155);
+  --card: oklch(0.965 0.012 85);
+  --card-foreground: oklch(0.18 0.022 155);
+  --popover: oklch(0.965 0.012 85);
+  --popover-foreground: oklch(0.18 0.022 155);
+  --primary: oklch(0.78 0.10 88);
+  --primary-foreground: oklch(0.18 0.022 155);
+  --cream: oklch(0.93 0.018 85);
+  --cream-foreground: oklch(0.18 0.022 155);
+  --secondary: oklch(0.24 0.025 155);
+  --secondary-foreground: oklch(0.95 0.015 90);
+  --muted: oklch(0.92 0.012 85);
+  --muted-foreground: oklch(0.5 0.02 130);
+  --accent: oklch(0.78 0.10 88);
+  --accent-foreground: oklch(0.18 0.022 155);
+  --border: oklch(0.86 0.012 85);
+  --input: oklch(0.86 0.012 85);
+  --ring: oklch(0.78 0.10 88);
 }
 
 [data-theme="plum"] {
-  --background: oklch(0.16 0.03 340);
-  --foreground: oklch(0.95 0.015 30);
-  --surface: oklch(0.95 0.025 25);
-  --surface-foreground: oklch(0.18 0.03 340);
-  --card: oklch(0.95 0.025 25);
-  --card-foreground: oklch(0.18 0.03 340);
-  --popover: oklch(0.95 0.025 25);
-  --popover-foreground: oklch(0.18 0.03 340);
-  --primary: oklch(0.75 0.09 25);
-  --primary-foreground: oklch(0.16 0.03 340);
-  --cream: oklch(0.9 0.05 25);
-  --cream-foreground: oklch(0.16 0.03 340);
+  /* Deep plum bg + warm terracotta accent (used as HIGHLIGHT only).
+     Cards stay neutral warm off-white — never plum-tinted. */
+  --background: oklch(0.17 0.035 340);
+  --foreground: oklch(0.95 0.012 30);
+  --surface: oklch(0.965 0.008 60);
+  --surface-foreground: oklch(0.18 0.025 340);
+  --card: oklch(0.965 0.008 60);
+  --card-foreground: oklch(0.18 0.025 340);
+  --popover: oklch(0.965 0.008 60);
+  --popover-foreground: oklch(0.18 0.025 340);
+  --primary: oklch(0.72 0.11 25);
+  --primary-foreground: oklch(0.16 0.035 340);
+  --cream: oklch(0.93 0.014 60);
+  --cream-foreground: oklch(0.18 0.025 340);
   --secondary: oklch(0.24 0.04 340);
-  --secondary-foreground: oklch(0.95 0.015 30);
-  --muted: oklch(0.9 0.025 25);
-  --muted-foreground: oklch(0.5 0.03 25);
-  --accent: oklch(0.75 0.09 25);
-  --accent-foreground: oklch(0.16 0.03 340);
-  --border: oklch(0.85 0.025 25);
-  --input: oklch(0.85 0.025 25);
-  --ring: oklch(0.75 0.09 25);
+  --secondary-foreground: oklch(0.95 0.012 30);
+  --muted: oklch(0.92 0.01 60);
+  --muted-foreground: oklch(0.52 0.025 340);
+  --accent: oklch(0.72 0.11 25);
+  --accent-foreground: oklch(0.16 0.035 340);
+  --border: oklch(0.86 0.01 60);
+  --input: oklch(0.86 0.01 60);
+  --ring: oklch(0.72 0.11 25);
 }
 
 [data-theme="mono"] {
+  /* Brutalist monochrome — pure black + pure white + a single hairline crimson accent.
+     Accent works on BOTH dark bg and light cards, unlike pure-white primary. */
   --background: oklch(0.12 0 0);
   --foreground: oklch(0.97 0 0);
-  --surface: oklch(0.96 0 0);
+  --surface: oklch(0.97 0 0);
   --surface-foreground: oklch(0.12 0 0);
-  --card: oklch(0.96 0 0);
+  --card: oklch(0.97 0 0);
   --card-foreground: oklch(0.12 0 0);
-  --popover: oklch(0.96 0 0);
+  --popover: oklch(0.97 0 0);
   --popover-foreground: oklch(0.12 0 0);
-  --primary: oklch(0.97 0 0);
-  --primary-foreground: oklch(0.12 0 0);
-  --cream: oklch(0.92 0 0);
+  --primary: oklch(0.62 0.22 25);
+  --primary-foreground: oklch(0.97 0 0);
+  --cream: oklch(0.94 0 0);
   --cream-foreground: oklch(0.12 0 0);
   --secondary: oklch(0.22 0 0);
   --secondary-foreground: oklch(0.97 0 0);
-  --muted: oklch(0.9 0 0);
+  --muted: oklch(0.92 0 0);
   --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.12 0 0);
-  --border: oklch(0.85 0 0);
-  --input: oklch(0.85 0 0);
-  --ring: oklch(0.97 0 0);
+  --accent: oklch(0.62 0.22 25);
+  --accent-foreground: oklch(0.97 0 0);
+  --border: oklch(0.86 0 0);
+  --input: oklch(0.86 0 0);
+  --ring: oklch(0.62 0.22 25);
 }
 
 /* Smooth swap when the user changes themes — applies to most surfaces */

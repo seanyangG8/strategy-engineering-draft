@@ -154,7 +154,7 @@ function StickyServiceNav() {
     <>
       {/* Desktop: vertical sticky on left */}
       <aside className="hidden lg:block sticky top-28 h-fit">
-        <p className="eyebrow text-primary-foreground/40 mb-5">// SERVICES</p>
+        <p className="eyebrow text-cream-foreground/55 mb-5">// SERVICES</p>
         <div className="relative pl-5">
           {/* Rail */}
           <div className="absolute left-0 top-1 bottom-1 w-px bg-cream-foreground/10" aria-hidden />
@@ -171,12 +171,12 @@ function StickyServiceNav() {
                   <a
                     href={`#service-${s.number}`}
                     className={`flex items-center gap-3 group transition-colors ${
-                      isActive ? "text-primary-foreground" : "text-primary-foreground/45 hover:text-primary-foreground/80"
+                      isActive ? "text-cream-foreground" : "text-cream-foreground/55 hover:text-cream-foreground/85"
                     }`}
                   >
                     <span
                       className={`h-px transition-all duration-500 ${
-                        isActive ? "w-8 bg-primary" : "w-3 bg-primary-foreground/25 group-hover:w-6"
+                        isActive ? "w-8 bg-primary" : "w-3 bg-cream-foreground/25 group-hover:w-6"
                       }`}
                     />
                     <span className="font-mono text-[11px] tracking-[0.2em] uppercase">
@@ -198,7 +198,7 @@ function StickyServiceNav() {
               key={s.number}
               href={`#service-${s.number}`}
               className={`whitespace-nowrap transition-colors ${
-                active === s.number ? "text-primary" : "text-primary-foreground/55"
+                active === s.number ? "text-primary" : "text-cream-foreground/65"
               }`}
             >
               {s.number} · {s.title}
@@ -241,7 +241,7 @@ function Services() {
                     aria-hidden
                     className={`pointer-events-none absolute -top-12 ${
                       reverse ? "right-0" : "left-0"
-                    } font-display text-[180px] md:text-[260px] font-light leading-none text-primary-foreground/[0.04] select-none`}
+                    } font-display text-[180px] md:text-[260px] font-light leading-none text-cream-foreground/[0.05] select-none`}
                   >
                     {s.number}
                   </div>
@@ -264,7 +264,7 @@ function Services() {
                             <p className="font-display text-2xl md:text-3xl font-medium text-primary tracking-tight">
                               <CountUpText value={o.v} />
                             </p>
-                            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary-foreground/60 mt-1.5">{o.l}</p>
+                            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-cream-foreground/60 mt-1.5">{o.l}</p>
                           </div>
                         ))}
                       </div>
