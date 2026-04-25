@@ -416,6 +416,29 @@ body, header, footer, section, article, aside, nav, main,
     font-family: var(--font-mono);
   }
 
+  /* Field-level validation feedback */
+  .float-field.field-error input,
+  .float-field.field-error textarea {
+    border-bottom-color: oklch(0.62 0.22 25);
+    box-shadow: 0 1px 0 0 oklch(0.62 0.22 25);
+  }
+  .float-field.field-error label,
+  .float-field.field-error input:focus + label,
+  .float-field.field-error input:not(:placeholder-shown) + label,
+  .float-field.field-error textarea:focus + label,
+  .float-field.field-error textarea:not(:placeholder-shown) + label {
+    color: oklch(0.62 0.22 25) !important;
+  }
+  .field-error-text {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: oklch(0.62 0.22 25);
+    line-height: 1.4;
+  }
+
   /* Checkmark draw-in */
   @keyframes check-draw {
     to { stroke-dashoffset: 0; }
