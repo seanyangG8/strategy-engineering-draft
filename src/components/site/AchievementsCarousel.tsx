@@ -128,7 +128,7 @@ const slides: Slide[] = [
     timeline: "Project Timeline: 5 Months",
     visual: (
       <div className="relative w-full h-full flex items-center justify-center">
-        <div className="absolute inset-4 bg-[#c8854a]/20 blur-3xl rounded-full" />
+        <div className="absolute inset-4 bg-primary/20 blur-3xl rounded-full" />
         <img src={erpImg} alt="ERP system" className="relative max-h-full max-w-full object-contain rounded-xl ring-1 ring-white/10" />
       </div>
     ),
@@ -140,7 +140,7 @@ const slides: Slide[] = [
     timeline: "Project Timeline: 5 Months",
     visual: (
       <div className="relative w-full h-full flex items-center justify-center">
-        <div className="absolute inset-4 bg-[#c8854a]/20 blur-3xl rounded-full" />
+        <div className="absolute inset-4 bg-primary/20 blur-3xl rounded-full" />
         <img src={esgImg} alt="ESG sustainability" className="relative max-h-full max-w-full object-contain rounded-xl" />
       </div>
     ),
@@ -204,22 +204,22 @@ export function AchievementsCarousel() {
         <CarouselContent>
           {slides.map((s, i) => (
             <CarouselItem key={i}>
-              <div className="group relative rounded-3xl bg-gradient-to-br from-[#1a1d24] via-[#13151b] to-[#0a0b0f] border border-[#c8854a]/30 p-6 md:p-12 shadow-[0_30px_80px_-20px_rgba(200,133,74,0.22)] overflow-hidden">
+              <div className="group relative rounded-3xl bg-gradient-to-br from-[#1a1d24] via-[#13151b] to-[#0a0b0f] border border-primary/30 p-6 md:p-12 shadow-[0_30px_80px_-20px_rgba(200,133,74,0.22)] overflow-hidden">
                 {/* Glow */}
-                <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-[#c8854a]/10 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-[#c8854a]/5 blur-3xl" />
+                <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
 
                 <div className="relative">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[10px] uppercase tracking-[0.25em] text-[#c8854a] font-semibold">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-primary font-semibold">
                       Case Study {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="h-px flex-1 bg-gradient-to-r from-[#c8854a]/60 to-transparent" />
+                    <span className="h-px flex-1 bg-gradient-to-r from-primary/60 to-transparent" />
                   </div>
                   <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight">
                     {s.title}
                   </h3>
-                  <div className="h-[2px] w-full bg-gradient-to-r from-[#c8854a] via-[#c8854a]/60 to-transparent mt-4 mb-8" />
+                  <div className="h-[2px] w-full bg-gradient-to-r from-primary via-primary/60 to-transparent mt-4 mb-8" />
 
                   <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[320px]">
                     <div className="h-[260px] md:h-[340px]">{s.visual}</div>
@@ -249,7 +249,7 @@ export function AchievementsCarousel() {
           type="button"
           onClick={() => api?.scrollPrev()}
           aria-label="Previous slide"
-          className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-[#c8854a] hover:bg-[#c8854a]/10 transition-all flex items-center justify-center"
+          className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-primary hover:bg-primary/10 transition-all flex items-center justify-center"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -263,7 +263,7 @@ export function AchievementsCarousel() {
               aria-label={`Go to slide ${i + 1} of ${slides.length}`}
               aria-current={current === i ? "true" : undefined}
               className={`h-1.5 rounded-full transition-all duration-300 ${
-                current === i ? "w-8 bg-[#c8854a]" : "w-1.5 bg-white/30 hover:bg-white/60"
+                current === i ? "w-8 bg-primary" : "w-1.5 bg-white/30 hover:bg-white/60"
               }`}
             />
           ))}
@@ -273,7 +273,7 @@ export function AchievementsCarousel() {
           type="button"
           onClick={() => api?.scrollNext()}
           aria-label="Next slide"
-          className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-[#c8854a] hover:bg-[#c8854a]/10 transition-all flex items-center justify-center"
+          className="h-10 w-10 rounded-full border border-white/20 text-white/80 hover:text-white hover:border-primary hover:bg-primary/10 transition-all flex items-center justify-center"
         >
           <ChevronRight className="h-5 w-5" />
         </button>
