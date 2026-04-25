@@ -56,10 +56,10 @@ export function Footer() {
         <div className="md:col-span-4">
           <p className="eyebrow text-primary mb-4">Disciplines</p>
           <ul className="space-y-2.5 text-sm text-white/55">
-            <li>Process Improvement</li>
-            <li>Automation & AI</li>
-            <li>Strategy & Transformation</li>
-            <li>Sustainability & Impact</li>
+            <li><Link to="/services" hash="service-01" className="hover:text-primary transition-colors story-link">Process Improvement</Link></li>
+            <li><Link to="/services" hash="service-02" className="hover:text-primary transition-colors story-link">Automation & AI</Link></li>
+            <li><Link to="/services" hash="service-03" className="hover:text-primary transition-colors story-link">Strategy & Transformation</Link></li>
+            <li><Link to="/services" hash="service-04" className="hover:text-primary transition-colors story-link">Sustainability & Impact</Link></li>
           </ul>
           <a
             href="https://www.linkedin.com/"

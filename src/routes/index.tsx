@@ -181,16 +181,23 @@ function Index() {
         </div>
 
         {/* Scroll indicator */}
-        <a
-          href="#trusted"
-          aria-label="Scroll to explore"
-          className="absolute left-1/2 -translate-x-1/2 bottom-28 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
+        <button
+          type="button"
+          aria-label="Scroll to next section"
+          onClick={() => {
+            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number | string | HTMLElement, o?: { offset?: number }) => void } }).__lenis;
+            const target = document.getElementById("stats");
+            if (target && lenis) lenis.scrollTo(target, { offset: -40 });
+            else if (target) target.scrollIntoView({ behavior: "smooth" });
+            else window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+          }}
+          className="absolute left-1/2 -translate-x-1/2 bottom-32 md:bottom-36 z-10 flex flex-col items-center gap-2 text-white/55 hover:text-primary transition-colors animate-fade-up-delay-3 group"
         >
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase">Scroll</span>
           <span className="relative block w-[22px] h-[36px] rounded-full border border-white/30 group-hover:border-primary/70 transition-colors">
             <span className="absolute left-1/2 top-2 -translate-x-1/2 w-[3px] h-[6px] rounded-full bg-current animate-scroll-dot" />
           </span>
-        </a>
+        </button>
 
         {/* Trusted-by hairline grid */}
         <div id="trusted" className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-background/50 backdrop-blur-md">
@@ -211,7 +218,7 @@ function Index() {
       </section>
 
       {/* STATS STRIP */}
-      <section className="bg-background border-y border-white/5 py-20 px-6">
+      <section id="stats" className="bg-background border-y border-white/5 py-20 px-6 scroll-mt-20">
         <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-10">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 100} className="text-center md:text-left">

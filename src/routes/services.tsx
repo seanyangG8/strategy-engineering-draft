@@ -191,7 +191,7 @@ function StickyServiceNav() {
       </aside>
 
       {/* Mobile/tablet: sticky top bar with progress */}
-      <div className="lg:hidden sticky top-16 z-30 -mx-6 px-6 pt-3 pb-2 bg-surface/90 backdrop-blur-md border-y border-black/10 mb-10">
+      <div className="lg:hidden sticky top-[68px] z-30 -mx-6 px-6 pt-3 pb-2 bg-surface/95 backdrop-blur-md border-y border-black/10 mb-10">
         <div className="flex gap-5 overflow-x-auto no-scrollbar font-mono text-[11px] tracking-wider mb-2">
           {services.map((s) => (
             <a

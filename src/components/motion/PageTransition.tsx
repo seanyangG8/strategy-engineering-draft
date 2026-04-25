@@ -32,7 +32,20 @@ export function PageTransition({ children }: { children: ReactNode }) {
     const t1 = setTimeout(() => {
       setContent(children);
       setKey(pathname);
-      window.scrollTo({ top: 0, behavior: "auto" });
+      const hash = window.location.hash?.slice(1);
+      const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number | HTMLElement, o?: { immediate?: boolean; offset?: number }) => void } }).__lenis;
+      const target = hash ? document.getElementById(hash) : null;
+      if (target) {
+        // Wait one frame so layout settles, then scroll to hash target
+        requestAnimationFrame(() => {
+          if (lenis) lenis.scrollTo(target, { offset: -80 });
+          else target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      } else if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
       // In: overlay exits upward
       requestAnimationFrame(() => setPhase("in"));
       const t2 = setTimeout(() => setPhase("idle"), 650);
