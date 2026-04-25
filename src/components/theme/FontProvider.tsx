@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export const FONTS = ["editorial", "modern", "industrial", "brutalist", "soft", "geometric"] as const;
+export const FONTS = ["editorial", "modern", "industrial", "brutalist", "soft", "geometric", "bold"] as const;
 export type FontPair = (typeof FONTS)[number];
 
 export const FONT_META: Record<
@@ -42,6 +42,12 @@ export const FONT_META: Record<
     sample: "Aa",
     display: "'Syne', 'Inter', sans-serif",
     sans: "'Plus Jakarta Sans', system-ui, sans-serif",
+  },
+  bold: {
+    label: "Bold",
+    sample: "Aa",
+    display: "'Montserrat', 'Inter', sans-serif",
+    sans: "'Montserrat', system-ui, sans-serif",
   },
 };
 
