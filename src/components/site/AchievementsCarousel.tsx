@@ -196,6 +196,124 @@ function EsgDiagram({ play }: { play: boolean }) {
   );
 }
 
+// Animated bar chart — bars grow one at a time, left to right
+function GrowthBars({ play }: { play: boolean }) {
+  // SVG coordinate system
+  const W = 100;
+  const H = 60;
+  const padL = 10;
+  const padR = 4;
+  const padT = 8;
+  const padB = 10;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const yMin = 260;
+  const yMax = 410;
+  const scaleY = (v: number) => ((v - yMin) / (yMax - yMin)) * chartH;
+  const barW = chartW / barData.length;
+  const innerBarW = barW * 0.55;
+  const stagger = 220; // ms between bar starts
+  const grow = 650; // ms per bar growth
+  // Y-axis ticks
+  const ticks = [260, 300, 340, 410];
+
+  return (
+    <div className="relative w-full h-full">
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-full" preserveAspectRatio="none" style={{ overflow: "visible" }}>
+        <defs>
+          <linearGradient id="growthBarFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.95} />
+            <stop offset="100%" stopColor={PRIMARY} stopOpacity={0.35} />
+          </linearGradient>
+        </defs>
+
+        {/* Gridlines + Y labels */}
+        {ticks.map((t) => {
+          const y = padT + chartH - scaleY(t);
+          return (
+            <g key={t}>
+              <line x1={padL} y1={y} x2={W - padR} y2={y} stroke="#ffffff10" strokeWidth="0.2" />
+              <text x={padL - 1} y={y + 1} textAnchor="end" fontSize="2.4" fill="#ffffff70">
+                {t}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Bars */}
+        {barData.map((d, i) => {
+          const x = padL + i * barW + (barW - innerBarW) / 2;
+          const fullH = scaleY(d.v);
+          const y = padT + chartH - fullH;
+          const delay = play ? i * stagger : 0;
+          return (
+            <g key={d.name}>
+              {/* Bar */}
+              <rect
+                x={x}
+                y={play ? y : padT + chartH}
+                width={innerBarW}
+                height={play ? fullH : 0}
+                rx={1}
+                fill="url(#growthBarFill)"
+                style={{
+                  transition: `y ${grow}ms cubic-bezier(0.22,1,0.36,1) ${delay}ms, height ${grow}ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+                }}
+              />
+              {/* Value label */}
+              <text
+                x={x + innerBarW / 2}
+                y={(play ? y : padT + chartH) - 1.2}
+                textAnchor="middle"
+                fontSize="2.4"
+                fill="#ffffffcc"
+                fontWeight="600"
+                style={{
+                  opacity: play ? 1 : 0,
+                  transition: `opacity 300ms ease-out ${delay + grow - 150}ms, y ${grow}ms cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+                }}
+              >
+                {d.v}
+              </text>
+              {/* X-axis label */}
+              <text
+                x={x + innerBarW / 2}
+                y={padT + chartH + 4}
+                textAnchor="middle"
+                fontSize="2.4"
+                fill="#ffffff70"
+              >
+                {d.name}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Trend arrow sweeping over bar tops */}
+        <path
+          d={barData
+            .map((d, i) => {
+              const x = padL + i * barW + barW / 2;
+              const y = padT + chartH - scaleY(d.v);
+              return `${i === 0 ? "M" : "L"} ${x} ${y}`;
+            })
+            .join(" ")}
+          fill="none"
+          stroke="#ffffff"
+          strokeOpacity="0.55"
+          strokeWidth="0.4"
+          strokeLinecap="round"
+          strokeDasharray="120"
+          strokeDashoffset={play ? 0 : 120}
+          style={{
+            transition: `stroke-dashoffset 1100ms ease-out ${barData.length * stagger + 100}ms`,
+          }}
+        />
+      </svg>
+    </div>
+  );
+}
+
 type Slide = {
   title: string;
   headline: string;
@@ -282,24 +400,7 @@ const slides: Slide[] = [
     headline: "Sales Growth of 30%",
     body: "Developed and implemented a new route to market strategy alongside a data-driven sales plan leading to 30% sales growth.",
     timeline: "Project Timeline: 3 Months",
-    visual: (play) => (
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={play ? barData : barData.map((d) => ({ ...d, v: 0 }))} margin={{ top: 24, right: 16, left: -8, bottom: 8 }}>
-          <defs>
-            <linearGradient id="barFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={PRIMARY} stopOpacity={0.45} />
-              <stop offset="100%" stopColor={PRIMARY} />
-            </linearGradient>
-          </defs>
-          <CartesianGrid stroke="#ffffff10" vertical={false} />
-          <XAxis dataKey="name" stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-          <YAxis stroke="#ffffff70" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} domain={[260, 410]} />
-          <Bar dataKey="v" fill="url(#barFill)" radius={[6, 6, 0, 0]} maxBarSize={42} isAnimationActive animationDuration={1200} animationEasing="ease-out">
-            <LabelList dataKey="v" position="top" fill="#ffffffcc" fontSize={10} />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    ),
+    visual: (play) => <GrowthBars play={play} />,
   },
 ];
 
