@@ -13,7 +13,13 @@ export function Footer() {
           <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
           <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div>
-              <p className="eyebrow text-primary mb-3">// READY WHEN YOU ARE</p>
+              <p className="eyebrow text-primary mb-3 inline-flex items-center gap-2">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                </span>
+                // CURRENTLY ACCEPTING 2 NEW ENGAGEMENTS · Q1
+              </p>
               <h3 className="font-display text-3xl md:text-5xl font-medium tracking-tight text-white max-w-xl leading-[1.05]">
                 Let's engineer your <span className="italic font-light">next chapter.</span>
               </h3>
@@ -22,7 +28,7 @@ export function Footer() {
               to="/contact"
               className="group items-center gap-2 rounded-full bg-primary hover:bg-primary/90 px-8 py-4 text-sm font-semibold text-primary-foreground tracking-wide shrink-0"
             >
-              Start a conversation
+              Claim a slot
               <ArrowUpRight className="size-4 group-hover:rotate-45 transition-transform" />
             </MagneticButton>
           </div>
