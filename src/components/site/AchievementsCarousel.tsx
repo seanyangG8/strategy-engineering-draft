@@ -891,6 +891,34 @@ const slides: Slide[] = [
     timeline: "Project Timeline: 3 Months",
     visual: (play) => <GrowthBars play={play} />,
   },
+  {
+    title: "B2B Manufacturing Sales Team",
+    headline: "30 Hours Saved Monthly",
+    body: "Built an agentic AI assistant that answers salespeople's queries on internal product details, pricing, specs and stock — replacing manual lookups across siloed systems with instant, sourced responses delivered in chat.",
+    timeline: "Project Timeline: 2 Months",
+    visual: (play) => <ChatAgentDiagram play={play} />,
+  },
+  {
+    title: "Mid-Market Finance Operation",
+    headline: "50 Hours Saved Monthly",
+    body: "Deployed AI-powered PDF parsing and three-way matching across invoices, purchase orders, and goods-received notes — auto-approving clean matches, flagging exceptions, and removing the back-office bottleneck.",
+    timeline: "Project Timeline: 3 Months",
+    visual: (play) => <InvoiceMatchDiagram play={play} />,
+  },
+  {
+    title: "Professional Services Firm",
+    headline: "30 Hours Saved Monthly",
+    body: "An LLM-powered triage and reply engine that classifies inbound mail, drafts contextual responses, and routes edge cases to humans — clearing the inbox while the team sleeps.",
+    timeline: "Project Timeline: 6 Weeks",
+    visual: (play) => <EmailFlowDiagram play={play} />,
+  },
+  {
+    title: "Consumer Brand Customer Care",
+    headline: "Unified Customer Outreach",
+    body: "Engineered a single chat platform consolidating WhatsApp, Instagram, Messenger, email, and SMS into one agent workspace — with shared context, SLA tracking, and AI-suggested replies across every channel.",
+    timeline: "Project Timeline: 4 Months",
+    visual: (play) => <OmnichannelDiagram play={play} />,
+  },
 ];
 
 export function AchievementsCarousel() {
