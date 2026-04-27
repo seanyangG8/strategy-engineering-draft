@@ -220,7 +220,7 @@ function Services() {
       </Helmet>
       <PageHero eyebrow="TRANSFORMING BUSINESSES, ONE SOLUTION AT A TIME" title="Services" backgroundImage={heroServices} objectPosition="center 100%" compact />
 
-      <section className="bg-surface text-surface-foreground py-24 px-6 relative">
+      <section className="bg-surface text-surface-foreground py-24 px-6 relative overflow-hidden">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-[220px_1fr] gap-16">
           <StickyServiceNav />
 

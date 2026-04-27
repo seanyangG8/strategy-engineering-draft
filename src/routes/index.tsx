@@ -200,17 +200,34 @@ function Index() {
 
         {/* Trusted-by hairline grid */}
         <div id="trusted" className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/10 bg-background/50 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6">
-            <span className="eyebrow text-white/45 whitespace-nowrap shrink-0 hidden md:inline">// TRUSTED BY</span>
-            <div className="flex-1 grid grid-cols-3 md:grid-cols-6 divide-x divide-white/10 border-x border-white/10">
+          {/* Mobile: horizontal scroll, single row, no wrapping */}
+          <div className="md:hidden px-6 py-3">
+            <span className="eyebrow text-white/45 block mb-2">// TRUSTED BY</span>
+            <div className="flex gap-5 overflow-x-auto no-scrollbar -mx-6 px-6">
               {trustedBy.map((name) => (
-                <div
+                <span
                   key={name}
-                  className="px-4 py-2 flex items-center justify-center text-center font-mono text-[10px] tracking-[0.22em] text-white/45 hover:text-white/85 transition-colors"
+                  className="whitespace-nowrap font-mono text-[10px] tracking-[0.22em] text-white/55"
                 >
                   {name}
-                </div>
+                </span>
               ))}
+            </div>
+          </div>
+          {/* Desktop: hairline grid */}
+          <div className="hidden md:block max-w-7xl mx-auto px-6 py-4">
+            <div className="flex items-center gap-6">
+              <span className="eyebrow text-white/45 whitespace-nowrap shrink-0">// TRUSTED BY</span>
+              <div className="flex-1 grid grid-cols-6 divide-x divide-white/10 border-x border-white/10">
+                {trustedBy.map((name) => (
+                  <div
+                    key={name}
+                    className="px-4 py-2 flex items-center justify-center text-center font-mono text-[10px] tracking-[0.22em] text-white/45 hover:text-white/85 transition-colors"
+                  >
+                    {name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
