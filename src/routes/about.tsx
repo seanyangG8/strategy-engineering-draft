@@ -167,13 +167,17 @@ function About() {
               <Reveal
                 key={v.word}
                 delay={i * 90}
-                className="bg-background p-8 group cursor-default min-h-[180px] flex flex-col justify-end relative overflow-hidden"
+                className="bg-background p-6 sm:p-8 group cursor-default sm:min-h-[180px] flex flex-col justify-end relative overflow-hidden"
               >
-                <div className="absolute inset-x-0 top-0 h-px bg-primary/0 group-hover:bg-primary transition-colors duration-500" />
-                <h3 className="font-display text-3xl md:text-4xl font-medium tracking-tight transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="absolute inset-x-0 top-0 h-px bg-primary/30 sm:bg-primary/0 sm:group-hover:bg-primary transition-colors duration-500" />
+                <h3 className="font-display text-3xl md:text-4xl font-medium tracking-tight transition-transform duration-500 sm:group-hover:-translate-y-2">
                   {v.word}<span className="text-primary">.</span>
                 </h3>
-                <p className="text-sm text-white/0 group-hover:text-white/65 transition-all duration-500 mt-2 max-h-0 group-hover:max-h-32 overflow-hidden">
+                {/* Definition: always visible on mobile, hover-reveal on desktop */}
+                <p className="text-sm text-white/65 mt-3 sm:hidden">
+                  {v.def}
+                </p>
+                <p className="hidden sm:block text-sm text-white/0 group-hover:text-white/65 transition-all duration-500 mt-2 max-h-0 group-hover:max-h-32 overflow-hidden">
                   {v.def}
                 </p>
               </Reveal>
