@@ -581,7 +581,7 @@ export function AchievementsCarousel() {
                     </h3>
                     <div className="h-[2px] w-full bg-gradient-to-r from-primary via-primary/60 to-transparent mt-4 mb-8" />
 
-                    <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[320px]">
+                    <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:min-h-[320px]">
                       <VisualSlot key={`${i}-${isActive ? playKey : "idle"}`} active={isActive} render={s.visual} />
                       <div className="text-left">
                         <h4 className="text-2xl md:text-3xl font-light text-white leading-tight mb-5">
