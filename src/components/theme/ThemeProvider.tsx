@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-export const THEMES = ["bronze", "midnight", "forest", "plum", "crimson", "mono"] as const;
+export const THEMES = ["bronze", "midnight", "forest", "mint", "plum", "crimson", "mono"] as const;
 export type Theme = (typeof THEMES)[number];
 
 export const THEME_META: Record<Theme, { label: string; swatch: string }> = {
   bronze: { label: "Bronze", swatch: "oklch(0.58 0.06 65)" },
   midnight: { label: "Midnight", swatch: "oklch(0.72 0.14 230)" },
   forest: { label: "Forest", swatch: "oklch(0.78 0.10 90)" },
+  mint: { label: "Mint", swatch: "#8cf2a6" },
   plum: { label: "Plum", swatch: "oklch(0.75 0.09 25)" },
   crimson: { label: "Crimson", swatch: "oklch(0.62 0.22 25)" },
   mono: { label: "Mono", swatch: "oklch(0.55 0 0)" },
