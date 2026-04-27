@@ -17,19 +17,19 @@ export const Route = createFileRoute("/")({
 
 const services = [
   {
+    icon: Workflow,
+    number: "01",
+    title: "Process Improvement",
+    desc: "Lean Six Sigma and Kaizen methodologies to remove bottlenecks, reduce waste, and unlock margin.",
+    tags: ["Lean", "Six Sigma", "Kaizen"],
+  },
+  {
     icon: Cpu,
     number: "02",
     title: "Automation & AI",
     desc: "Custom automation, AI integrations, and analytics dashboards that turn raw data into compounding advantage.",
     tags: ["LLM Workflows", "RPA", "Data Pipelines"],
     featured: true,
-  },
-  {
-    icon: Workflow,
-    number: "01",
-    title: "Process Improvement",
-    desc: "Lean Six Sigma and Kaizen methodologies to remove bottlenecks, reduce waste, and unlock margin.",
-    tags: ["Lean", "Six Sigma", "Kaizen"],
   },
   {
     icon: Compass,
