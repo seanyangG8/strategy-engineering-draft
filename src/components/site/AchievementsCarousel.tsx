@@ -828,6 +828,13 @@ type Slide = {
 
 const slides: Slide[] = [
   {
+    title: "B2B Sales Team",
+    headline: "30 Hours Saved Monthly",
+    body: "Built an agentic AI assistant that answers salespeople's queries on internal product details, pricing, specs and stock — replacing manual lookups across siloed systems with instant, sourced responses delivered in chat.",
+    timeline: "Project Timeline: 2 Months",
+    visual: (play) => <ChatAgentDiagram play={play} />,
+  },
+  {
     title: "Listed FMCG Market Leader",
     headline: "Time Saved by 98.2%",
     body: "Developed a regional automation solution streamlining six hours of daily work into several minutes whilst employing Lean principles and practices.",
