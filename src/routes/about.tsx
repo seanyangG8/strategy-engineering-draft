@@ -167,13 +167,17 @@ function About() {
               <Reveal
                 key={v.word}
                 delay={i * 90}
-                className="bg-background p-8 group cursor-default min-h-[180px] flex flex-col justify-end relative overflow-hidden"
+                className="bg-background p-6 sm:p-8 group cursor-default sm:min-h-[180px] flex flex-col justify-end relative overflow-hidden"
               >
-                <div className="absolute inset-x-0 top-0 h-px bg-primary/0 group-hover:bg-primary transition-colors duration-500" />
-                <h3 className="font-display text-3xl md:text-4xl font-medium tracking-tight transition-transform duration-500 group-hover:-translate-y-2">
+                <div className="absolute inset-x-0 top-0 h-px bg-primary/30 sm:bg-primary/0 sm:group-hover:bg-primary transition-colors duration-500" />
+                <h3 className="font-display text-3xl md:text-4xl font-medium tracking-tight transition-transform duration-500 sm:group-hover:-translate-y-2">
                   {v.word}<span className="text-primary">.</span>
                 </h3>
-                <p className="text-sm text-white/0 group-hover:text-white/65 transition-all duration-500 mt-2 max-h-0 group-hover:max-h-32 overflow-hidden">
+                {/* Definition: always visible on mobile, hover-reveal on desktop */}
+                <p className="text-sm text-white/65 mt-3 sm:hidden">
+                  {v.def}
+                </p>
+                <p className="hidden sm:block text-sm text-white/0 group-hover:text-white/65 transition-all duration-500 mt-2 max-h-0 group-hover:max-h-32 overflow-hidden">
                   {v.def}
                 </p>
               </Reveal>
@@ -262,25 +266,27 @@ function About() {
                     src={m.photo}
                     alt={m.name}
                     loading="lazy"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    className="w-full h-full object-cover sm:grayscale sm:group-hover:grayscale-0 sm:group-hover:scale-105 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute inset-x-5 bottom-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-                    <p className="font-display text-sm italic text-white/90 leading-snug mb-3">"{m.quote}"</p>
+                  {/* Mobile: persistent gradient + LinkedIn. Desktop: hover overlay with quote. */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-x-5 bottom-5 sm:opacity-0 sm:group-hover:opacity-100 sm:translate-y-2 sm:group-hover:translate-y-0 transition-all duration-500">
+                    <p className="hidden sm:block font-display text-sm italic text-white/90 leading-snug mb-3">"{m.quote}"</p>
                     <a
                       href={m.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn (opens in new tab)`}
-                      className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/30 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                      className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/40 bg-background/60 backdrop-blur-sm text-white hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
                     >
-                      <Linkedin className="size-3.5" />
+                      <Linkedin className="size-4" />
                     </a>
                   </div>
                 </div>
                 <h4 className="font-display text-xl font-medium">{m.name}</h4>
                 <p className="text-primary text-sm mt-1">{m.role}</p>
                 <p className="text-white/40 text-xs mt-1.5 font-mono">{m.edu}</p>
+                <p className="sm:hidden font-display text-sm italic text-white/70 leading-snug mt-3">"{m.quote}"</p>
               </Reveal>
             ))}
           </div>

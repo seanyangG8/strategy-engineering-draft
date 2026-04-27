@@ -238,9 +238,9 @@ function Services() {
                   {/* Oversized backdrop number */}
                   <div
                     aria-hidden
-                    className={`pointer-events-none absolute -top-12 ${
+                    className={`pointer-events-none absolute -top-8 md:-top-12 ${
                       reverse ? "right-0" : "left-0"
-                    } font-display text-[180px] md:text-[260px] font-light leading-none text-cream-foreground/[0.05] select-none`}
+                    } font-display text-[120px] sm:text-[180px] md:text-[260px] font-light leading-none text-cream-foreground/[0.05] select-none`}
                   >
                     {s.number}
                   </div>

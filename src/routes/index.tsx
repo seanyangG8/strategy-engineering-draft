@@ -17,19 +17,19 @@ export const Route = createFileRoute("/")({
 
 const services = [
   {
+    icon: Workflow,
+    number: "01",
+    title: "Process Improvement",
+    desc: "Lean Six Sigma and Kaizen methodologies to remove bottlenecks, reduce waste, and unlock margin.",
+    tags: ["Lean", "Six Sigma", "Kaizen"],
+  },
+  {
     icon: Cpu,
     number: "02",
     title: "Automation & AI",
     desc: "Custom automation, AI integrations, and analytics dashboards that turn raw data into compounding advantage.",
     tags: ["LLM Workflows", "RPA", "Data Pipelines"],
     featured: true,
-  },
-  {
-    icon: Workflow,
-    number: "01",
-    title: "Process Improvement",
-    desc: "Lean Six Sigma and Kaizen methodologies to remove bottlenecks, reduce waste, and unlock margin.",
-    tags: ["Lean", "Six Sigma", "Kaizen"],
   },
   {
     icon: Compass,
@@ -138,7 +138,7 @@ function Index() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/55 to-background" />
         <Header />
-        <div className="relative z-10 text-center px-6 max-w-5xl">
+        <div className="relative z-10 text-center px-6 max-w-5xl pb-32 md:pb-0">
           <p className="eyebrow text-primary mb-6 animate-fade-up">// UNLOCKING POTENTIAL</p>
           <h1 className="font-display text-[40px] sm:text-5xl md:text-7xl lg:text-8xl font-medium text-white leading-[0.95] tracking-tight">
             {["Your", "ambition."].map((w, i) => (
