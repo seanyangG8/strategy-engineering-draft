@@ -53,4 +53,4 @@ export function useTheme() {
 }
 
 // Inline script to set theme before hydration — prevents FOUC
-export const themeBootstrapScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');var v=['bronze','midnight','forest','plum','crimson','mono'];if(t&&v.indexOf(t)!==-1){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','bronze');}}catch(e){document.documentElement.setAttribute('data-theme','bronze');}})();`;
+export const themeBootstrapScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');var v=['bronze','midnight','forest','mint','plum','crimson','mono'];if(t&&v.indexOf(t)!==-1){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','bronze');}}catch(e){document.documentElement.setAttribute('data-theme','bronze');}})();`;
