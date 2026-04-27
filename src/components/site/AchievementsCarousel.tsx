@@ -899,13 +899,6 @@ const slides: Slide[] = [
     visual: (play) => <GrowthBars play={play} />,
   },
   {
-    title: "B2B Manufacturing Sales Team",
-    headline: "30 Hours Saved Monthly",
-    body: "Built an agentic AI assistant that answers salespeople's queries on internal product details, pricing, specs and stock — replacing manual lookups across siloed systems with instant, sourced responses delivered in chat.",
-    timeline: "Project Timeline: 2 Months",
-    visual: (play) => <ChatAgentDiagram play={play} />,
-  },
-  {
     title: "Mid-Market Finance Operation",
     headline: "50 Hours Saved Monthly",
     body: "Deployed AI-powered PDF parsing and three-way matching across invoices, purchase orders, and goods-received notes — auto-approving clean matches, flagging exceptions, and removing the back-office bottleneck.",
@@ -913,7 +906,7 @@ const slides: Slide[] = [
     visual: (play) => <InvoiceMatchDiagram play={play} />,
   },
   {
-    title: "Professional Services Firm",
+    title: "Logistics Operator",
     headline: "30 Hours Saved Monthly",
     body: "An LLM-powered triage and reply engine that classifies inbound mail, drafts contextual responses, and routes edge cases to humans — clearing the inbox while the team sleeps.",
     timeline: "Project Timeline: 6 Weeks",
