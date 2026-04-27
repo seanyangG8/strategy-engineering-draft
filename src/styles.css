@@ -174,6 +174,32 @@
   --ring: oklch(0.62 0.22 25);
 }
 
+[data-theme="mint"] {
+  /* Deep emerald-charcoal bg + bright mint accent (#8cf2a6).
+     Cards stay neutral cool ivory so the mint pops as a true highlight. */
+  --background: oklch(0.17 0.025 165);
+  --foreground: oklch(0.96 0.012 150);
+  --surface: oklch(0.965 0.008 150);
+  --surface-foreground: oklch(0.17 0.025 165);
+  --card: oklch(0.965 0.008 150);
+  --card-foreground: oklch(0.17 0.025 165);
+  --popover: oklch(0.965 0.008 150);
+  --popover-foreground: oklch(0.17 0.025 165);
+  --primary: oklch(0.88 0.17 152);
+  --primary-foreground: oklch(0.16 0.025 165);
+  --cream: oklch(0.93 0.02 150);
+  --cream-foreground: oklch(0.17 0.025 165);
+  --secondary: oklch(0.24 0.03 165);
+  --secondary-foreground: oklch(0.96 0.012 150);
+  --muted: oklch(0.92 0.01 150);
+  --muted-foreground: oklch(0.52 0.025 160);
+  --accent: oklch(0.88 0.17 152);
+  --accent-foreground: oklch(0.16 0.025 165);
+  --border: oklch(0.86 0.01 150);
+  --input: oklch(0.86 0.01 150);
+  --ring: oklch(0.88 0.17 152);
+}
+
 [data-theme="mono"] {
   /* True monochrome — black + white + grayscale only.
      Primary is a mid-gray that works as subtle accent on both dark bg and light cards.
