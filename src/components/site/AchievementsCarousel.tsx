@@ -428,6 +428,396 @@ function GrowthBars({ play }: { play: boolean }) {
   );
 }
 
+// Animated Agentic AI Sales Assistant — central AI hub with knowledge sources feeding in + chat reply
+function ChatAgentDiagram({ play }: { play: boolean }) {
+  const sources = [
+    { label: "Product DB", y: 22 },
+    { label: "Pricing", y: 50 },
+    { label: "Specs", y: 78 },
+  ];
+  const reply = "Stock: 1,240 units · 14d lead";
+  const charsShown = play ? reply.length : 0;
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        <defs>
+          <radialGradient id="aiHubGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={PRIMARY} stopOpacity="0.9" />
+            <stop offset="100%" stopColor={PRIMARY} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Source pills on left */}
+        {sources.map((s, i) => (
+          <g
+            key={s.label}
+            style={{
+              opacity: play ? 1 : 0,
+              transform: play ? "translateX(0)" : "translateX(-6px)",
+              transition: `opacity 400ms ease-out ${150 + i * 120}ms, transform 500ms cubic-bezier(0.22,1,0.36,1) ${150 + i * 120}ms`,
+            }}
+          >
+            <rect x="4" y={s.y - 4} width="22" height="8" rx="4" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.5" opacity="0.95" />
+            <text x="15" y={s.y + 1.2} textAnchor="middle" fontSize="2.6" fill="#fff" opacity="0.9">{s.label}</text>
+          </g>
+        ))}
+
+        {/* Streaming dots from each source to hub */}
+        {sources.map((s, i) => (
+          <circle
+            key={`d-${i}`}
+            r="1.2"
+            fill={PRIMARY}
+            style={{
+              opacity: play ? 1 : 0,
+              transition: `opacity 200ms ${600 + i * 120}ms`,
+            }}
+          >
+            <animate
+              attributeName="cx"
+              from="26"
+              to="44"
+              dur="1.4s"
+              begin={`${0.6 + i * 0.25}s`}
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="cy"
+              from={s.y}
+              to="50"
+              dur="1.4s"
+              begin={`${0.6 + i * 0.25}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        ))}
+
+        {/* Connector lines */}
+        {sources.map((s, i) => (
+          <line
+            key={`l-${i}`}
+            x1="26"
+            y1={s.y}
+            x2="44"
+            y2="50"
+            stroke={PRIMARY}
+            strokeOpacity="0.25"
+            strokeWidth="0.3"
+            strokeDasharray="40"
+            strokeDashoffset={play ? 0 : 40}
+            style={{ transition: `stroke-dashoffset 700ms ease-out ${300 + i * 120}ms` }}
+          />
+        ))}
+
+        {/* AI hub */}
+        <circle cx="50" cy="50" r="14" fill="url(#aiHubGlow)" />
+        <circle
+          cx="50"
+          cy="50"
+          r={play ? 7 : 0}
+          fill={PRIMARY}
+          style={{ transition: "r 600ms cubic-bezier(0.34,1.56,0.64,1) 200ms" }}
+        />
+        <text x="50" y="51.6" textAnchor="middle" fontSize="3" fill="#fff" fontWeight="700" style={{ opacity: play ? 1 : 0, transition: "opacity 400ms 800ms" }}>
+          AI
+        </text>
+
+        {/* Outgoing chat bubble */}
+        <g
+          style={{
+            opacity: play ? 1 : 0,
+            transform: play ? "translateX(0)" : "translateX(8px)",
+            transition: "opacity 500ms 1100ms, transform 600ms cubic-bezier(0.22,1,0.36,1) 1100ms",
+          }}
+        >
+          <path
+            d="M 60 38 H 95 a 2 2 0 0 1 2 2 v 16 a 2 2 0 0 1 -2 2 H 66 l -4 4 v -4 H 60 a 2 2 0 0 1 -2 -2 V 40 a 2 2 0 0 1 2 -2 z"
+            fill="#0d0d0d"
+            stroke={PRIMARY}
+            strokeWidth="0.5"
+          />
+          <text x="62" y="46" fontSize="2.3" fill={PRIMARY} fontWeight="600">SALES BOT</text>
+          <text x="62" y="52" fontSize="2.5" fill="#fff" opacity="0.92">
+            {reply.slice(0, charsShown)}
+            <tspan fill={PRIMARY} style={{ opacity: play ? 1 : 0 }}>{play ? "▍" : ""}</tspan>
+          </text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Animated Invoice 3-Way Match — three docs slide in and lock with a check seal
+function InvoiceMatchDiagram({ play }: { play: boolean }) {
+  const docs = [
+    { label: "INVOICE", x: 14, fromX: -10, delay: 100 },
+    { label: "P.O.", x: 40, fromX: 0, delay: 250 },
+    { label: "GRN", x: 66, fromX: 10, delay: 400 },
+  ];
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        {/* Three documents */}
+        {docs.map((d) => (
+          <g
+            key={d.label}
+            style={{
+              opacity: play ? 1 : 0,
+              transform: play ? "translateX(0)" : `translateX(${d.fromX}px)`,
+              transition: `opacity 500ms ease-out ${d.delay}ms, transform 700ms cubic-bezier(0.22,1,0.36,1) ${d.delay}ms`,
+            }}
+          >
+            <rect x={d.x} y="22" width="20" height="28" rx="1.5" fill="#fafaf6" stroke={PRIMARY} strokeWidth="0.4" />
+            {/* Doc lines */}
+            <rect x={d.x + 2.5} y="26" width="15" height="1" rx="0.5" fill="#0d0d0d" opacity="0.5" />
+            <rect x={d.x + 2.5} y="29" width="11" height="1" rx="0.5" fill="#0d0d0d" opacity="0.3" />
+            <rect x={d.x + 2.5} y="32" width="13" height="1" rx="0.5" fill="#0d0d0d" opacity="0.3" />
+            <rect x={d.x + 2.5} y="35" width="9" height="1" rx="0.5" fill="#0d0d0d" opacity="0.3" />
+            {/* Header tag */}
+            <rect x={d.x + 2.5} y="40" width="15" height="6" rx="1" fill={PRIMARY} opacity="0.9" />
+            <text x={d.x + 10} y="44.2" textAnchor="middle" fontSize="2.4" fill="#0d0d0d" fontWeight="700">
+              {d.label}
+            </text>
+          </g>
+        ))}
+
+        {/* Match lines linking them */}
+        {[
+          { x1: 34, x2: 40 },
+          { x1: 60, x2: 66 },
+        ].map((seg, i) => (
+          <line
+            key={i}
+            x1={seg.x1}
+            y1="36"
+            x2={seg.x2}
+            y2="36"
+            stroke={PRIMARY}
+            strokeWidth="0.6"
+            strokeDasharray="8"
+            strokeDashoffset={play ? 0 : 8}
+            style={{ transition: `stroke-dashoffset 500ms ease-out ${700 + i * 150}ms` }}
+          />
+        ))}
+
+        {/* Approval seal stamping in */}
+        <g
+          style={{
+            opacity: play ? 1 : 0,
+            transform: play ? "scale(1) rotate(-8deg)" : "scale(0.2) rotate(-8deg)",
+            transformOrigin: "50px 72px",
+            transition: "opacity 300ms 1100ms, transform 600ms cubic-bezier(0.34,1.56,0.64,1) 1100ms",
+          }}
+        >
+          <circle cx="50" cy="72" r="11" fill="none" stroke={PRIMARY} strokeWidth="1" />
+          <circle cx="50" cy="72" r="9" fill="none" stroke={PRIMARY} strokeWidth="0.4" />
+          <text x="50" y="70" textAnchor="middle" fontSize="2.2" fill={PRIMARY} fontWeight="700" letterSpacing="0.4">MATCHED</text>
+          <path d="M 45.5 73.5 L 49 77 L 55 70.5" fill="none" stroke={PRIMARY} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+
+        {/* Counter readout */}
+        <text x="50" y="92" textAnchor="middle" fontSize="2.6" fill="#ffffff80" letterSpacing="0.4">
+          LINE ITEMS RECONCILED · 100%
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+// Animated Email Automation — inbox stack funnels into a sorter that splits to 3 lanes
+function EmailFlowDiagram({ play }: { play: boolean }) {
+  const lanes = [
+    { label: "AUTO-REPLY", y: 30, pct: 62 },
+    { label: "ROUTE", y: 50, pct: 28 },
+    { label: "ESCALATE", y: 70, pct: 10 },
+  ];
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        {/* Inbox stack on left */}
+        {[0, 1, 2, 3].map((i) => (
+          <g
+            key={i}
+            style={{
+              opacity: play ? 1 : 0,
+              transform: play ? "translateX(0)" : "translateX(-8px)",
+              transition: `opacity 350ms ${100 + i * 100}ms, transform 500ms cubic-bezier(0.22,1,0.36,1) ${100 + i * 100}ms`,
+            }}
+          >
+            <rect x={6 + i * 1.5} y={36 + i * 2} width="16" height="11" rx="1" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.4" opacity={1 - i * 0.18} />
+            <path d={`M ${6 + i * 1.5} ${36 + i * 2} L ${14 + i * 1.5} ${42 + i * 2} L ${22 + i * 1.5} ${36 + i * 2}`} fill="none" stroke={PRIMARY} strokeWidth="0.4" opacity={0.7 - i * 0.15} />
+          </g>
+        ))}
+
+        {/* Flow lines into prism */}
+        <line x1="24" y1="44" x2="44" y2="50" stroke={PRIMARY} strokeOpacity="0.4" strokeWidth="0.4" strokeDasharray="30" strokeDashoffset={play ? 0 : 30} style={{ transition: "stroke-dashoffset 600ms 600ms" }} />
+
+        {/* Sorting prism (triangle) */}
+        <g
+          style={{
+            opacity: play ? 1 : 0,
+            transform: play ? "scale(1)" : "scale(0.5)",
+            transformOrigin: "48px 50px",
+            transition: "opacity 400ms 700ms, transform 600ms cubic-bezier(0.34,1.56,0.64,1) 700ms",
+          }}
+        >
+          <path d="M 44 38 L 56 50 L 44 62 Z" fill={PRIMARY} fillOpacity="0.15" stroke={PRIMARY} strokeWidth="0.6" />
+          <text x="50" y="51.5" textAnchor="middle" fontSize="2.3" fill={PRIMARY} fontWeight="700">AI</text>
+        </g>
+
+        {/* Lanes */}
+        {lanes.map((ln, i) => (
+          <g key={ln.label}>
+            {/* Connector */}
+            <line
+              x1="56"
+              y1="50"
+              x2="62"
+              y2={ln.y}
+              stroke={PRIMARY}
+              strokeOpacity="0.3"
+              strokeWidth="0.4"
+              strokeDasharray="20"
+              strokeDashoffset={play ? 0 : 20}
+              style={{ transition: `stroke-dashoffset 500ms ${1100 + i * 120}ms` }}
+            />
+            {/* Lane label */}
+            <text x="62" y={ln.y - 2.5} fontSize="2.3" fill="#ffffffaa" fontWeight="600" letterSpacing="0.3" style={{ opacity: play ? 1 : 0, transition: `opacity 350ms ${1300 + i * 120}ms` }}>
+              {ln.label}
+            </text>
+            {/* Bar track */}
+            <rect x="62" y={ln.y - 0.5} width="32" height="2.4" rx="1.2" fill="#ffffff10" />
+            {/* Filled bar */}
+            <rect
+              x="62"
+              y={ln.y - 0.5}
+              width={play ? (32 * ln.pct) / 100 : 0}
+              height="2.4"
+              rx="1.2"
+              fill={PRIMARY}
+              style={{ transition: `width 900ms cubic-bezier(0.22,1,0.36,1) ${1400 + i * 150}ms` }}
+            />
+            {/* % label */}
+            <text x="94" y={ln.y + 1.3} textAnchor="end" fontSize="2.3" fill="#fff" fontWeight="600" style={{ opacity: play ? 1 : 0, transition: `opacity 400ms ${1600 + i * 150}ms` }}>
+              {ln.pct}%
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// Animated Omnichannel — five channels converge into a single unified inbox
+function OmnichannelDiagram({ play }: { play: boolean }) {
+  const channels = [
+    { label: "WhatsApp", y: 14 },
+    { label: "Instagram", y: 32 },
+    { label: "Messenger", y: 50 },
+    { label: "Email", y: 68 },
+    { label: "SMS", y: 86 },
+  ];
+  return (
+    <div className="relative w-full h-full">
+      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <svg viewBox="0 0 100 100" className="relative w-full h-full">
+        <defs>
+          <radialGradient id="inboxGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={PRIMARY} stopOpacity="0.85" />
+            <stop offset="100%" stopColor={PRIMARY} stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Channel pills on left */}
+        {channels.map((c, i) => (
+          <g
+            key={c.label}
+            style={{
+              opacity: play ? 1 : 0,
+              transform: play ? "translateX(0)" : "translateX(-6px)",
+              transition: `opacity 380ms ${100 + i * 90}ms, transform 500ms cubic-bezier(0.22,1,0.36,1) ${100 + i * 90}ms`,
+            }}
+          >
+            <circle cx="9" cy={c.y} r="3.2" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.5" />
+            <circle cx="9" cy={c.y} r="1.4" fill={PRIMARY} opacity="0.85" />
+            <text x="14" y={c.y + 1} fontSize="2.6" fill="#fff" opacity="0.92">{c.label}</text>
+          </g>
+        ))}
+
+        {/* Curved connector paths from each channel to central hub */}
+        {channels.map((c, i) => {
+          const path = `M 12 ${c.y} C 35 ${c.y}, 45 50, 62 50`;
+          return (
+            <path
+              key={`p-${i}`}
+              d={path}
+              fill="none"
+              stroke={PRIMARY}
+              strokeOpacity="0.28"
+              strokeWidth="0.4"
+              strokeDasharray="80"
+              strokeDashoffset={play ? 0 : 80}
+              style={{ transition: `stroke-dashoffset 900ms ease-out ${500 + i * 100}ms` }}
+            />
+          );
+        })}
+
+        {/* Animated message dots travelling along each path */}
+        {channels.map((c, i) => (
+          <circle
+            key={`d-${i}`}
+            r="1.3"
+            fill={PRIMARY}
+            style={{ opacity: play ? 1 : 0, transition: `opacity 200ms ${900 + i * 100}ms` }}
+          >
+            <animateMotion
+              dur={`${2 + i * 0.15}s`}
+              begin={`${0.9 + i * 0.18}s`}
+              repeatCount="indefinite"
+              path={`M 12 ${c.y} C 35 ${c.y}, 45 50, 62 50`}
+            />
+          </circle>
+        ))}
+
+        {/* Unified inbox hub */}
+        <circle cx="68" cy="50" r="16" fill="url(#inboxGlow)" />
+        <g
+          style={{
+            opacity: play ? 1 : 0,
+            transform: play ? "scale(1)" : "scale(0.5)",
+            transformOrigin: "68px 50px",
+            transition: "opacity 400ms 700ms, transform 600ms cubic-bezier(0.34,1.56,0.64,1) 700ms",
+          }}
+        >
+          <rect x="58" y="42" width="20" height="16" rx="2" fill="#0d0d0d" stroke={PRIMARY} strokeWidth="0.6" />
+          <path d="M 58 42 L 68 51 L 78 42" fill="none" stroke={PRIMARY} strokeWidth="0.6" />
+          <text x="68" y="55.5" textAnchor="middle" fontSize="2.4" fill={PRIMARY} fontWeight="700" letterSpacing="0.3">INBOX</text>
+        </g>
+
+        {/* Outgoing unified stream */}
+        <line
+          x1="78"
+          y1="50"
+          x2="96"
+          y2="50"
+          stroke={PRIMARY}
+          strokeWidth="0.7"
+          strokeDasharray="20"
+          strokeDashoffset={play ? 0 : 20}
+          style={{ transition: "stroke-dashoffset 700ms ease-out 1400ms" }}
+        />
+        <circle cx="96" cy="50" r={play ? 1.8 : 0} fill={PRIMARY} style={{ transition: "r 400ms cubic-bezier(0.34,1.56,0.64,1) 1900ms" }} />
+        <text x="92" y="46" textAnchor="end" fontSize="2.3" fill="#ffffff80" style={{ opacity: play ? 1 : 0, transition: "opacity 400ms 2000ms" }}>
+          ONE WORKSPACE
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 type Slide = {
   title: string;
   headline: string;
