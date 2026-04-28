@@ -43,7 +43,7 @@ const services = [
     intro: "Stay ahead with agentic AI and comprehensive automation services designed to improve efficiency, productivity, and innovation.",
     bullets: [
       { h: "Custom automation", b: "Optimise processes and eliminate manual tasks." },
-      { h: "Agentic AI integrations", b: "LLMs and ML to enhance decisions and customer interactions." },
+      { h: "AI integrations", b: "LLMs and ML to enhance decisions and customer interactions." },
       { h: "Agentic AI", b: "Autonomous agents that triage, decide, and execute across your stack." },
       { h: "Workflow orchestration", b: "Connect disparate tools into seamless pipelines." },
       { h: "Continuous optimisation", b: "Machine learning feedback loops that compound." },
