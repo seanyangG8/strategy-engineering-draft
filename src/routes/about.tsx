@@ -124,19 +124,31 @@ function About() {
         <div className="absolute inset-0 opacity-[0.025] bg-grain pointer-events-none" />
         <div className="mx-auto max-w-6xl relative">
           <div className="relative" ref={railRef}>
-            {/* Timeline rail */}
-            <div className="absolute left-[10px] md:left-[7.5rem] top-2 bottom-2 w-px bg-cream-foreground/10" aria-hidden />
+            {/* Timeline rail — bounded between first and last dot */}
             <div
-              className="absolute left-[10px] md:left-[7.5rem] top-2 w-px bg-primary origin-top"
+              className="absolute left-[10px] md:left-[7.5rem] w-px bg-cream-foreground/10"
               aria-hidden
-              style={{ height: "calc(100% - 1rem)", transform: `scaleY(${railProgress})`, transition: "transform 0.12s linear" }}
+              style={{ top: "0.5rem", height: railHeight ? `${railHeight - 8}px` : "calc(100% - 1rem)" }}
+            />
+            <div
+              className="absolute left-[10px] md:left-[7.5rem] w-px bg-primary origin-top"
+              aria-hidden
+              style={{
+                top: "0.5rem",
+                height: railHeight ? `${railHeight - 8}px` : "calc(100% - 1rem)",
+                transform: `scaleY(${railProgress})`,
+                transition: "transform 0.12s linear",
+              }}
             />
             <div className="space-y-20 md:space-y-24">
               {pillars.map((p, idx) => (
                 <Reveal key={p.n} delay={idx * 100}>
                   <div className="grid grid-cols-[2.5rem_1fr] md:grid-cols-[8rem_1fr] gap-4 md:gap-12 relative">
                     <div className="flex flex-col items-start gap-2 md:gap-3 pt-1">
-                      <span className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary shrink-0">
+                      <span
+                        ref={idx === pillars.length - 1 ? lastDotRef : undefined}
+                        className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary shrink-0"
+                      >
                         <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </span>
                       <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] md:tracking-[0.25em] text-primary">{p.n}</span>
