@@ -69,9 +69,21 @@ const engagements = [
 
 function About() {
   const railRef = useRef<HTMLDivElement>(null);
+  const lastDotRef = useRef<HTMLSpanElement>(null);
   const [railProgress, setRailProgress] = useState(0);
+  const [railHeight, setRailHeight] = useState<number | null>(null);
 
   useEffect(() => {
+    const measure = () => {
+      const railEl = railRef.current;
+      const lastDot = lastDotRef.current;
+      if (!railEl || !lastDot) return;
+      const railTop = railEl.getBoundingClientRect().top;
+      const dotRect = lastDot.getBoundingClientRect();
+      // Distance from top of rail container to centre of last dot
+      const h = dotRect.top - railTop + dotRect.height / 2;
+      setRailHeight(h);
+    };
     const onScroll = () => {
       const el = railRef.current;
       if (!el) return;
@@ -79,15 +91,15 @@ function About() {
       const vh = window.innerHeight;
       const start = vh * 0.75;
       const end = vh * 0.25;
-      // progress: 0 when rail top below start; 1 when rail bottom above end
       const total = r.height + (start - end);
       const passed = start - r.top;
       const p = Math.max(0, Math.min(1, passed / total));
       setRailProgress(p);
     };
+    measure();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", () => { measure(); onScroll(); });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
