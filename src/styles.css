@@ -440,6 +440,14 @@ body, header, footer, section, article, aside, nav, main,
     border-radius: 0;
   }
   .float-field textarea { resize: vertical; min-height: 7rem; }
+  .float-field-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+    padding-right: 1.5rem;
+  }
+  .float-field-select select::-ms-expand { display: none; }
   .float-field input:focus,
   .float-field textarea:focus,
   .float-field select:focus {
