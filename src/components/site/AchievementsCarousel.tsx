@@ -83,7 +83,7 @@ function ErpDiagram({ play }: { play: boolean }) {
   ];
   return (
     <div className="relative w-full h-full">
-      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <div className="absolute inset-6 bg-primary/[0.08] blur-3xl rounded-full" />
       <svg viewBox="0 0 100 100" className="relative w-full h-full">
         <defs>
           <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
