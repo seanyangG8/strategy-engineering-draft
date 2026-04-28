@@ -281,6 +281,23 @@ body, header, footer, section, article, aside, nav, main,
   animation: primary-flow 12s ease-in-out infinite;
 }
 
+/* High-chroma themes (mint, lime) — keep featured surfaces near-neutral charcoal,
+   with only a whisper of primary so green stays a typographic accent, not wallpaper. */
+[data-theme="mint"] .bg-primary-flow,
+[data-theme="mint"] .bg-bronze-flow,
+[data-theme="lime"] .bg-primary-flow,
+[data-theme="lime"] .bg-bronze-flow {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--background) 94%, var(--primary) 6%) 0%,
+      var(--background) 40%,
+      color-mix(in oklab, var(--background) 86%, var(--primary) 14%) 100%
+    );
+  background-size: 200% 200%;
+  animation: primary-flow 14s ease-in-out infinite;
+}
+
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; overflow-x: hidden; }
