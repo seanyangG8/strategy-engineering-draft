@@ -143,7 +143,7 @@ function StickyServiceNav() {
   return (
     <>
       {/* Desktop: vertical sticky on left */}
-      <aside className="hidden lg:block sticky top-28 h-fit">
+      <aside className="hidden lg:block sticky top-28 h-fit z-20 relative">
         <p className="eyebrow text-cream-foreground/55 mb-5">// SERVICES</p>
         <div className="relative pl-5">
           {/* Rail */}
