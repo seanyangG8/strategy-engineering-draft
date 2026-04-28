@@ -282,7 +282,7 @@ function About() {
             </p>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {team.map((m, i) => (
               <Reveal key={m.name} delay={i * 80} className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream/5 mb-5 ring-1 ring-white/0 group-hover:ring-primary/40 transition-all duration-500">
