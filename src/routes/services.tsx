@@ -300,7 +300,7 @@ function Services() {
                           </li>
                         ))}
                         {/* Closing quote — fills the empty grid cell */}
-                        <li className="bg-bronze-flow text-white p-6 relative overflow-hidden flex items-center">
+                        <li className="bg-primary-flow text-white p-6 relative overflow-hidden flex items-center">
                           <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
                           <div className="relative flex items-start gap-3">
                             <span aria-hidden className="font-display text-3xl font-light leading-none text-primary opacity-70 select-none -mt-1">"</span>

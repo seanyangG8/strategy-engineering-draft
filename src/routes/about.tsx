@@ -232,7 +232,7 @@ function About() {
                 delay={i * 120}
                 className={`rounded-2xl border p-9 transition-all duration-300 hover:-translate-y-1 ${
                   e.featured
-                    ? "bg-bronze-flow text-white border-white/10 relative overflow-hidden"
+                    ? "bg-primary-flow text-white border-white/10 relative overflow-hidden"
                     : "bg-cream border-cream-foreground/10"
                 }`}
               >

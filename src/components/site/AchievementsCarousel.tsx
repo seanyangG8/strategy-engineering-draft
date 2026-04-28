@@ -982,7 +982,7 @@ export function AchievementsCarousel() {
             const isActive = current === i && inView;
             return (
               <CarouselItem key={i}>
-                <div className="group relative rounded-3xl bg-bronze-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
+                <div className="group relative rounded-3xl bg-primary-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
                   {/* Glow */}
                   <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
                   <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />

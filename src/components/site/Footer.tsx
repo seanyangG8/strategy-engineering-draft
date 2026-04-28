@@ -9,7 +9,7 @@ export function Footer() {
 
       {/* CTA band */}
       <div className="mx-auto max-w-7xl mb-20 relative">
-        <div className="rounded-3xl border border-white/10 bg-bronze-flow p-10 md:p-14 relative overflow-hidden">
+        <div className="rounded-3xl border border-white/10 bg-primary-flow p-10 md:p-14 relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.06] bg-grain pointer-events-none" />
           <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
             <div>
