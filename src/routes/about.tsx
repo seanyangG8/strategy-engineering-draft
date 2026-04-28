@@ -69,9 +69,21 @@ const engagements = [
 
 function About() {
   const railRef = useRef<HTMLDivElement>(null);
+  const lastDotRef = useRef<HTMLSpanElement>(null);
   const [railProgress, setRailProgress] = useState(0);
+  const [railHeight, setRailHeight] = useState<number | null>(null);
 
   useEffect(() => {
+    const measure = () => {
+      const railEl = railRef.current;
+      const lastDot = lastDotRef.current;
+      if (!railEl || !lastDot) return;
+      const railTop = railEl.getBoundingClientRect().top;
+      const dotRect = lastDot.getBoundingClientRect();
+      // Distance from top of rail container to centre of last dot
+      const h = dotRect.top - railTop + dotRect.height / 2;
+      setRailHeight(h);
+    };
     const onScroll = () => {
       const el = railRef.current;
       if (!el) return;
@@ -79,15 +91,15 @@ function About() {
       const vh = window.innerHeight;
       const start = vh * 0.75;
       const end = vh * 0.25;
-      // progress: 0 when rail top below start; 1 when rail bottom above end
       const total = r.height + (start - end);
       const passed = start - r.top;
       const p = Math.max(0, Math.min(1, passed / total));
       setRailProgress(p);
     };
+    measure();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", () => { measure(); onScroll(); });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
@@ -105,26 +117,38 @@ function About() {
         <meta name="twitter:image" content={lightbulb} />
         <link rel="canonical" href="https://strategyengineering.co/about" />
       </Helmet>
-      <PageHero title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
+      <PageHero eyebrow="WHO WE ARE" title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
 
       {/* MISSION + WHY (vertical timeline) */}
       <section className="bg-surface text-surface-foreground py-28 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.025] bg-grain pointer-events-none" />
         <div className="mx-auto max-w-6xl relative">
           <div className="relative" ref={railRef}>
-            {/* Timeline rail */}
-            <div className="absolute left-[10px] md:left-[7.5rem] top-2 bottom-2 w-px bg-cream-foreground/10" aria-hidden />
+            {/* Timeline rail — bounded between first and last dot */}
             <div
-              className="absolute left-[10px] md:left-[7.5rem] top-2 w-px bg-primary origin-top"
+              className="absolute left-[10px] md:left-[7.5rem] w-px bg-cream-foreground/10"
               aria-hidden
-              style={{ height: "calc(100% - 1rem)", transform: `scaleY(${railProgress})`, transition: "transform 0.12s linear" }}
+              style={{ top: "0.5rem", height: railHeight ? `${railHeight - 8}px` : "calc(100% - 1rem)" }}
+            />
+            <div
+              className="absolute left-[10px] md:left-[7.5rem] w-px bg-primary origin-top"
+              aria-hidden
+              style={{
+                top: "0.5rem",
+                height: railHeight ? `${railHeight - 8}px` : "calc(100% - 1rem)",
+                transform: `scaleY(${railProgress})`,
+                transition: "transform 0.12s linear",
+              }}
             />
             <div className="space-y-20 md:space-y-24">
               {pillars.map((p, idx) => (
                 <Reveal key={p.n} delay={idx * 100}>
                   <div className="grid grid-cols-[2.5rem_1fr] md:grid-cols-[8rem_1fr] gap-4 md:gap-12 relative">
                     <div className="flex flex-col items-start gap-2 md:gap-3 pt-1">
-                      <span className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary shrink-0">
+                      <span
+                        ref={idx === pillars.length - 1 ? lastDotRef : undefined}
+                        className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full bg-surface border border-primary shrink-0"
+                      >
                         <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </span>
                       <span className="font-mono text-[10px] md:text-[11px] tracking-[0.2em] md:tracking-[0.25em] text-primary">{p.n}</span>
@@ -208,7 +232,7 @@ function About() {
                 delay={i * 120}
                 className={`rounded-2xl border p-9 transition-all duration-300 hover:-translate-y-1 ${
                   e.featured
-                    ? "bg-bronze-flow text-white border-white/10 relative overflow-hidden"
+                    ? "bg-primary-flow text-white border-white/10 relative overflow-hidden"
                     : "bg-cream border-cream-foreground/10"
                 }`}
               >
@@ -258,7 +282,7 @@ function About() {
             </p>
           </Reveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {team.map((m, i) => (
               <Reveal key={m.name} delay={i * 80} className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream/5 mb-5 ring-1 ring-white/0 group-hover:ring-primary/40 transition-all duration-500">

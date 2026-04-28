@@ -284,7 +284,7 @@ function Index() {
                     <Link
                       to="/services"
                       className={`relative block h-full p-8 group ${
-                        s.featured ? "bg-bronze-flow text-white" : "bg-cream"
+                        s.featured ? "bg-primary-flow text-white" : "bg-cream"
                       }`}
                     >
                       {s.featured && (

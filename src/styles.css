@@ -266,8 +266,9 @@ body, header, footer, section, article, aside, nav, main,
               border-color 280ms ease, fill 280ms ease, stroke 280ms ease;
 }
 
-/* Update the bronze-flow gradient to track the active primary so featured
-   cards re-tint with the theme. */
+/* Animated gradient that tracks the active primary so featured surfaces
+   re-tint with the current theme. .bg-bronze-flow remains as a legacy alias. */
+.bg-primary-flow,
 .bg-bronze-flow {
   background:
     linear-gradient(
@@ -277,7 +278,7 @@ body, header, footer, section, article, aside, nav, main,
       color-mix(in oklab, var(--background) 55%, var(--primary) 45%) 100%
     );
   background-size: 200% 200%;
-  animation: bronze-flow 12s ease-in-out infinite;
+  animation: primary-flow 12s ease-in-out infinite;
 }
 
 @layer base {
@@ -404,8 +405,8 @@ body, header, footer, section, article, aside, nav, main,
     background-size: 160px 160px;
   }
 
-  /* keyframes for the dynamic .bg-bronze-flow defined above */
-  @keyframes bronze-flow {
+  /* keyframes for the dynamic .bg-primary-flow defined above */
+  @keyframes primary-flow {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
   }
@@ -440,6 +441,14 @@ body, header, footer, section, article, aside, nav, main,
     border-radius: 0;
   }
   .float-field textarea { resize: vertical; min-height: 7rem; }
+  .float-field-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none;
+    padding-right: 1.5rem;
+  }
+  .float-field-select select::-ms-expand { display: none; }
   .float-field input:focus,
   .float-field textarea:focus,
   .float-field select:focus {

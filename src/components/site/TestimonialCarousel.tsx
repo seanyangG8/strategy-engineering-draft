@@ -36,7 +36,7 @@ export function TestimonialCarousel() {
     >
       <div className="absolute inset-0 opacity-[0.03] bg-grain pointer-events-none" />
       <div className="mx-auto max-w-5xl text-center relative">
-        <p className="eyebrow text-primary-foreground/50 mb-8">// IN THEIR WORDS</p>
+        <p className="eyebrow text-cream-foreground/55 mb-8">// IN THEIR WORDS</p>
         <Quote className="size-10 text-primary mx-auto mb-8 opacity-80" strokeWidth={1.2} />
         <div className="relative min-h-[200px] md:min-h-[180px]" aria-live="polite">
           {quotes.map((q, idx) => (
@@ -53,7 +53,7 @@ export function TestimonialCarousel() {
               <p className="font-display text-2xl md:text-4xl font-light italic leading-snug tracking-tight max-w-4xl mx-auto">
                 "{q.text}"
               </p>
-              <footer className="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-primary-foreground/60">
+              <footer className="mt-8 font-mono text-xs uppercase tracking-[0.22em] text-cream-foreground/60">
                 {q.role} <span className="text-primary">·</span> {q.org}
               </footer>
             </blockquote>
@@ -68,7 +68,7 @@ export function TestimonialCarousel() {
               aria-current={i === idx ? "true" : undefined}
               onClick={() => setI(idx)}
               className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === idx ? "w-10 bg-primary" : "w-2 bg-primary-foreground/15 hover:bg-primary-foreground/40"
+                i === idx ? "w-10 bg-primary" : "w-2 bg-cream-foreground/15 hover:bg-cream-foreground/40"
               }`}
             />
           ))}

@@ -114,11 +114,13 @@ function Contact() {
             <p className="eyebrow text-cream-foreground/60 mb-3">// CONTACT</p>
             <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight mb-8">Let's start a conversation.</h2>
 
-            <a
-              href="mailto:contact@strategyengineering.co"
-              className="block group rounded-2xl border border-cream-foreground/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4"
-            >
-              <div className="flex items-center justify-between gap-4">
+            <div className="group relative rounded-2xl border border-cream-foreground/10 p-6 hover:border-primary/60 hover:bg-background hover:text-white transition-all mb-4">
+              <a
+                href="mailto:contact@strategyengineering.co"
+                aria-label="Email contact@strategyengineering.co"
+                className="absolute inset-0 rounded-2xl"
+              />
+              <div className="relative flex items-center justify-between gap-4 pointer-events-none">
                 <div className="min-w-0">
                   <p className="eyebrow text-primary mb-2 flex items-center gap-2">
                     <Mail className="size-3.5" /> EMAIL US
@@ -126,19 +128,19 @@ function Contact() {
                   <p className="font-display text-xl font-medium tracking-tight truncate">contact@strategyengineering.co</p>
                   <p className="text-xs mt-2 opacity-60">We reply within one business day.</p>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-2 shrink-0 pointer-events-auto">
                   <button
                     type="button"
                     onClick={onCopy}
                     aria-label="Copy email address"
-                    className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                    className="relative z-10 inline-flex items-center justify-center w-9 h-9 rounded-full border border-cream-foreground/15 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all"
                   >
                     {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
                   </button>
                   <ArrowUpRight className="size-5 opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" />
                 </div>
               </div>
-            </a>
+            </div>
 
             <a
               href="mailto:contact@strategyengineering.co?subject=30-min%20discovery%20call"
@@ -256,7 +258,7 @@ function Contact() {
                   />
                   <label htmlFor="contact-website">Company website</label>
                 </div>
-                <div className="float-field">
+                <div className="float-field float-field-select">
                   <select
                     id="contact-interest"
                     name="interest"
@@ -272,6 +274,13 @@ function Contact() {
                     <option value="unsure">Not sure yet</option>
                   </select>
                   <label htmlFor="contact-interest">I'm interested in…</label>
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 12 8"
+                    className="pointer-events-none absolute right-1 bottom-3 w-3 h-2 opacity-60"
+                  >
+                    <path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
                 <div className={`float-field ${touched.message && errors.message ? "field-error" : ""}`}>
                   <textarea
