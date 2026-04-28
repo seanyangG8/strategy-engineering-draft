@@ -78,8 +78,6 @@ export function Header() {
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
-        <FontToggle />
-        <ThemeToggle />
         <button
           className="text-white p-2 rounded-md"
           onClick={() => setOpen(!open)}
@@ -105,15 +103,19 @@ export function Header() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href="https://www.linkedin.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn (opens in new tab)"
-              className="text-white/70 hover:text-primary inline-flex items-center gap-2 text-sm pt-2 border-t border-white/10 rounded-sm"
-            >
-              <Linkedin className="size-4" /> LinkedIn
-            </a>
+            <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+              <FontToggle />
+              <ThemeToggle />
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn (opens in new tab)"
+                className="ml-auto text-white/70 hover:text-primary inline-flex items-center gap-2 text-sm rounded-sm"
+              >
+                <Linkedin className="size-5" />
+              </a>
+            </div>
           </nav>
         </div>
       )}
