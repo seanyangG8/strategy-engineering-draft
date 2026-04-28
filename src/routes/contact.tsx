@@ -258,7 +258,7 @@ function Contact() {
                   />
                   <label htmlFor="contact-website">Company website</label>
                 </div>
-                <div className="float-field">
+                <div className="float-field float-field-select">
                   <select
                     id="contact-interest"
                     name="interest"
@@ -274,6 +274,13 @@ function Contact() {
                     <option value="unsure">Not sure yet</option>
                   </select>
                   <label htmlFor="contact-interest">I'm interested in…</label>
+                  <svg
+                    aria-hidden
+                    viewBox="0 0 12 8"
+                    className="pointer-events-none absolute right-1 bottom-3 w-3 h-2 opacity-60"
+                  >
+                    <path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
                 <div className={`float-field ${touched.message && errors.message ? "field-error" : ""}`}>
                   <textarea
