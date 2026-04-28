@@ -40,11 +40,11 @@ const services = [
     slug: "automation",
     title: "Automation & AI",
     tagline: "Innovate smarter, not harder.",
-    intro: "Stay ahead with comprehensive automation and AI services designed to improve efficiency, productivity, and innovation.",
+    intro: "Stay ahead with agentic AI and comprehensive automation services designed to improve efficiency, productivity, and innovation.",
     bullets: [
       { h: "Custom automation", b: "Optimise processes and eliminate manual tasks." },
       { h: "AI integrations", b: "LLMs and ML to enhance decisions and customer interactions." },
-      { h: "Analytics dashboards", b: "Turn raw data into actionable, real-time insights." },
+      { h: "Agentic AI", b: "Autonomous agents that triage, decide, and execute across your stack." },
       { h: "Workflow orchestration", b: "Connect disparate tools into seamless pipelines." },
       { h: "Continuous optimisation", b: "Machine learning feedback loops that compound." },
     ],
@@ -211,7 +211,7 @@ function Services() {
     <main>
       <Helmet>
         <title>Services — Strategy Engineering</title>
-        <meta name="description" content="Process improvement, automation & AI, strategy & transformation, sustainability & impact." />
+        <meta name="description" content="Process improvement, agentic AI & automation, strategy & transformation, sustainability & impact." />
         <meta property="og:title" content="Services — Strategy Engineering" />
         <meta property="og:description" content="Transforming businesses, one solution at a time." />
         <meta property="og:image" content={heroServices} />
