@@ -27,8 +27,8 @@ const services = [
     icon: Cpu,
     number: "02",
     title: "Automation & AI",
-    desc: "Custom automation, AI integrations, and analytics dashboards that turn raw data into compounding advantage.",
-    tags: ["LLM Workflows", "RPA", "Data Pipelines"],
+    desc: "Agentic AI, custom automation, and intelligent integrations that turn raw data into compounding advantage.",
+    tags: ["Agentic AI", "RPA", "Data Pipelines"],
     featured: true,
   },
   {
