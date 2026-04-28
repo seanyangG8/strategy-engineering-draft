@@ -105,7 +105,7 @@ function About() {
         <meta name="twitter:image" content={lightbulb} />
         <link rel="canonical" href="https://strategyengineering.co/about" />
       </Helmet>
-      <PageHero title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
+      <PageHero eyebrow="WHO WE ARE" title="Where engineering meets business." backgroundImage={lightbulb} compact objectPosition="center 65%" />
 
       {/* MISSION + WHY (vertical timeline) */}
       <section className="bg-surface text-surface-foreground py-28 px-6 relative overflow-hidden">
