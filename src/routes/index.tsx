@@ -27,7 +27,7 @@ const services = [
     icon: Cpu,
     number: "02",
     title: "Automation & AI",
-    desc: "Agentic AI, custom automation, and intelligent integrations that turn raw data into compounding advantage.",
+    desc: "Agentic AI, automation, and autonomous workflows — engineered to act, adapt, and compound.",
     tags: ["Agentic AI", "RPA", "Data Pipelines"],
     featured: true,
   },
