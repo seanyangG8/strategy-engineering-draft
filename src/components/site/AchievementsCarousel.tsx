@@ -83,7 +83,7 @@ function ErpDiagram({ play }: { play: boolean }) {
   ];
   return (
     <div className="relative w-full h-full">
-      <div className="absolute inset-6 bg-primary/15 blur-3xl rounded-full" />
+      <div className="absolute inset-6 bg-primary/[0.08] blur-3xl rounded-full" />
       <svg viewBox="0 0 100 100" className="relative w-full h-full">
         <defs>
           <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
@@ -982,10 +982,10 @@ export function AchievementsCarousel() {
             const isActive = current === i && inView;
             return (
               <CarouselItem key={i}>
-                <div className="group relative rounded-3xl bg-primary-flow border border-primary/30 p-6 md:p-12 shadow-2xl shadow-primary/20 overflow-hidden">
+                <div className="group relative rounded-3xl bg-primary-flow border border-white/10 p-6 md:p-12 shadow-2xl shadow-black/40 overflow-hidden">
                   {/* Glow */}
-                  <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/10 blur-3xl" />
-                  <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/5 blur-3xl" />
+                  <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 rounded-full bg-primary/[0.06] blur-3xl" />
+                  <div className="pointer-events-none absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-primary/[0.04] blur-3xl" />
 
                   <div className="relative">
                     <div className="flex items-center gap-3 mb-2">
@@ -997,7 +997,7 @@ export function AchievementsCarousel() {
                     <h3 className="text-2xl md:text-4xl font-light text-white tracking-tight">
                       {s.title}
                     </h3>
-                    <div className="h-[2px] w-full bg-gradient-to-r from-primary via-primary/60 to-transparent mt-4 mb-8" />
+                    <div className="h-[2px] w-full bg-gradient-to-r from-white/30 via-white/10 to-transparent mt-4 mb-8" />
 
                     <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center md:min-h-[320px]">
                       <VisualSlot key={`${i}-${isActive ? playKey : "idle"}`} active={isActive} render={s.visual} />

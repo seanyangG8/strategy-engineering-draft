@@ -185,7 +185,7 @@
   --card-foreground: oklch(0.16 0.008 165);
   --popover: oklch(0.965 0.006 90);
   --popover-foreground: oklch(0.16 0.008 165);
-  --primary: oklch(0.88 0.17 152);
+  --primary: oklch(0.86 0.13 152);
   --primary-foreground: oklch(0.16 0.008 165);
   --cream: oklch(0.90 0.025 80);
   --cream-foreground: oklch(0.16 0.008 165);
@@ -279,6 +279,23 @@ body, header, footer, section, article, aside, nav, main,
     );
   background-size: 200% 200%;
   animation: primary-flow 12s ease-in-out infinite;
+}
+
+/* High-chroma themes (mint, lime) — keep featured surfaces near-neutral charcoal,
+   with only a whisper of primary so green stays a typographic accent, not wallpaper. */
+[data-theme="mint"] .bg-primary-flow,
+[data-theme="mint"] .bg-bronze-flow,
+[data-theme="lime"] .bg-primary-flow,
+[data-theme="lime"] .bg-bronze-flow {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--background) 94%, var(--primary) 6%) 0%,
+      var(--background) 40%,
+      color-mix(in oklab, var(--background) 86%, var(--primary) 14%) 100%
+    );
+  background-size: 200% 200%;
+  animation: primary-flow 14s ease-in-out infinite;
 }
 
 @layer base {
